@@ -4718,7 +4718,11 @@
          暴露全局 Waline.init；经典脚本加载，不用 module 以兼容站内渲染） ----------
          懒加载：第一次切到茶寮视图才拉 CSS / JS 并初始化，不拖慢其他页面。
          先探服务端在不在：探不通就不初始化，把 Waline 自带的英文报错挡在门外，
-         只给一句中文提示 + 重试按钮。 */
+         只给一句中文提示 + 重试按钮。
+         2026-11-26 修复「总是打不开」：原版只从 unpkg 拉客户端（国内手机网络常
+         拉不动），且服务端预检超时只有 8 秒（Vercel 冷启动首请求实测 6 秒+，
+         移动网络下屡屡超时）。现改为 jsdelivr 主源 + unpkg 兜底，预检放宽到
+         20 秒并自动重试 3 次——首个请求把服务唤醒后，重试通常立刻通。 */
       (function () {
         var SERVER_URL = "https://zhixuan-ge-waline.vercel.app/";
         var section = document.getElementById("chaliao");
@@ -4733,31 +4737,56 @@
           if (stateText) stateText.textContent = msg;
           if (retryBtn) retryBtn.hidden = !canRetry;
         }
+        /* 客户端资源双源：jsdelivr 为主（国内可达性明显好于 unpkg），unpkg 兜底 */
+        var CSS_URLS = [
+          "https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css",
+          "https://unpkg.com/@waline/client@v3/dist/waline.css"
+        ];
+        var JS_URLS = [
+          "https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.umd.js",
+          "https://unpkg.com/@waline/client@v3/dist/waline.umd.js"
+        ];
         function loadCss() {
           if (document.querySelector("link[data-waline-css]")) return;
           var l = document.createElement("link");
           l.rel = "stylesheet";
-          l.href = "https://unpkg.com/@waline/client@v3/dist/waline.css";
+          l.href = CSS_URLS[0];
           l.setAttribute("data-waline-css", "");
+          l.onerror = function () { l.onerror = null; l.href = CSS_URLS[1]; };
           document.head.appendChild(l);
         }
-        function loadJs() {
+        function loadJsFrom(src) {
           return new Promise(function (resolve, reject) {
-            if (window.Waline && typeof window.Waline.init === "function") { resolve(); return; }
+            var done = false;
             var s = document.createElement("script");
-            s.src = "https://unpkg.com/@waline/client@v3/dist/waline.umd.js";
+            /* 脚本挂起时既不 onload 也不 onerror，20 秒看门狗兜底换源 */
+            var timer = window.setTimeout(function () { fail(new Error("waline-timeout")); }, 20000);
+            function ok() {
+              if (done) return;
+              if (window.Waline && typeof window.Waline.init === "function") {
+                done = true; window.clearTimeout(timer); resolve();
+              } else { fail(new Error("waline-missing")); }
+            }
+            function fail(err) {
+              if (done) return; done = true;
+              window.clearTimeout(timer);
+              if (s.parentNode) s.parentNode.removeChild(s);
+              reject(err);
+            }
+            s.src = src;
             s.async = true;
-            s.onload = function () {
-              if (window.Waline && typeof window.Waline.init === "function") resolve();
-              else reject(new Error("waline-missing"));
-            };
-            s.onerror = function () { reject(new Error("waline-load")); };
+            s.onload = ok;
+            s.onerror = function () { fail(new Error("waline-load")); };
             document.head.appendChild(s);
           });
         }
-        function preflight() {
+        function loadJs() {
+          if (window.Waline && typeof window.Waline.init === "function") return Promise.resolve();
+          return loadJsFrom(JS_URLS[0]).catch(function () { return loadJsFrom(JS_URLS[1]); });
+        }
+        function preflightOnce() {
           var ctrl = ("AbortController" in window) ? new AbortController() : null;
-          var timer = ctrl ? window.setTimeout(function () { ctrl.abort(); }, 8000) : null;
+          var timer = ctrl ? window.setTimeout(function () { ctrl.abort(); }, 20000) : null;
           var opts = ctrl ? { signal: ctrl.signal } : {};
           return fetch(SERVER_URL + "api/comment?path=%2Fchaliao&pageSize=1", opts)
             .then(function (r) {
@@ -4767,12 +4796,19 @@
             })
             .then(function (j) { if (!j || j.errno !== 0) throw new Error("waline-api"); });
         }
+        function preflight(triesLeft) {
+          return preflightOnce().catch(function (err) {
+            if (triesLeft <= 1) throw err;
+            return new Promise(function (res) { window.setTimeout(res, 1200); })
+              .then(function () { return preflight(triesLeft - 1); });
+          });
+        }
         function start() {
           if (started) return;
           started = true;
           showState("清茶已烹，正在铺开留言簿……", false);
           loadCss();
-          Promise.all([loadJs(), preflight()]).then(function () {
+          Promise.all([loadJs(), preflight(3)]).then(function () {
             window.Waline.init({
               el: "#waline",
               serverURL: SERVER_URL,
@@ -4781,7 +4817,7 @@
               commentSorting: "latest",
               meta: ["nick", "mail"],
               login: "disable",
-              emoji: ["https://unpkg.com/@waline/emojis@1.2.0/weibo"],
+              emoji: ["https://cdn.jsdelivr.net/npm/@waline/emojis@1.2.0/weibo"],
               dark: "auto",
               locale: { placeholder: "落座留言：读经有得、心存疑惑，或三两闲话，皆可写在这里……" }
             });
