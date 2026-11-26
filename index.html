@@ -1079,6 +1079,44 @@
         #waline .wl-input,#waline .wl-editor{font-size:16px}
       }
     </style>
+      <script>
+      /* 知玄阁自建流量统计（仅阁主看板可见）：访客打开章节时记一次，不记 IP、不记个人信息，
+         访客标识是浏览器里的一串随机字符，到库里之前按天加盐哈希，无法跨天追踪到个人。
+         上报失败静默，不影响页面。接口：https://stats.zhixuange.top/api/track */
+      (function () {
+        var EP = "https://stats.zhixuange.top/api/track";
+        var KEY = "zxg_vid";
+        var vid = null;
+        try {
+          vid = localStorage.getItem(KEY);
+          if (!vid) {
+            vid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+              var r = (Math.random() * 16) | 0;
+              return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+            });
+            localStorage.setItem(KEY, vid);
+          }
+        } catch (e) {}
+        var last = "", lastAt = 0;
+        window.__zxgTrack = function (view) {
+          if (!vid || !view) return;
+          var now = Date.now();
+          if (view === last && now - lastAt < 30000) return;
+          last = view; lastAt = now;
+          var ref = "";
+          try { ref = document.referrer ? new URL(document.referrer).host : ""; } catch (e) {}
+          var dev = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? "mobile" : "desktop";
+          var payload = JSON.stringify({ v: view, vid: vid, ref: ref, dev: dev });
+          try {
+            if (navigator.sendBeacon) {
+              var b = new Blob([payload], { type: "application/json" });
+              if (navigator.sendBeacon(EP, b)) return;
+            }
+          } catch (e) {}
+          try { fetch(EP, { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }); } catch (e) {}
+        };
+      })();
+    </script>
   </head>
   <body>
     <script>
@@ -4107,6 +4145,7 @@
           if (viewIds.indexOf(id) === -1) id = viewIds[0];
           clearSearchState();
           currentView = id;
+          try { if (window.__zxgTrack) window.__zxgTrack(id); } catch (e) {}
           viewSections.forEach(function (s) { s.classList.toggle("view-on", s.id === id); });
           var aboutEl = document.getElementById("aboutBlock");
           if (aboutEl) aboutEl.classList.toggle("home-on", id === viewIds[0]);
