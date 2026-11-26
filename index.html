@@ -474,7 +474,7 @@
         .daily blockquote{font-size:clamp(18px,5.4vw,24px);overflow-wrap:break-word}
         /* 背景 Logo 收小变淡，只作衬底，不再压住正文显拥挤 */
         .hero .hero-logo{width:min(300px,76vw);right:-3vw;opacity:.38}
-        /* 章节导航改为多行平铺：十个章节一次看全，不再横滑到一半截断；
+        /* 章节导航改为多行平铺：九个章节一次看全，不再横滑到一半截断；
            吸顶不再取消：窄屏同样多行平铺全部章节（不再折叠成只剩 Logo + 汉堡），
            滑到页面下方时照常固定悬浮在顶部（磨砂玻璃表面见 PillNav 样式块） */
         nav.toc{padding:0 8px;margin-top:22px}
@@ -643,13 +643,13 @@
       nav.pill-nav[data-stuck]{ position:fixed; top:14px; left:0; right:0; margin-top:0; }
       @media (max-width:640px){ nav.pill-nav[data-stuck]{ top:10px; } }
       #pnSpacer{ height:0; }
-      /* 中等宽度先收紧单行：字号与项内边距略减，十个章节仍在一行内排全，不触发隐藏 */
+      /* 中等宽度先收紧单行：字号与项内边距略减，九个章节仍在一行内排全，不触发隐藏 */
       @media (max-width:1180px){
         nav.pill-nav{ --pn-x:10px; --pn-font:13px; --pn-item-gap:2px; --pn-gap:6px; }
       }
       /* 窄屏不再折叠成汉堡：原 collapse=auto 会把整条章节栏 display:none，
          只剩 Logo 圆泡与汉堡按钮，观感上像「导航没了」（用户反馈）。
-         改为胶囊多行平铺：十个章节一次看全；即使脚本误设 data-collapsed 也强制显示章节栏、隐藏汉堡。 */
+         改为胶囊多行平铺：九个章节一次看全；即使脚本误设 data-collapsed 也强制显示章节栏、隐藏汉堡。 */
       @media (max-width:900px){
         nav.pill-nav{ flex-wrap:wrap; }
         nav.pill-nav[data-collapsed]{ justify-content:center; }
@@ -663,6 +663,50 @@
       }
       @media (prefers-reduced-motion: reduce){
         .pill-nav__face, .pill-nav__face-alt, .pill-nav__fill, .pill-nav__line, nav.pill-nav .pill-nav__item, .pill-nav__row{ transition:none; }
+      }
+
+      /* ---------- 手机收起：向下浏览时收成一条细 bar（Logo＋当前章节＋展开钮） ----------
+         导航在手机上多行平铺占高约两百像素，故 ≤900px 给它一个收起态：
+         收起钮与细 bar 只在这个断点内出现，data-mini 也只在这个断点内有样式，
+         桌面端完全不受影响。进站时导航完整展开，让人一眼看到全站内容；
+         向下滑动浏览时脚本自动收起，向上滑或回到顶部再展开（逻辑见 PillNav
+         脚本「手机收起」段），收起钮与细 bar 也可手动切换。收起时 Logo 圆泡、
+         章节胶囊条、汉堡钮一并隐藏，只剩一条 44px 细 bar 吸顶。 */
+      .pill-nav__fold{ display:none; }
+      .pill-nav__mini{ display:none; }
+      @media (max-width:900px){
+        nav.pill-nav:not([data-mini]) .pill-nav__fold{
+          display:inline-grid; place-items:center; position:relative; flex:none;
+          width:40px; height:40px; padding:0; border:0; border-radius:999px;
+          color:var(--pn-strong); cursor:pointer; outline:none;
+        }
+        .pill-nav__fold:focus-visible{ outline:2px solid var(--pn-ring); outline-offset:2px; }
+        nav.pill-nav[data-mini] .pill-nav__logo,
+        nav.pill-nav[data-mini] .pill-nav__bar,
+        nav.pill-nav[data-mini] .pill-nav__toggle{ display:none; }
+        nav.pill-nav[data-mini] .pill-nav__mini{
+          display:flex; align-items:center; gap:10px; flex:1 1 auto; min-width:0;
+          height:var(--pn-h); padding:0 14px 0 7px;
+          border:0; border-radius:999px; cursor:pointer; outline:none;
+          color:var(--pn-strong); font-family:inherit; font-size:14.5px; line-height:1; text-align:left;
+          position:relative;
+        }
+        .pill-nav__mini:focus-visible{ outline:2px solid var(--pn-ring); outline-offset:2px; }
+        .pill-nav__mini img{ display:block; width:30px; height:30px; border-radius:8px; object-fit:contain; flex:none; }
+        .pill-nav__mini-label{ font-weight:700; letter-spacing:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .pill-nav__mini-hint{ margin-left:auto; flex:none; display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:500; letter-spacing:2px; color:var(--pn-text); }
+        /* 收放丝滑：细 bar 与完整导航切换时不硬切，各自带一段缓慢的淡入＋轻微下滑，
+           缓动用 easeOutQuint 类曲线，起步快、收尾长，观感柔和不弹跳。 */
+        @keyframes pn-mini-in{ from{ opacity:0; transform:translateY(-8px) scale(.985); } to{ opacity:1; transform:translateY(0) scale(1); } }
+        @keyframes pn-bar-in{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:translateY(0); } }
+        nav.pill-nav[data-mini] .pill-nav__mini{ animation:pn-mini-in .5s cubic-bezier(.22,1,.36,1) both; }
+        nav.pill-nav:not([data-mini]) .pill-nav__bar{ animation:pn-bar-in .5s cubic-bezier(.22,1,.36,1) both; }
+        nav.pill-nav:not([data-mini]) .pill-nav__logo{ animation:pn-bar-in .5s cubic-bezier(.22,1,.36,1) both; }
+      }
+      @media (prefers-reduced-motion: reduce){
+        nav.pill-nav[data-mini] .pill-nav__mini,
+        nav.pill-nav:not([data-mini]) .pill-nav__bar,
+        nav.pill-nav:not([data-mini]) .pill-nav__logo{ animation:none; }
       }
     </style>
     <style>
@@ -860,7 +904,7 @@
       /* 藏书阁不是章节：节头标记不用「第 X 章」，改独立入口样式 */
       .sec-head .no.no-lib{background:var(--jade-soft);border:1px solid var(--jade);color:var(--jade);border-radius:999px;padding:2px 14px;font-size:13px;letter-spacing:2px;font-weight:700;line-height:2}
       .sec-head .no.no-lib::before,.sec-head .no.no-lib::after{content:none}
-      /* 导航里的藏书阁：独立松绿页签，不带章节序号，与十章区分 */
+      /* 导航里的藏书阁：独立松绿页签，不带章节序号，与九章区分 */
       nav.pill-nav .pill-nav__item.lib-item{--pn-pill:var(--jade);background:var(--jade);color:#fff;font-weight:700;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 6px 16px -6px rgba(24,44,34,.5)}
       nav.pill-nav .pill-nav__item.lib-item:hover{background:var(--jade)}
       nav.pill-nav .pill-nav__item.lib-item[aria-current]{color:#fff}
@@ -958,6 +1002,29 @@
       nav.pill-nav .pill-nav__item.tea-item svg{flex:0 0 auto}
       .pill-nav__row.tea-row{background:var(--jade-soft);color:var(--jade);font-weight:700}
       .pill-nav__row.tea-row .lib-row-tag{margin-left:auto;font-size:11.5px;font-weight:700;letter-spacing:2px;background:#2E4B3C;color:#fff;border-radius:999px;padding:3px 10px}
+      /* ===== 导航分组：九章供浏览，藏书阁 / 茶寮 / 生辰八字是功能，单独成组 ===== */
+      /* 生辰八字改归功能组：与藏书阁、茶寮同款松绿实心页签，不再用章节的朱砂 hot */
+      nav.pill-nav .pill-nav__item.func-item{--pn-pill:var(--jade);background:var(--jade);color:#fff;font-weight:700;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 6px 16px -6px rgba(24,44,34,.5)}
+      nav.pill-nav .pill-nav__item.func-item:hover{background:var(--jade)}
+      nav.pill-nav .pill-nav__item.func-item[aria-current]{color:#fff}
+      .pill-nav__row.func-row{background:var(--jade-soft);color:var(--jade);font-weight:700}
+      .pill-nav__row.func-row .lib-row-tag{margin-left:auto;font-size:11.5px;font-weight:700;letter-spacing:2px;background:#2E4B3C;color:#fff;border-radius:999px;padding:3px 10px}
+      /* 胶囊条内的分组界：桌面单行时是竖线＋「功能」小标，与章节明显分开 */
+      .pill-nav__group-sep{display:flex;align-items:center;gap:6px;padding:0 2px 0 5px;color:var(--jade);pointer-events:none}
+      .pill-nav__group-sep::before{content:"";width:1px;height:20px;background:color-mix(in srgb, var(--jade) 45%, transparent)}
+      .pill-nav__group-sep span{font-size:11px;font-weight:700;letter-spacing:2px;white-space:nowrap}
+      /* 中等宽度收紧时只留竖线，不挤占章节的单行空间 */
+      @media (max-width:1320px){ .pill-nav__group-sep span{display:none} .pill-nav__group-sep{padding:0 1px} }
+      /* 窄屏多行平铺时整行成界：九章在上、功能三项在下，一眼分清 */
+      @media (max-width:900px){
+        .pill-nav__group-sep{flex:0 0 100%;justify-content:center;gap:10px;padding:4px 0 2px}
+        .pill-nav__group-sep span{display:block}
+        .pill-nav__group-sep::before{width:36px;height:1px}
+        .pill-nav__group-sep::after{content:"";width:36px;height:1px;background:color-mix(in srgb, var(--jade) 45%, transparent)}
+      }
+      /* 折叠面板里的分组标头 */
+      .pill-nav__group-label{display:flex;align-items:center;gap:10px;padding:12px 16px 5px;color:var(--jade);font-size:11.5px;font-weight:700;letter-spacing:3px}
+      .pill-nav__group-label::after{content:"";flex:1;height:1px;background:color-mix(in srgb, var(--jade) 35%, transparent)}
       /* 茶寮小引：与藏书阁「阁主手记」同款松绿提示框 */
       .tea-intro{display:flex;gap:14px;align-items:flex-start;background:var(--jade-soft);border:1.5px solid var(--jade);border-radius:20px;padding:18px 20px;margin:4px 0 18px}
       .tea-intro-tag{flex:0 0 auto;background:#2E4B3C;color:#fff;font-family:"Noto Serif SC",serif;font-weight:900;font-size:13.5px;letter-spacing:3px;padding:6px 12px;border-radius:8px;margin-top:2px}
@@ -1149,8 +1216,6 @@
           <ul class="pill-nav__list">
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#qubie"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">道家与道教</span><span class="pill-nav__face-alt" aria-hidden="true">道家与道教</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#jingdian"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">经典著作</span><span class="pill-nav__face-alt" aria-hidden="true">经典著作</span></a></li>
-            <li class="pill-nav__slot"><a class="pill-nav__item lib-item" href="#cangshu" aria-label="藏书阁（独立入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>藏书阁</span><span class="pill-nav__face-alt" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>藏书阁</span></a></li>
-            <li class="pill-nav__slot"><a class="pill-nav__item tea-item" href="#chaliao" aria-label="问道茶寮（独立入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>问道茶寮</span><span class="pill-nav__face-alt" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>问道茶寮</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#sixiang"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">核心思想</span><span class="pill-nav__face-alt" aria-hidden="true">核心思想</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#renwu"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">历史人物</span><span class="pill-nav__face-alt" aria-hidden="true">历史人物</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#liupai"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">宗派源流</span><span class="pill-nav__face-alt" aria-hidden="true">宗派源流</span></a></li>
@@ -1158,12 +1223,19 @@
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#shenxian"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">神仙宫观</span><span class="pill-nav__face-alt" aria-hidden="true">神仙宫观</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#yingxiang"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">文化影响</span><span class="pill-nav__face-alt" aria-hidden="true">文化影响</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item" href="#shijianxian"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">发展脉络</span><span class="pill-nav__face-alt" aria-hidden="true">发展脉络</span></a></li>
-            <li class="pill-nav__slot"><a class="pill-nav__item hot" href="#bazi"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">生辰八字</span><span class="pill-nav__face-alt" aria-hidden="true">生辰八字</span></a></li>
+            <li class="pill-nav__group-sep" aria-hidden="true"><span>功能</span></li>
+            <li class="pill-nav__slot"><a class="pill-nav__item lib-item" href="#cangshu" aria-label="藏书阁（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>藏书阁</span><span class="pill-nav__face-alt" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>藏书阁</span></a></li>
+            <li class="pill-nav__slot"><a class="pill-nav__item tea-item" href="#chaliao" aria-label="问道茶寮（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>问道茶寮</span><span class="pill-nav__face-alt" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>问道茶寮</span></a></li>
+            <li class="pill-nav__slot"><a class="pill-nav__item func-item" href="#bazi" aria-label="生辰八字（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">生辰八字</span><span class="pill-nav__face-alt" aria-hidden="true">生辰八字</span></a></li>
           </ul>
           <span class="pill-nav__dot" aria-hidden="true"></span>
         </div>
         <span class="pill-nav__rim" aria-hidden="true"></span>
       </div>
+      <button type="button" class="pill-nav__fold pill-nav__surface" id="pnFold" aria-label="收起导航">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+        <span class="pill-nav__rim" aria-hidden="true"></span>
+      </button>
       <button type="button" class="pill-nav__toggle pill-nav__surface" aria-expanded="false" aria-controls="pillNavPanel" aria-label="打开菜单">
         <span class="pill-nav__burger" aria-hidden="true"><span class="pill-nav__line pill-nav__line--top"></span><span class="pill-nav__line pill-nav__line--bottom"></span></span>
         <span class="pill-nav__rim" aria-hidden="true"></span>
@@ -1172,8 +1244,6 @@
         <ul class="pill-nav__menu">
           <li><button type="button" class="pill-nav__row" data-pn-target="qubie">道家与道教</button></li>
           <li><button type="button" class="pill-nav__row" data-pn-target="jingdian">经典著作</button></li>
-          <li><button type="button" class="pill-nav__row lib-row" data-pn-target="cangshu">藏书阁<span class="lib-row-tag">独立入口</span></button></li>
-          <li><button type="button" class="pill-nav__row tea-row" data-pn-target="chaliao">问道茶寮<span class="lib-row-tag">独立入口</span></button></li>
           <li><button type="button" class="pill-nav__row" data-pn-target="sixiang">核心思想</button></li>
           <li><button type="button" class="pill-nav__row" data-pn-target="renwu">历史人物</button></li>
           <li><button type="button" class="pill-nav__row" data-pn-target="liupai">宗派源流</button></li>
@@ -1181,13 +1251,22 @@
           <li><button type="button" class="pill-nav__row" data-pn-target="shenxian">神仙宫观</button></li>
           <li><button type="button" class="pill-nav__row" data-pn-target="yingxiang">文化影响</button></li>
           <li><button type="button" class="pill-nav__row" data-pn-target="shijianxian">发展脉络</button></li>
-          <li><button type="button" class="pill-nav__row" data-pn-target="bazi">生辰八字</button></li>
+          <li class="pill-nav__group-label" aria-hidden="true">功能</li>
+          <li><button type="button" class="pill-nav__row lib-row" data-pn-target="cangshu">藏书阁<span class="lib-row-tag">独立入口</span></button></li>
+          <li><button type="button" class="pill-nav__row tea-row" data-pn-target="chaliao">问道茶寮<span class="lib-row-tag">独立入口</span></button></li>
+          <li><button type="button" class="pill-nav__row func-row" data-pn-target="bazi">生辰八字<span class="lib-row-tag">独立入口</span></button></li>
         </ul>
         <span class="pill-nav__rim" aria-hidden="true"></span>
       </div>
+      <button type="button" class="pill-nav__mini pill-nav__surface" id="pnMini" aria-label="展开导航">
+        <img src="data:image/webp;base64,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" alt="" draggable="false" />
+        <span class="pill-nav__mini-label">道家与道教</span>
+        <span class="pill-nav__mini-hint">导航<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        <span class="pill-nav__rim" aria-hidden="true"></span>
+      </button>
       <div class="pill-nav__measure" aria-hidden="true">
         <div class="pill-nav__measure-list">
-          <span class="pill-nav__ink-item">道家与道教</span><span class="pill-nav__ink-item">经典著作</span><span class="pill-nav__ink-item">藏书阁</span><span class="pill-nav__ink-item">问道茶寮</span><span class="pill-nav__ink-item">核心思想</span><span class="pill-nav__ink-item">历史人物</span><span class="pill-nav__ink-item">宗派源流</span><span class="pill-nav__ink-item">修行养生</span><span class="pill-nav__ink-item">神仙宫观</span><span class="pill-nav__ink-item">文化影响</span><span class="pill-nav__ink-item">发展脉络</span><span class="pill-nav__ink-item">生辰八字</span>
+          <span class="pill-nav__ink-item">道家与道教</span><span class="pill-nav__ink-item">经典著作</span><span class="pill-nav__ink-item">核心思想</span><span class="pill-nav__ink-item">历史人物</span><span class="pill-nav__ink-item">宗派源流</span><span class="pill-nav__ink-item">修行养生</span><span class="pill-nav__ink-item">神仙宫观</span><span class="pill-nav__ink-item">文化影响</span><span class="pill-nav__ink-item">发展脉络</span><span class="pill-nav__ink-item">藏书阁</span><span class="pill-nav__ink-item">问道茶寮</span><span class="pill-nav__ink-item">生辰八字</span>
         </div>
       </div>
     </nav>
@@ -1312,9 +1391,161 @@
         </div>
       </section>
 
+      <!-- 核心思想 -->
+      <section id="sixiang" data-sec>
+        <div class="sec-head"><span class="no">叁</span><h2>核心思想</h2></div>
+        <p class="sec-desc">十个概念，读懂道家的一大半。</p>
+        <div class="grid">
+          <article class="card diagram-card" data-search="五行 相生 相克 图解 生克环 木火土金水 互动">
+            <h3>五行生克环 · 图解</h3>
+            <div class="meta">图文互证 · 点一点就能玩</div>
+            <div class="wx-wrap">
+              <svg id="wxSvg" viewBox="0 0 300 300" role="img" aria-label="五行相生相克环形图，点选任意一行查看关系">
+                <defs>
+                  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a08c62"></path></marker>
+                  <marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3E5D4E"></path></marker>
+                </defs>
+                <g id="gSheng">
+                  <line class="edge" data-from="木" data-to="火" x1="168.6" y1="68.5" x2="220.2" y2="105.9" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="火" data-to="土" x1="233.3" y1="142.5" x2="213.6" y2="203.1" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="土" data-to="金" x1="182.9" y1="226.9" x2="119.1" y2="226.9" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="金" data-to="水" x1="87" y1="205" x2="67.3" y2="144.4" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="水" data-to="木" x1="78.2" y1="107.1" x2="129.8" y2="69.7" marker-end="url(#arr)"></line>
+                </g>
+                <g id="gKe" style="display:none">
+                  <line class="edge" data-from="木" data-to="土" x1="157.1" y1="76.9" x2="198.2" y2="203.1" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="土" data-to="水" x1="187.3" y1="213.4" x2="79.8" y2="135.3" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="水" data-to="火" x1="82.6" y1="120.6" x2="215.4" y2="120.6" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="火" data-to="金" x1="221.8" y1="134.1" x2="114.3" y2="212.2" marker-end="url(#arr)"></line>
+                  <line class="edge" data-from="金" data-to="木" x1="101.2" y1="205" x2="142.3" y2="78.9" marker-end="url(#arr)"></line>
+                </g>
+                <g class="node sel" data-wx="木" transform="translate(150,55)"><circle r="21" fill="#3d8b5f"></circle><text dy=".36em">木</text></g>
+                <g class="node" data-wx="火" transform="translate(240.4,120.6)"><circle r="21" fill="#c0452f"></circle><text dy=".36em">火</text></g>
+                <g class="node" data-wx="土" transform="translate(205.9,226.9)"><circle r="21" fill="#b08a3c"></circle><text dy=".36em">土</text></g>
+                <g class="node" data-wx="金" transform="translate(94.1,226.9)"><circle r="21" fill="#8a8f98"></circle><text dy=".36em">金</text></g>
+                <g class="node" data-wx="水" transform="translate(59.6,120.6)"><circle r="21" fill="#3a6ea8"></circle><text dy=".36em">水</text></g>
+              </svg>
+              <div class="wx-side">
+                <div class="seg" role="group" aria-label="切换相生或相克视图">
+                  <button type="button" id="segSheng" class="on">相生</button>
+                  <button type="button" id="segKe">相克</button>
+                </div>
+                <p id="wxCaption"></p>
+                <p class="wx-note">相生是滋养：木生火，火生土，土生金，金生水，水生木，循环不息。相克是制约：木克土，土克水，水克火，火克金，金克木——没有制约，生发就会失控。道家看重的不是某一行独大，而是五行之间的流通与平衡，这也是八字解析里判断喜用、忌讳的根基。</p>
+              </div>
+            </div>
+          </article>
+          <article class="card" data-search="道 本源 宇宙规律 道法自然"><h3>道</h3><p>宇宙的本源与运行规律，先于天地而存在，不可言说、只能体悟。「道法自然」——道效法的是它自己本来的样子。</p></article>
+          <article class="card" data-search="德 道德经 德是道的体现 上德不德"><h3>德</h3><p>道在具体事物中的体现。万物得「德」而生，人守「德」而安。「上德不德，是以有德」——真正的德不自夸。</p></article>
+          <article class="card" data-search="无为 无为而治 不妄为 顺应"><h3>无为</h3><p>不是什么都不做，而是不妄为、不强为：顺着事物自身的规律去做，反而「无为而无不为」。</p></article>
+          <article class="card" data-search="自然 本来如此 道法自然 无为"><h3>自然</h3><p>不是大自然，而是「自己如此」的状态。万物按自己的本性生长，人不去横加干涉，就是自然。</p></article>
+          <article class="card" data-search="阴阳 对立统一 太极 相互转化"><h3>阴阳</h3><p>万物由对立又互根的两面构成，阴中有阳、阳中有阴，盛极而衰、否极泰来。「万物负阴而抱阳」。</p></article>
+          <article class="card" data-search="五行 木火土金水 相生相克"><h3>五行</h3><p>木、火、土、金、水五种运行状态，相生相克构成万物的生成与变化，后来成为中医、命理、风水的共同框架。</p></article>
+          <article class="card" data-search="气 元气 气化万物 聚则生 散则死"><h3>气</h3><p>构成万物的基本质料。气聚则生、气散则死；养生练的就是守住这口精气神。</p></article>
+          <article class="card" data-search="逍遥 庄子 精神自由 无待"><h3>逍遥</h3><p>庄子的理想境界：精神不受外物束缚，乘天地之正、御六气之辩，游于无穷。</p></article>
+          <article class="card" data-search="性命双修 内丹 性 命 全真道"><h3>性命双修</h3><p>内丹学总纲：「性」是心性神明，「命」是身体精气。只修性不修命难成，只修命不修性是旁门——两者同修。</p></article>
+          <article class="card" data-search="柔弱胜刚强 上善若水 反者道之动"><h3>柔弱胜刚强</h3><p>「天下莫柔弱于水，而攻坚强者莫之能胜。」道总是以反面的方式运行：反者道之动，弱者道之用。</p></article>
+        </div>
+      </section>
+
+      <!-- 历史人物 -->
+      <section id="renwu" data-sec>
+        <div class="sec-head"><span class="no">肆</span><h2>历史人物</h2></div>
+        <p class="sec-desc">从哲学家到炼丹家，再到开宗立派的祖师。</p>
+        <div class="grid">
+          <article class="card" data-search="老子 李耳 道德经 太上老君 道家创始人"><h3>老子</h3><div class="meta">春秋 · 道家创始人</div><p>姓李名耳，周朝守藏室之史。西出函谷关，应关令尹喜之请留下五千言《道德经》。道教尊为太上老君。</p><span class="pill red">道家</span><span class="pill red">道教共尊</span></article>
+          <article class="card" data-search="庄子 庄周 南华真人 逍遥游"><h3>庄子</h3><div class="meta">战国 · 道家代表</div><p>名周，宋国蒙人。与老子并称「老庄」。拒绝楚王相位，曳尾于涂中——宁可在泥里自由，也不入庙堂受束缚。道教尊为南华真人。</p><span class="pill red">道家</span></article>
+          <article class="card" data-search="列子 列御寇 冲虚真人 愚公移山"><h3>列子</h3><div class="meta">战国 · 道家先驱</div><p>名御寇，郑国人。学说贵虚守静，《列子》中的寓言流传极广。道教尊为冲虚真人。</p><span class="pill red">道家</span></article>
+          <article class="card" data-search="张道陵 张天师 五斗米道 正一道 鹤鸣山"><h3>张道陵</h3><div class="meta">东汉 · 道教创始人</div><p>公元 142 年于鹤鸣山创五斗米道（天师道），道教正式形成。其后代世居龙虎山，正一道由此绵延至今。</p><span class="pill">道教</span><span class="pill gold">正一道</span></article>
+          <article class="card" data-search="葛洪 抱朴子 炼丹 罗浮山 稚川"><h3>葛洪</h3><div class="meta">东晋 · 炼丹家、医学家</div><p>号抱朴子，著《抱朴子》系统整理神仙方术与炼丹法；《肘后备急方》是中医急救名著，屠呦呦受其启发发现青蒿素。晚年炼丹于罗浮山。</p><span class="pill">道教</span></article>
+          <article class="card" data-search="陶弘景 上清派 茅山 华阳隐居 山中宰相"><h3>陶弘景</h3><div class="meta">南北朝 · 上清派宗师</div><p>隐居茅山整理上清经，创立神仙谱系《真灵位业图》。梁武帝常向他咨询国事，人称「山中宰相」。</p><span class="pill">道教</span><span class="pill gold">上清派</span></article>
+          <article class="card" data-search="陈抟 睡仙 希夷先生 华山 内丹 先天图"><h3>陈抟</h3><div class="meta">五代宋初 · 内丹与易学大家</div><p>号希夷先生，隐居华山，传说一睡百日，世称「睡仙」。传下先天太极图与内丹学，对宋代理学影响极深。</p><span class="pill">道教</span></article>
+          <article class="card" data-search="王重阳 全真道 创立 活死人墓 全真七子"><h3>王重阳</h3><div class="meta">金代 · 全真道创始人</div><p>在终南山掘「活死人墓」修行，出关后创立全真道，主张三教合一、性命双修。其弟子即著名的全真七子。</p><span class="pill">道教</span><span class="pill gold">全真道</span></article>
+          <article class="card" data-search="丘处机 长春真人 全真七子 西游 万里 止杀 成吉思汗"><h3>丘处机</h3><div class="meta">金元 · 全真七子之首</div><p>王重阳弟子。72 岁高龄万里西行至雪山见成吉思汗，以「敬天爱民、清心寡欲」劝其止杀，被尊为国师，全真道由此大兴。</p><span class="pill">道教</span><span class="pill gold">全真道</span></article>
+          <article class="card" data-search="张三丰 太极拳 武当 内家拳 三丰派"><h3>张三丰</h3><div class="meta">元明 · 武当派祖师</div><p>武当山修道，创内家拳法，后世尊为太极拳的源头人物。主张以武入道、性命双修，金庸小说让他的名气传遍华人世界。</p><span class="pill">道教</span><span class="pill gold">武当</span></article>
+        </div>
+      </section>
+
+      <!-- 宗派源流 -->
+      <section id="liupai" data-sec>
+        <div class="sec-head"><span class="no">伍</span><h2>宗派源流</h2></div>
+        <p class="sec-desc">今天道教的两大派，就是正一与全真。</p>
+        <div class="grid">
+          <article class="card" data-search="正一道 天师道 张道陵 龙虎山 符箓 在家"><h3>正一道</h3><div class="meta">源于东汉天师道 · 祖庭龙虎山</div><p>以符箓斋醮为主，道士可以结婚、住家、在家修行。由历代张天师统领，是南方道教的主体。</p></article>
+          <article class="card" data-search="全真道 王重阳 出家 戒律 北京白云观 性命双修"><h3>全真道</h3><div class="meta">金代王重阳创 · 祖庭北京白云观</div><p>主张出家住观、严守戒律、性命双修、三教合一。全真七子各立门派，龙门派最为兴盛。</p></article>
+          <article class="card" data-search="上清派 茅山 陶弘景 存思 魏华存"><h3>上清派</h3><div class="meta">东晋兴起 · 祖庭茅山</div><p>以存思、诵经为主要修法，讲究个人内修，士大夫信众多。陶弘景在此派基础上建立了完整的神仙谱系。</p></article>
+          <article class="card" data-search="灵宝派 葛巢甫 度人经 斋醮 科仪"><h3>灵宝派</h3><div class="meta">东晋末形成</div><p>以《度人经》为核心，发展出道教最完备的斋醮科仪体系，今天道教法事的仪轨大多源于此派。</p></article>
+          <article class="card" data-search="老庄学派 黄老学派 稷下 文子 道家学派分支"><h3>先秦道家诸派</h3><div class="meta">老庄派 · 黄老派 · 杨朱派</div><p>老庄派主无为逍遥；黄老派把道家与法家、阴阳结合，成为汉初治国思想；杨朱派讲贵己全生。三者同源而异流。</p></article>
+          <article class="card" data-search="武当派 张三丰 太极 内家拳"><h3>武当派</h3><div class="meta">元明 · 祖庭武当山</div><p>张三丰创立，以内家拳、太极剑闻名，主张以武入道，是道教与武术结合最深的一支。</p></article>
+        </div>
+      </section>
+
+      <!-- 修行养生 -->
+      <section id="xiuxing" data-sec>
+        <div class="sec-head"><span class="no">陆</span><h2>修行养生</h2></div>
+        <p class="sec-desc">道教修行的终极目标是长生久视，方法则落到日常的呼吸、饮食与动静之间。</p>
+        <div class="grid">
+          <article class="card" data-search="内丹 性命双修 炼精化气 周天 金丹"><h3>内丹</h3><p>以人体为鼎炉、精气神为药物，依次炼精化气、炼气化神、炼神还虚。唐宋以后成为道教修行的主流，全真道即以内丹为核心。</p></article>
+          <article class="card" data-search="外丹 炼丹术 葛洪 金石 草木 长生药"><h3>外丹</h3><p>用丹砂、铅汞等矿物炼制丹药求长生。因丹药中毒事件频发，唐以后渐衰，但客观上推动了古代化学与医药学。</p></article>
+          <article class="card" data-search="导引 吐纳 呼吸 熊经鸟申 华佗 养生功"><h3>导引吐纳</h3><p>导引是肢体运动，吐纳是呼吸调节，二者合称古代「气功」的源头。马王堆出土的《导引图》有 44 式，是现存最早的健身图谱。</p></article>
+          <article class="card" data-search="太极 太极拳 张三丰 以柔克刚 养生"><h3>太极</h3><p>源于道家阴阳哲学的拳法与修身法：以柔克刚、以静制动。如今太极拳已列入联合国教科文组织人类非物质文化遗产。</p></article>
+          <article class="card" data-search="五禽戏 华佗 虎鹿熊猿鸟 模仿 健身"><h3>五禽戏</h3><p>华佗模仿虎、鹿、熊、猿、鸟五种动物的动作创编的导引术，一戏汗出即可祛病，是中医养生功法的代表。</p></article>
+          <article class="card" data-search="辟谷 服气 不食五谷 断食 养生争议"><h3>辟谷</h3><p>不食五谷、只服气或少量药食的修行法，源于「食肉者勇敢而悍，食谷者智慧而夭」的观念。现代尝试须谨慎，不宜长期断食。</p></article>
+          <article class="card" data-search="符箓 斋醮 科仪 法事 正一道"><h3>符箓与斋醮</h3><p>符箓是沟通神明的文书符号，斋醮是设坛建醮的仪式科范。正一道最重此道，今天宫观的法事活动主要由此展开。</p></article>
+          <article class="card" data-search="存思 存神 守一 黄庭经 上清"><h3>存思守一</h3><p>闭目内观，想象体内神明与光气运行，意守丹田。上清派的核心功法，也是后来内丹「炼神」的先声。</p></article>
+        </div>
+      </section>
+
+      <!-- 神仙宫观 -->
+      <section id="shenxian" data-sec>
+        <div class="sec-head"><span class="no">柒</span><h2>神仙宫观</h2></div>
+        <p class="sec-desc">道教的神仙世界有严密的谱系，宫观名山则是它在人间的落点。</p>
+        <div class="grid">
+          <article class="card" data-search="三清 元始天尊 灵宝天尊 道德天尊 最高神"><h3>三清</h3><div class="meta">道教最高神</div><p>元始天尊、灵宝天尊、道德天尊（即太上老君），居玉清、上清、太清三境，是「道」的三种化身。</p></article>
+          <article class="card" data-search="玉皇大帝 玉帝 四御 天庭"><h3>玉皇大帝</h3><div class="meta">天庭主宰</div><p>全称昊天金阙无上至尊玉皇大帝，统御三界十方，是民间信仰中最熟悉的天界最高统治者，地位仅次于三清。</p></article>
+          <article class="card" data-search="八仙 吕洞宾 铁拐李 汉钟离 何仙姑 过海"><h3>八仙</h3><div class="meta">民间最受欢迎的神仙组合</div><p>铁拐李、汉钟离、张果老、吕洞宾、何仙姑、蓝采和、韩湘子、曹国舅。「八仙过海，各显神通」说的就是他们。</p></article>
+          <article class="card" data-search="武当山 湖北 真武大帝 张三丰 世界文化遗产"><h3>武当山</h3><div class="meta">湖北十堰 · 真武大帝道场</div><p>明成祖大修武当，宫观规模冠绝天下。供奉真武大帝，张三丰在此创武当派。已列入世界文化遗产。</p></article>
+          <article class="card" data-search="龙虎山 江西 张天师 正一祖庭 嗣汉天师府"><h3>龙虎山</h3><div class="meta">江西鹰潭 · 正一道祖庭</div><p>张道陵炼丹之地，其后代天师世居于此近两千年，嗣汉天师府是中国历史上延续最久的道教府邸。</p></article>
+          <article class="card" data-search="青城山 四川 都江堰 天师洞 幽甲天下"><h3>青城山</h3><div class="meta">四川都江堰 · 天师道发源地之一</div><p>张道陵曾在此传道，「青城天下幽」。山上天师洞、建福宫等宫观掩映于古树之间。</p></article>
+          <article class="card" data-search="崂山 山东 青岛 太清宫 海上名山第一"><h3>崂山</h3><div class="meta">山东青岛 · 海上名山第一</div><p>中国海岸线最高峰，全真道龙门派在此开宗，太清宫是崂山最古老的道观，蒲松龄《聊斋志异》中的崂山道士即源于此。</p></article>
+          <article class="card" data-search="茅山 江苏 上清派 陶弘景 句曲山"><h3>茅山</h3><div class="meta">江苏句容 · 上清派祖庭</div><p>因汉代茅盈三兄弟在此修道得名，陶弘景在此开创上清派体系，是道教「第一福地、第八洞天」。</p></article>
+        </div>
+      </section>
+
+      <!-- 文化影响 -->
+      <section id="yingxiang" data-sec>
+        <div class="sec-head"><span class="no">捌</span><h2>文化影响</h2></div>
+        <p class="sec-desc">道家与道教早已渗进中国人生活的纹理里，很多习以为常的东西，源头都在这里。</p>
+        <div class="grid">
+          <article class="card" data-search="中医 黄帝内经 阴阳五行 经络 养生 葛洪"><h3>中医</h3><p>《黄帝内经》以阴阳五行立论，经络、气血、治未病皆源于道家对身体的理解。葛洪、陶弘景、孙思邈都是道士兼医家。</p><button type="button" class="lib-go" data-lib-read="neijing">在藏书阁读《素问》精选 →</button></article>
+          <article class="card" data-search="书画 山水画 留白 写意 倪瓒 王羲之"><h3>书画</h3><p>「计白当黑」的留白、山水画的空灵、写意的洒脱，背后是道家的自然观。王羲之抄《黄庭经》换鹅，倪瓒的画里全是庄子的气。</p></article>
+          <article class="card" data-search="园林 借景 曲径通幽 自然 苏州园林"><h3>园林</h3><p>中国园林讲「虽由人作，宛自天开」，不求对称、贵在曲折，正是道法自然在空间里的样子。</p></article>
+          <article class="card" data-search="茶道 陆羽 茶经 清静 自然"><h3>茶道</h3><p>陆羽《茶经》深受道家影响，饮茶讲清、静、和、寂，从解渴的俗事升华为修身的方式。</p></article>
+          <article class="card" data-search="武术 太极拳 形意 八卦掌 内家 以柔克刚"><h3>武术</h3><p>太极拳、形意拳、八卦掌等内家拳种，直接以阴阳、五行、八卦命名立论，是道家哲学在身体上的实践。</p></article>
+          <article class="card" data-search="民俗 节日 三元节 上元 中元 下元 庙会 本命年"><h3>民俗节日</h3><p>上元（元宵）、中元（七月半）、下元三元节源于道教；本命年穿红、贴门神、拜太岁，也都是道教民俗的遗存。</p></article>
+        </div>
+      </section>
+
+      <!-- 时间线 -->
+      <section id="shijianxian" data-sec>
+        <div class="sec-head"><span class="no">玖</span><h2>发展脉络</h2></div>
+        <p class="sec-desc">两千五百年，一条线看完。</p>
+        <div class="timeline">
+          <div class="tl-item" data-search="老子 道德经 春秋"><span class="when">约公元前 6—5 世纪</span><h3>老子著《道德经》</h3><p>道家思想诞生，道、德、无为、自然等核心概念成型。</p></div>
+          <div class="tl-item" data-search="庄子 战国 逍遥"><span class="when">战国</span><h3>庄子与稷下黄老</h3><p>《庄子》成书，道家思想大放异彩；黄老学在齐国稷下学宫成为显学。</p></div>
+          <div class="tl-item" data-search="汉初 黄老 无为而治 文景之治"><span class="when">西汉初</span><h3>黄老治国</h3><p>汉文帝、汉景帝以黄老无为治国，与民休息，成就「文景之治」。</p></div>
+          <div class="tl-item" data-search="张道陵 五斗米道 142 道教成立"><span class="when">公元 142 年</span><h3>道教正式形成</h3><p>张道陵创五斗米道，有了教团、仪式与信众，道教作为宗教诞生。</p></div>
+          <div class="tl-item" data-search="葛洪 抱朴子 东晋 炼丹"><span class="when">东晋</span><h3>葛洪与上清、灵宝诸派</h3><p>《抱朴子》总结炼丹术；上清、灵宝经系相继形成，道教理论大备。</p></div>
+          <div class="tl-item" data-search="寇谦之 陆修静 唐宋 崇道 道藏"><span class="when">南北朝至唐宋</span><h3>道教制度化与鼎盛</h3><p>寇谦之改革天师道，陆修静整理三洞经书；唐尊老子为祖、宋真宗与徽宗崇道，道教地位达到顶峰，《道藏》编成。</p></div>
+          <div class="tl-item" data-search="王重阳 全真道 金 1167"><span class="when">1167 年</span><h3>王重阳创全真道</h3><p>北方新道教兴起，主张三教合一、性命双修，与南方正一道南北并立至今。</p></div>
+          <div class="tl-item" data-search="张三丰 武当 明 太极"><span class="when">元明</span><h3>武当兴盛与内丹成熟</h3><p>张三丰创武当派，明成祖大修武当山；内丹学成为道教修行的主流形态。</p></div>
+          <div class="tl-item" data-search="现代 非遗 太极拳 养生 文化"><span class="when">今天</span><h3>融入日常的道家</h3><p>太极拳列入人类非物质文化遗产，《道德经》全球热译，道家思想成为世界理解中国的一把钥匙。</p></div>
+        </div>
+      </section>
+
       <!-- 藏书阁：书架 → 书详情 → 在线阅读器（原文数据按需加载，不进首屏） -->
       <section id="cangshu" data-sec>
-        <div class="sec-head"><span class="no no-lib">独立入口 · 不计章节</span><h2>藏书阁</h2></div>
+        <div class="sec-head"><span class="no no-lib">功能 · 不计章节</span><h2>藏书阁</h2></div>
         <p class="sec-desc">前面各章提到的书，都收在这里：点开任意一本，先看详情，再进阅读器读原文——带本站自撰的白话对照，读到哪儿记到哪儿，下次接着读。第一批八本：《道德经》《庄子》全文，其余先备精选篇章，陆续补齐。</p>
 
         <div id="libShelf">
@@ -1474,7 +1705,7 @@
 
       <!-- 问道茶寮：独立入口、不计章节；留言走 Waline，访客填昵称即可落笔 -->
       <section id="chaliao" data-sec>
-        <div class="sec-head"><span class="no no-lib">独立入口 · 不计章节</span><h2>问道茶寮</h2></div>
+        <div class="sec-head"><span class="no no-lib">功能 · 不计章节</span><h2>问道茶寮</h2></div>
         <div class="tea-intro">
           <span class="tea-intro-tag">茶寮小引</span>
           <p>阁外云深，且入茶寮一坐。问道不拘深浅，论道何必正襟。凡推门至此者，皆是同路之人。读经有得、心存疑惑，或只是路过歇脚、留三两闲话，皆可落笔于此。清茶已烹，静候高见。</p>
@@ -1489,161 +1720,9 @@
         <p class="tea-note">填个昵称就能落笔，邮箱可留可不留，不必注册登录。</p>
       </section>
 
-      <!-- 核心思想 -->
-      <section id="sixiang" data-sec>
-        <div class="sec-head"><span class="no">叁</span><h2>核心思想</h2></div>
-        <p class="sec-desc">十个概念，读懂道家的一大半。</p>
-        <div class="grid">
-          <article class="card diagram-card" data-search="五行 相生 相克 图解 生克环 木火土金水 互动">
-            <h3>五行生克环 · 图解</h3>
-            <div class="meta">图文互证 · 点一点就能玩</div>
-            <div class="wx-wrap">
-              <svg id="wxSvg" viewBox="0 0 300 300" role="img" aria-label="五行相生相克环形图，点选任意一行查看关系">
-                <defs>
-                  <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a08c62"></path></marker>
-                  <marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3E5D4E"></path></marker>
-                </defs>
-                <g id="gSheng">
-                  <line class="edge" data-from="木" data-to="火" x1="168.6" y1="68.5" x2="220.2" y2="105.9" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="火" data-to="土" x1="233.3" y1="142.5" x2="213.6" y2="203.1" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="土" data-to="金" x1="182.9" y1="226.9" x2="119.1" y2="226.9" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="金" data-to="水" x1="87" y1="205" x2="67.3" y2="144.4" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="水" data-to="木" x1="78.2" y1="107.1" x2="129.8" y2="69.7" marker-end="url(#arr)"></line>
-                </g>
-                <g id="gKe" style="display:none">
-                  <line class="edge" data-from="木" data-to="土" x1="157.1" y1="76.9" x2="198.2" y2="203.1" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="土" data-to="水" x1="187.3" y1="213.4" x2="79.8" y2="135.3" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="水" data-to="火" x1="82.6" y1="120.6" x2="215.4" y2="120.6" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="火" data-to="金" x1="221.8" y1="134.1" x2="114.3" y2="212.2" marker-end="url(#arr)"></line>
-                  <line class="edge" data-from="金" data-to="木" x1="101.2" y1="205" x2="142.3" y2="78.9" marker-end="url(#arr)"></line>
-                </g>
-                <g class="node sel" data-wx="木" transform="translate(150,55)"><circle r="21" fill="#3d8b5f"></circle><text dy=".36em">木</text></g>
-                <g class="node" data-wx="火" transform="translate(240.4,120.6)"><circle r="21" fill="#c0452f"></circle><text dy=".36em">火</text></g>
-                <g class="node" data-wx="土" transform="translate(205.9,226.9)"><circle r="21" fill="#b08a3c"></circle><text dy=".36em">土</text></g>
-                <g class="node" data-wx="金" transform="translate(94.1,226.9)"><circle r="21" fill="#8a8f98"></circle><text dy=".36em">金</text></g>
-                <g class="node" data-wx="水" transform="translate(59.6,120.6)"><circle r="21" fill="#3a6ea8"></circle><text dy=".36em">水</text></g>
-              </svg>
-              <div class="wx-side">
-                <div class="seg" role="group" aria-label="切换相生或相克视图">
-                  <button type="button" id="segSheng" class="on">相生</button>
-                  <button type="button" id="segKe">相克</button>
-                </div>
-                <p id="wxCaption"></p>
-                <p class="wx-note">相生是滋养：木生火，火生土，土生金，金生水，水生木，循环不息。相克是制约：木克土，土克水，水克火，火克金，金克木——没有制约，生发就会失控。道家看重的不是某一行独大，而是五行之间的流通与平衡，这也是八字解析里判断喜用、忌讳的根基。</p>
-              </div>
-            </div>
-          </article>
-          <article class="card" data-search="道 本源 宇宙规律 道法自然"><h3>道</h3><p>宇宙的本源与运行规律，先于天地而存在，不可言说、只能体悟。「道法自然」——道效法的是它自己本来的样子。</p></article>
-          <article class="card" data-search="德 道德经 德是道的体现 上德不德"><h3>德</h3><p>道在具体事物中的体现。万物得「德」而生，人守「德」而安。「上德不德，是以有德」——真正的德不自夸。</p></article>
-          <article class="card" data-search="无为 无为而治 不妄为 顺应"><h3>无为</h3><p>不是什么都不做，而是不妄为、不强为：顺着事物自身的规律去做，反而「无为而无不为」。</p></article>
-          <article class="card" data-search="自然 本来如此 道法自然 无为"><h3>自然</h3><p>不是大自然，而是「自己如此」的状态。万物按自己的本性生长，人不去横加干涉，就是自然。</p></article>
-          <article class="card" data-search="阴阳 对立统一 太极 相互转化"><h3>阴阳</h3><p>万物由对立又互根的两面构成，阴中有阳、阳中有阴，盛极而衰、否极泰来。「万物负阴而抱阳」。</p></article>
-          <article class="card" data-search="五行 木火土金水 相生相克"><h3>五行</h3><p>木、火、土、金、水五种运行状态，相生相克构成万物的生成与变化，后来成为中医、命理、风水的共同框架。</p></article>
-          <article class="card" data-search="气 元气 气化万物 聚则生 散则死"><h3>气</h3><p>构成万物的基本质料。气聚则生、气散则死；养生练的就是守住这口精气神。</p></article>
-          <article class="card" data-search="逍遥 庄子 精神自由 无待"><h3>逍遥</h3><p>庄子的理想境界：精神不受外物束缚，乘天地之正、御六气之辩，游于无穷。</p></article>
-          <article class="card" data-search="性命双修 内丹 性 命 全真道"><h3>性命双修</h3><p>内丹学总纲：「性」是心性神明，「命」是身体精气。只修性不修命难成，只修命不修性是旁门——两者同修。</p></article>
-          <article class="card" data-search="柔弱胜刚强 上善若水 反者道之动"><h3>柔弱胜刚强</h3><p>「天下莫柔弱于水，而攻坚强者莫之能胜。」道总是以反面的方式运行：反者道之动，弱者道之用。</p></article>
-        </div>
-      </section>
-
-      <!-- 历史人物 -->
-      <section id="renwu" data-sec>
-        <div class="sec-head"><span class="no">肆</span><h2>历史人物</h2></div>
-        <p class="sec-desc">从哲学家到炼丹家，再到开宗立派的祖师。</p>
-        <div class="grid">
-          <article class="card" data-search="老子 李耳 道德经 太上老君 道家创始人"><h3>老子</h3><div class="meta">春秋 · 道家创始人</div><p>姓李名耳，周朝守藏室之史。西出函谷关，应关令尹喜之请留下五千言《道德经》。道教尊为太上老君。</p><span class="pill red">道家</span><span class="pill red">道教共尊</span></article>
-          <article class="card" data-search="庄子 庄周 南华真人 逍遥游"><h3>庄子</h3><div class="meta">战国 · 道家代表</div><p>名周，宋国蒙人。与老子并称「老庄」。拒绝楚王相位，曳尾于涂中——宁可在泥里自由，也不入庙堂受束缚。道教尊为南华真人。</p><span class="pill red">道家</span></article>
-          <article class="card" data-search="列子 列御寇 冲虚真人 愚公移山"><h3>列子</h3><div class="meta">战国 · 道家先驱</div><p>名御寇，郑国人。学说贵虚守静，《列子》中的寓言流传极广。道教尊为冲虚真人。</p><span class="pill red">道家</span></article>
-          <article class="card" data-search="张道陵 张天师 五斗米道 正一道 鹤鸣山"><h3>张道陵</h3><div class="meta">东汉 · 道教创始人</div><p>公元 142 年于鹤鸣山创五斗米道（天师道），道教正式形成。其后代世居龙虎山，正一道由此绵延至今。</p><span class="pill">道教</span><span class="pill gold">正一道</span></article>
-          <article class="card" data-search="葛洪 抱朴子 炼丹 罗浮山 稚川"><h3>葛洪</h3><div class="meta">东晋 · 炼丹家、医学家</div><p>号抱朴子，著《抱朴子》系统整理神仙方术与炼丹法；《肘后备急方》是中医急救名著，屠呦呦受其启发发现青蒿素。晚年炼丹于罗浮山。</p><span class="pill">道教</span></article>
-          <article class="card" data-search="陶弘景 上清派 茅山 华阳隐居 山中宰相"><h3>陶弘景</h3><div class="meta">南北朝 · 上清派宗师</div><p>隐居茅山整理上清经，创立神仙谱系《真灵位业图》。梁武帝常向他咨询国事，人称「山中宰相」。</p><span class="pill">道教</span><span class="pill gold">上清派</span></article>
-          <article class="card" data-search="陈抟 睡仙 希夷先生 华山 内丹 先天图"><h3>陈抟</h3><div class="meta">五代宋初 · 内丹与易学大家</div><p>号希夷先生，隐居华山，传说一睡百日，世称「睡仙」。传下先天太极图与内丹学，对宋代理学影响极深。</p><span class="pill">道教</span></article>
-          <article class="card" data-search="王重阳 全真道 创立 活死人墓 全真七子"><h3>王重阳</h3><div class="meta">金代 · 全真道创始人</div><p>在终南山掘「活死人墓」修行，出关后创立全真道，主张三教合一、性命双修。其弟子即著名的全真七子。</p><span class="pill">道教</span><span class="pill gold">全真道</span></article>
-          <article class="card" data-search="丘处机 长春真人 全真七子 西游 万里 止杀 成吉思汗"><h3>丘处机</h3><div class="meta">金元 · 全真七子之首</div><p>王重阳弟子。72 岁高龄万里西行至雪山见成吉思汗，以「敬天爱民、清心寡欲」劝其止杀，被尊为国师，全真道由此大兴。</p><span class="pill">道教</span><span class="pill gold">全真道</span></article>
-          <article class="card" data-search="张三丰 太极拳 武当 内家拳 三丰派"><h3>张三丰</h3><div class="meta">元明 · 武当派祖师</div><p>武当山修道，创内家拳法，后世尊为太极拳的源头人物。主张以武入道、性命双修，金庸小说让他的名气传遍华人世界。</p><span class="pill">道教</span><span class="pill gold">武当</span></article>
-        </div>
-      </section>
-
-      <!-- 宗派源流 -->
-      <section id="liupai" data-sec>
-        <div class="sec-head"><span class="no">伍</span><h2>宗派源流</h2></div>
-        <p class="sec-desc">今天道教的两大派，就是正一与全真。</p>
-        <div class="grid">
-          <article class="card" data-search="正一道 天师道 张道陵 龙虎山 符箓 在家"><h3>正一道</h3><div class="meta">源于东汉天师道 · 祖庭龙虎山</div><p>以符箓斋醮为主，道士可以结婚、住家、在家修行。由历代张天师统领，是南方道教的主体。</p></article>
-          <article class="card" data-search="全真道 王重阳 出家 戒律 北京白云观 性命双修"><h3>全真道</h3><div class="meta">金代王重阳创 · 祖庭北京白云观</div><p>主张出家住观、严守戒律、性命双修、三教合一。全真七子各立门派，龙门派最为兴盛。</p></article>
-          <article class="card" data-search="上清派 茅山 陶弘景 存思 魏华存"><h3>上清派</h3><div class="meta">东晋兴起 · 祖庭茅山</div><p>以存思、诵经为主要修法，讲究个人内修，士大夫信众多。陶弘景在此派基础上建立了完整的神仙谱系。</p></article>
-          <article class="card" data-search="灵宝派 葛巢甫 度人经 斋醮 科仪"><h3>灵宝派</h3><div class="meta">东晋末形成</div><p>以《度人经》为核心，发展出道教最完备的斋醮科仪体系，今天道教法事的仪轨大多源于此派。</p></article>
-          <article class="card" data-search="老庄学派 黄老学派 稷下 文子 道家学派分支"><h3>先秦道家诸派</h3><div class="meta">老庄派 · 黄老派 · 杨朱派</div><p>老庄派主无为逍遥；黄老派把道家与法家、阴阳结合，成为汉初治国思想；杨朱派讲贵己全生。三者同源而异流。</p></article>
-          <article class="card" data-search="武当派 张三丰 太极 内家拳"><h3>武当派</h3><div class="meta">元明 · 祖庭武当山</div><p>张三丰创立，以内家拳、太极剑闻名，主张以武入道，是道教与武术结合最深的一支。</p></article>
-        </div>
-      </section>
-
-      <!-- 修行养生 -->
-      <section id="xiuxing" data-sec>
-        <div class="sec-head"><span class="no">陆</span><h2>修行养生</h2></div>
-        <p class="sec-desc">道教修行的终极目标是长生久视，方法则落到日常的呼吸、饮食与动静之间。</p>
-        <div class="grid">
-          <article class="card" data-search="内丹 性命双修 炼精化气 周天 金丹"><h3>内丹</h3><p>以人体为鼎炉、精气神为药物，依次炼精化气、炼气化神、炼神还虚。唐宋以后成为道教修行的主流，全真道即以内丹为核心。</p></article>
-          <article class="card" data-search="外丹 炼丹术 葛洪 金石 草木 长生药"><h3>外丹</h3><p>用丹砂、铅汞等矿物炼制丹药求长生。因丹药中毒事件频发，唐以后渐衰，但客观上推动了古代化学与医药学。</p></article>
-          <article class="card" data-search="导引 吐纳 呼吸 熊经鸟申 华佗 养生功"><h3>导引吐纳</h3><p>导引是肢体运动，吐纳是呼吸调节，二者合称古代「气功」的源头。马王堆出土的《导引图》有 44 式，是现存最早的健身图谱。</p></article>
-          <article class="card" data-search="太极 太极拳 张三丰 以柔克刚 养生"><h3>太极</h3><p>源于道家阴阳哲学的拳法与修身法：以柔克刚、以静制动。如今太极拳已列入联合国教科文组织人类非物质文化遗产。</p></article>
-          <article class="card" data-search="五禽戏 华佗 虎鹿熊猿鸟 模仿 健身"><h3>五禽戏</h3><p>华佗模仿虎、鹿、熊、猿、鸟五种动物的动作创编的导引术，一戏汗出即可祛病，是中医养生功法的代表。</p></article>
-          <article class="card" data-search="辟谷 服气 不食五谷 断食 养生争议"><h3>辟谷</h3><p>不食五谷、只服气或少量药食的修行法，源于「食肉者勇敢而悍，食谷者智慧而夭」的观念。现代尝试须谨慎，不宜长期断食。</p></article>
-          <article class="card" data-search="符箓 斋醮 科仪 法事 正一道"><h3>符箓与斋醮</h3><p>符箓是沟通神明的文书符号，斋醮是设坛建醮的仪式科范。正一道最重此道，今天宫观的法事活动主要由此展开。</p></article>
-          <article class="card" data-search="存思 存神 守一 黄庭经 上清"><h3>存思守一</h3><p>闭目内观，想象体内神明与光气运行，意守丹田。上清派的核心功法，也是后来内丹「炼神」的先声。</p></article>
-        </div>
-      </section>
-
-      <!-- 神仙宫观 -->
-      <section id="shenxian" data-sec>
-        <div class="sec-head"><span class="no">柒</span><h2>神仙宫观</h2></div>
-        <p class="sec-desc">道教的神仙世界有严密的谱系，宫观名山则是它在人间的落点。</p>
-        <div class="grid">
-          <article class="card" data-search="三清 元始天尊 灵宝天尊 道德天尊 最高神"><h3>三清</h3><div class="meta">道教最高神</div><p>元始天尊、灵宝天尊、道德天尊（即太上老君），居玉清、上清、太清三境，是「道」的三种化身。</p></article>
-          <article class="card" data-search="玉皇大帝 玉帝 四御 天庭"><h3>玉皇大帝</h3><div class="meta">天庭主宰</div><p>全称昊天金阙无上至尊玉皇大帝，统御三界十方，是民间信仰中最熟悉的天界最高统治者，地位仅次于三清。</p></article>
-          <article class="card" data-search="八仙 吕洞宾 铁拐李 汉钟离 何仙姑 过海"><h3>八仙</h3><div class="meta">民间最受欢迎的神仙组合</div><p>铁拐李、汉钟离、张果老、吕洞宾、何仙姑、蓝采和、韩湘子、曹国舅。「八仙过海，各显神通」说的就是他们。</p></article>
-          <article class="card" data-search="武当山 湖北 真武大帝 张三丰 世界文化遗产"><h3>武当山</h3><div class="meta">湖北十堰 · 真武大帝道场</div><p>明成祖大修武当，宫观规模冠绝天下。供奉真武大帝，张三丰在此创武当派。已列入世界文化遗产。</p></article>
-          <article class="card" data-search="龙虎山 江西 张天师 正一祖庭 嗣汉天师府"><h3>龙虎山</h3><div class="meta">江西鹰潭 · 正一道祖庭</div><p>张道陵炼丹之地，其后代天师世居于此近两千年，嗣汉天师府是中国历史上延续最久的道教府邸。</p></article>
-          <article class="card" data-search="青城山 四川 都江堰 天师洞 幽甲天下"><h3>青城山</h3><div class="meta">四川都江堰 · 天师道发源地之一</div><p>张道陵曾在此传道，「青城天下幽」。山上天师洞、建福宫等宫观掩映于古树之间。</p></article>
-          <article class="card" data-search="崂山 山东 青岛 太清宫 海上名山第一"><h3>崂山</h3><div class="meta">山东青岛 · 海上名山第一</div><p>中国海岸线最高峰，全真道龙门派在此开宗，太清宫是崂山最古老的道观，蒲松龄《聊斋志异》中的崂山道士即源于此。</p></article>
-          <article class="card" data-search="茅山 江苏 上清派 陶弘景 句曲山"><h3>茅山</h3><div class="meta">江苏句容 · 上清派祖庭</div><p>因汉代茅盈三兄弟在此修道得名，陶弘景在此开创上清派体系，是道教「第一福地、第八洞天」。</p></article>
-        </div>
-      </section>
-
-      <!-- 文化影响 -->
-      <section id="yingxiang" data-sec>
-        <div class="sec-head"><span class="no">捌</span><h2>文化影响</h2></div>
-        <p class="sec-desc">道家与道教早已渗进中国人生活的纹理里，很多习以为常的东西，源头都在这里。</p>
-        <div class="grid">
-          <article class="card" data-search="中医 黄帝内经 阴阳五行 经络 养生 葛洪"><h3>中医</h3><p>《黄帝内经》以阴阳五行立论，经络、气血、治未病皆源于道家对身体的理解。葛洪、陶弘景、孙思邈都是道士兼医家。</p><button type="button" class="lib-go" data-lib-read="neijing">在藏书阁读《素问》精选 →</button></article>
-          <article class="card" data-search="书画 山水画 留白 写意 倪瓒 王羲之"><h3>书画</h3><p>「计白当黑」的留白、山水画的空灵、写意的洒脱，背后是道家的自然观。王羲之抄《黄庭经》换鹅，倪瓒的画里全是庄子的气。</p></article>
-          <article class="card" data-search="园林 借景 曲径通幽 自然 苏州园林"><h3>园林</h3><p>中国园林讲「虽由人作，宛自天开」，不求对称、贵在曲折，正是道法自然在空间里的样子。</p></article>
-          <article class="card" data-search="茶道 陆羽 茶经 清静 自然"><h3>茶道</h3><p>陆羽《茶经》深受道家影响，饮茶讲清、静、和、寂，从解渴的俗事升华为修身的方式。</p></article>
-          <article class="card" data-search="武术 太极拳 形意 八卦掌 内家 以柔克刚"><h3>武术</h3><p>太极拳、形意拳、八卦掌等内家拳种，直接以阴阳、五行、八卦命名立论，是道家哲学在身体上的实践。</p></article>
-          <article class="card" data-search="民俗 节日 三元节 上元 中元 下元 庙会 本命年"><h3>民俗节日</h3><p>上元（元宵）、中元（七月半）、下元三元节源于道教；本命年穿红、贴门神、拜太岁，也都是道教民俗的遗存。</p></article>
-        </div>
-      </section>
-
-      <!-- 时间线 -->
-      <section id="shijianxian" data-sec>
-        <div class="sec-head"><span class="no">玖</span><h2>发展脉络</h2></div>
-        <p class="sec-desc">两千五百年，一条线看完。</p>
-        <div class="timeline">
-          <div class="tl-item" data-search="老子 道德经 春秋"><span class="when">约公元前 6—5 世纪</span><h3>老子著《道德经》</h3><p>道家思想诞生，道、德、无为、自然等核心概念成型。</p></div>
-          <div class="tl-item" data-search="庄子 战国 逍遥"><span class="when">战国</span><h3>庄子与稷下黄老</h3><p>《庄子》成书，道家思想大放异彩；黄老学在齐国稷下学宫成为显学。</p></div>
-          <div class="tl-item" data-search="汉初 黄老 无为而治 文景之治"><span class="when">西汉初</span><h3>黄老治国</h3><p>汉文帝、汉景帝以黄老无为治国，与民休息，成就「文景之治」。</p></div>
-          <div class="tl-item" data-search="张道陵 五斗米道 142 道教成立"><span class="when">公元 142 年</span><h3>道教正式形成</h3><p>张道陵创五斗米道，有了教团、仪式与信众，道教作为宗教诞生。</p></div>
-          <div class="tl-item" data-search="葛洪 抱朴子 东晋 炼丹"><span class="when">东晋</span><h3>葛洪与上清、灵宝诸派</h3><p>《抱朴子》总结炼丹术；上清、灵宝经系相继形成，道教理论大备。</p></div>
-          <div class="tl-item" data-search="寇谦之 陆修静 唐宋 崇道 道藏"><span class="when">南北朝至唐宋</span><h3>道教制度化与鼎盛</h3><p>寇谦之改革天师道，陆修静整理三洞经书；唐尊老子为祖、宋真宗与徽宗崇道，道教地位达到顶峰，《道藏》编成。</p></div>
-          <div class="tl-item" data-search="王重阳 全真道 金 1167"><span class="when">1167 年</span><h3>王重阳创全真道</h3><p>北方新道教兴起，主张三教合一、性命双修，与南方正一道南北并立至今。</p></div>
-          <div class="tl-item" data-search="张三丰 武当 明 太极"><span class="when">元明</span><h3>武当兴盛与内丹成熟</h3><p>张三丰创武当派，明成祖大修武当山；内丹学成为道教修行的主流形态。</p></div>
-          <div class="tl-item" data-search="现代 非遗 太极拳 养生 文化"><span class="when">今天</span><h3>融入日常的道家</h3><p>太极拳列入人类非物质文化遗产，《道德经》全球热译，道家思想成为世界理解中国的一把钥匙。</p></div>
-        </div>
-      </section>
-
       <!-- 生辰八字 -->
       <section id="bazi" data-sec>
-        <div class="sec-head"><span class="no">拾</span><h2>生辰八字解析</h2></div>
+        <div class="sec-head"><span class="no no-lib">功能 · 不计章节</span><h2>生辰八字解析</h2></div>
         <p class="sec-desc">八字命理脱胎于道家的阴阳五行学说：把出生的年、月、日、时换算成四组干支（四柱八字），再看五行生克与日主强弱。输入出生日期、精确时间和出生地，网站会先按出生地经度把北京时间换算成真太阳时，再排盘——出生在时辰交界附近时，这一步可能直接改变时柱。排盘后还有九行四柱详表（主星、藏干、星运、空亡、纳音、神煞）、大运／流年／流月／流日四级联动时间轴、旺衰与用神可视化诊断、事业财富婚姻健康事项纲要，并可复制盘面或生成竖版分享卡，也能与另一副八字做简易合盘；另设「白话解读」页签，把盘面结论翻成人话，联系生活、学业、事业、钱财与姻缘来讲。</p>
         <div class="bazi-box">
           <div class="bz-layout">
@@ -3425,9 +3504,9 @@
           var id = location.hash.slice(1);
           if (id && id !== currentView && viewIds.indexOf(id) !== -1) showView(id, false);
         });
-        /* 每章底部自动加「上一章 / 下一章」翻页：只在十章之间流转，
-           藏书阁与问道茶寮都是独立入口、不占章节号，翻页跳过它们，它们自己也不挂章节翻页 */
-        var chapterSections = viewSections.filter(function (s) { return s.id !== "cangshu" && s.id !== "chaliao"; });
+        /* 每章底部自动加「上一章 / 下一章」翻页：只在九章之间流转，
+           藏书阁、问道茶寮、生辰八字都是功能入口、不占章节号，翻页跳过它们，它们自己也不挂章节翻页 */
+        var chapterSections = viewSections.filter(function (s) { return s.id !== "cangshu" && s.id !== "chaliao" && s.id !== "bazi"; });
         var chapterIds = chapterSections.map(function (s) { return s.id; });
         chapterSections.forEach(function (s, i) {
           var pager = document.createElement("nav");
@@ -3794,6 +3873,9 @@
         var slots = Array.prototype.slice.call(root.querySelectorAll(".pill-nav__slot"));
         var items = slots.map(function (s) { return s.querySelector(".pill-nav__item"); });
         var rows = Array.prototype.slice.call(root.querySelectorAll(".pill-nav__row"));
+        var mini = root.querySelector(".pill-nav__mini");
+        var miniLabel = root.querySelector(".pill-nav__mini-label");
+        var foldBtn = root.querySelector(".pill-nav__fold");
 
         /* highlightColor = 站内朱砂红；高亮上的文字按相对亮度自动选黑/白（同组件 contrastInk） */
         function contrastInk(color) {
@@ -3838,6 +3920,13 @@
           rows.forEach(function (r, i) {
             if (i === ai) r.setAttribute("aria-current", "page"); else r.removeAttribute("aria-current");
           });
+          /* 收起态细 bar 上的章节名跟随当前章节（aria-current 变化时 sync 都会被调到） */
+          if (miniLabel) {
+            var curItem = items[ai];
+            var curFace = curItem ? curItem.querySelector(".pill-nav__face") : null;
+            var curName = curFace ? curFace.textContent.replace(/\s+/g, " ").trim() : "";
+            if (curName) miniLabel.textContent = curName;
+          }
         }
         function render() {
           if (!dot) return;
@@ -4059,6 +4148,52 @@
           if (root.parentElement) stickyRO.observe(root.parentElement);
         }
         updateSticky();
+
+        /* ---------- 手机收起（≤900px）：进站展开，向下浏览自动收起 ----------
+           导航在手机上多行平铺占高约两百像素：进站时完整展开，让人一眼看到
+           全站章节；手指向上滑（向下浏览）越过一段距离后自动收成 44px 细 bar
+           （Logo＋当前章节名＋「导航」展开钮），把空间让给正文；向下滑回或
+           回到页面顶部时再自动展开。收起钮 / 细 bar 仍可手动切换，点任意章节、
+           点 Logo 回首页也会收回。阈值刻意放慢：要先滚过页面上方 380px、
+           且同向持续滑满 110px 才收起，展开也要同向持续滑满 70px（或回到
+           顶部 80px 内），轻扫与小抖动都不触发；每次收放后另有 700ms 冷却，
+           期间不再反向触发，避免来回闪动。收放动画见样式里 pn-mini-in /
+           pn-bar-in（0.5s 缓动淡入滑动）。章节跳转等程序滚动（单帧位移过大）
+           不算手势，且跳转后 1 秒内暂停自动收放，免得落点滚动把刚收起的
+           导航又顶开。状态只记在本次打开期间，不落盘；转回宽屏时自动
+           解除收起态。 */
+        var mobileNavMQ = window.matchMedia("(max-width: 900px)");
+        var autoNav = { lastY: window.scrollY || 0, down: 0, up: 0, holdUntil: 0 };
+        function setMini(on) {
+          root.toggleAttribute("data-mini", !!on && mobileNavMQ.matches);
+          autoNav.down = 0; autoNav.up = 0;
+          autoNav.holdUntil = Math.max(autoNav.holdUntil, Date.now() + 700);
+          updateSticky();
+        }
+        function holdAutoNav(ms) { autoNav.holdUntil = Date.now() + ms; autoNav.down = 0; autoNav.up = 0; }
+        if (foldBtn) foldBtn.addEventListener("click", function () { setMini(true); holdAutoNav(600); });
+        if (mini) mini.addEventListener("click", function () { setMini(false); holdAutoNav(600); });
+        items.forEach(function (it) {
+          it.addEventListener("click", function () { if (mobileNavMQ.matches) { setMini(true); holdAutoNav(1000); } });
+        });
+        if (logoLink) logoLink.addEventListener("click", function () { if (mobileNavMQ.matches) { setMini(true); holdAutoNav(1000); } });
+        if (typeof mobileNavMQ.addEventListener === "function") {
+          mobileNavMQ.addEventListener("change", function (e) { if (!e.matches) root.removeAttribute("data-mini"); });
+        }
+        window.addEventListener("scroll", function () {
+          var y = window.scrollY || 0;
+          var dy = y - autoNav.lastY;
+          autoNav.lastY = y;
+          if (!mobileNavMQ.matches) { autoNav.down = 0; autoNav.up = 0; return; }
+          if (Date.now() < autoNav.holdUntil || Math.abs(dy) > 400) { autoNav.down = 0; autoNav.up = 0; return; }
+          if (dy > 0) { autoNav.down += dy; autoNav.up = 0; }
+          else if (dy < 0) { autoNav.up += -dy; autoNav.down = 0; }
+          if (!root.hasAttribute("data-mini")) {
+            if (y > 380 && autoNav.down > 110) setMini(true);
+          } else if (y <= 80 || autoNav.up > 70) {
+            setMini(false);
+          }
+        }, { passive: true });
 
         /* ---------- 初始化：量测 → 折叠判定 → intro 入场 ---------- */
         selected = activeIndex();
