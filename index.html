@@ -496,6 +496,58 @@
         .hero .hero-logo{opacity:.32}
       }
 
+      /* ---------- 玄历 · 宫观巡礼 ---------- */
+      .xl-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:16px;box-shadow:var(--shadow)}
+      .xl-bar .xl-today{font-family:"Noto Serif SC",serif;font-weight:900;font-size:18px}
+      .xl-bar input[type="date"]{font:inherit;color:var(--ink);background:var(--paper2);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+      .xl-bar .xl-hint{color:var(--ink2);font-size:13px}
+      .xl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:16px}
+      .xl-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+      .xl-card h3{font-family:"Noto Serif SC",serif;font-size:18px;margin:0 0 8px;font-weight:900}
+      .xl-card h3 small{color:var(--gold);font-size:13px;letter-spacing:1px;margin-left:6px}
+      .xl-big{font-family:"Noto Serif SC",serif;font-size:26px;font-weight:900;letter-spacing:1px;line-height:1.4}
+      .xl-sub{color:var(--ink2);font-size:14px;margin-top:2px}
+      .xl-pillars{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+      .xl-pillar{flex:1;min-width:78px;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 6px;background:var(--paper2)}
+      .xl-pillar b{display:block;font-family:"Noto Serif SC",serif;font-size:22px}
+      .xl-pillar span{font-size:12px;color:var(--ink2)}
+      .xl-yiji{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      .xl-yiji h4{margin:0 0 6px;font-size:14px}
+      .xl-yiji h4.yi{color:var(--jade)}
+      .xl-yiji h4.ji{color:#c0452f}
+      .xl-yiji ul{margin:0;padding-left:18px;font-size:14px;line-height:1.9}
+      .xl-note{color:var(--ink2);font-size:13px;line-height:1.8}
+      .xl-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+      .xl-table th,.xl-table td{border-bottom:1px solid var(--line);padding:7px 6px;text-align:left;vertical-align:top}
+      .xl-table th{color:var(--gold);font-size:13px;letter-spacing:1px}
+      .xl-table tr.cur td{font-weight:700;color:var(--jade)}
+      .xl-table tr.next td{font-weight:700}
+      .gg-map{position:relative;height:360px;background:linear-gradient(180deg,var(--paper2),var(--card));border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+      .gg-map .gg-gridline{position:absolute;background:var(--line);opacity:.45}
+      .gg-map .gg-coord{position:absolute;font-size:11px;color:var(--ink2);opacity:.8}
+      .gg-dot{position:absolute;transform:translate(-50%,-50%);min-width:30px;height:30px;padding:0 7px;border-radius:999px;border:1.5px solid var(--jade);background:var(--card);color:var(--jade);font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);white-space:nowrap}
+      .gg-dot:hover{border-color:var(--seal);color:var(--seal)}
+      .gg-dot.sel{background:var(--jade);color:#fff;border-color:var(--jade)}
+      .gg-dot.dim{opacity:.35}
+      .gg-map-note{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--ink2);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 8px}
+      .gg-sealabel{position:absolute;transform:translate(-50%,-50%);font-size:11px;color:#6d7f6e;letter-spacing:2px;pointer-events:none;white-space:nowrap}
+      .gg-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+      .gg-filters select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
+      .gg-detail h3{font-family:"Noto Serif SC",serif;font-size:20px;margin:0 0 2px;font-weight:900}
+      .gg-detail .meta{color:var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:8px}
+      @media (max-width:640px){
+        .xl-big{font-size:22px}
+        .gg-map{height:320px}
+        .gg-dot{font-size:11px;min-width:26px;height:26px}
+      }
+      .gg-thumb{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:10px;margin-bottom:12px}
+      .gg-hero{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;margin-bottom:12px}
+      .gg-terrain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+      /* 宫观小卡片：BounceCards（React Bits）原生移植，按实际画面适配 */
+      #ggList .card{will-change:transform}
+      #ggList .card[data-active]{box-shadow:0 18px 38px rgba(38,28,20,.18)}
+      @media (prefers-reduced-motion:reduce){#ggList .card{will-change:auto}}
+
       /* ---------- 八字测算悬浮按钮：右下角常驻，让访客知道本站不止能看，还能算 ---------- */
       .bazi-fab{position:fixed;right:22px;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;align-items:center;gap:9px;background:var(--seal);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:12px 20px 12px 14px;font-family:"Noto Serif SC",serif;font-size:15px;font-weight:700;letter-spacing:2px;cursor:pointer;box-shadow:0 8px 22px rgba(30,13,13,.38)}
       .bazi-fab .fab-mark{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border:1.5px solid rgba(255,255,255,.9);border-radius:6px;font-size:13px;line-height:1;letter-spacing:0;transform:rotate(-3deg)}
@@ -524,6 +576,70 @@
       @media (max-width:640px){
         .about-logo{width:46px;height:46px;border-radius:11px}
         .about-head-note{letter-spacing:2px;padding:3px 7px}
+      }
+    </style>
+    <style>
+      /* ===== 周公解梦：功能入口，不计章节（配色全走本站色板变量） ===== */
+      /* 阁主手记（解梦版）：复用藏书阁 .lib-note 骨架，正文改为多段，首段不再零边距 */
+      .dream-note{align-items:flex-start}
+      .dream-note-body{flex:1;min-width:0}
+      .dream-note-body h3{font-family:"Noto Serif SC",serif;font-size:19px;font-weight:900;letter-spacing:2px;margin:0 0 10px;color:var(--ink)}
+      .dream-note-body p{margin:0 0 10px;font-size:15.5px;line-height:1.9}
+      .dream-note-body p:last-child{margin-bottom:0}
+      /* 搜索框 + 解析 */
+      .dream-box{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:26px 28px;margin-top:22px}
+      .dream-label{display:block;font-family:"Noto Serif SC",serif;font-size:17px;font-weight:900;letter-spacing:2px;margin:0 0 12px}
+      .dream-row{display:flex;gap:10px;align-items:stretch}
+      .dream-row textarea{flex:1;min-width:0;padding:13px 16px;border:1px solid var(--line);border-radius:16px;background:var(--paper);color:var(--ink);font-size:15.5px;font-family:inherit;line-height:1.7;resize:vertical;min-height:56px}
+      .dream-row textarea:focus{outline:2px solid var(--jade);outline-offset:1px}
+      .dream-row .btn{width:auto;flex:0 0 auto;padding:13px 26px}
+      .dream-hint{margin:12px 0 0;color:var(--ink2);font-size:13.5px}
+      /* 解析结果 */
+      .dream-count{margin:22px 0 6px;font-size:14px;color:var(--ink2)}
+      .dream-count b{color:var(--seal);font-family:"Noto Serif SC",serif}
+      .dream-expand-hint{margin:0 0 12px;font-size:13px;color:var(--ink2)}
+      .dream-results{display:grid;gap:14px}
+      .dream-card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;cursor:pointer;transition:border-color .25s ease,box-shadow .25s ease}
+      .dream-card:hover{border-color:var(--seal)}
+      .dream-card.is-open{border-color:var(--seal);box-shadow:0 10px 26px rgba(38,28,20,.10)}
+      .dream-card:focus-visible{outline:2px solid var(--jade);outline-offset:2px}
+      .dream-toggle{margin-top:12px;display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--seal);background:var(--card);color:var(--seal);border-radius:999px;padding:7px 16px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;line-height:1.5}
+      .dream-toggle:hover{background:var(--seal-soft)}
+      .dream-toggle .dream-chev{display:inline-block;transition:transform .25s ease;font-size:12px}
+      .dream-card.is-open .dream-toggle .dream-chev{transform:rotate(180deg)}
+      .dream-detail{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px;cursor:default}
+      .dream-detail[hidden]{display:none}
+      .dream-detail h4{font-family:"Noto Serif SC",serif;font-size:15.5px;font-weight:900;letter-spacing:1px;margin:0 0 8px;color:var(--ink)}
+      .dream-scenes{margin:0 0 12px;padding:0;list-style:none}
+      .dream-scenes li{font-size:14.5px;line-height:1.8;padding:8px 0;border-bottom:1px dashed var(--line)}
+      .dream-scenes li:last-child{border-bottom:none;padding-bottom:2px}
+      .dream-scenes b{color:var(--seal);font-family:"Noto Serif SC",serif;white-space:nowrap}
+      .dream-yiji{margin:0 0 12px;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;line-height:1.8}
+      .dream-yiji b{color:var(--jade);font-weight:700}
+      .dream-related{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+      .dream-related .rel-label{font-size:13.5px;color:var(--ink2);font-weight:700}
+      .dream-rel-chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font-size:13.5px;cursor:pointer;font-family:inherit;line-height:1.5}
+      .dream-rel-chip:hover{border-color:var(--seal);color:var(--seal);background:var(--seal-soft)}
+      .dream-card-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+      .dream-card-head h3{font-family:"Noto Serif SC",serif;font-size:20px;font-weight:900;letter-spacing:1px;margin:0}
+      .dream-tag{flex:0 0 auto;font-size:12.5px;font-weight:700;letter-spacing:2px;padding:2px 12px;border-radius:999px;line-height:1.9}
+      .dream-tag.ji{background:var(--jade-soft);color:var(--jade)}
+      .dream-tag.xiong{background:var(--seal-soft);color:var(--seal)}
+      .dream-tag.zhong{background:var(--gold-soft);color:var(--gold)}
+      .dream-hit{font-size:12.5px;color:var(--ink2)}
+      .dream-hit b{color:var(--gold);font-weight:700}
+      .dream-ancient{border-left:3px solid var(--seal);background:var(--card);border-radius:0 12px 12px 0;padding:10px 14px;font-family:"Noto Serif SC",serif;font-size:15px;color:var(--ink);margin:10px 0}
+      .dream-plain{margin:0 0 8px;font-size:15px}
+      .dream-tip{margin:0;font-size:13.5px;color:var(--ink2)}
+      .dream-tip b{color:var(--jade);font-weight:700}
+      .dream-empty{border:1.5px dashed var(--line);border-radius:18px;padding:22px 24px;background:var(--paper);color:var(--ink2);font-size:15px;margin-top:22px}
+      .dream-empty b{color:var(--ink)}
+      @media (max-width:640px){
+        .dream-box{padding:20px 18px}
+        .dream-row{flex-direction:column}
+        .dream-row .btn{width:100%}
+        .dream-row textarea{font-size:16px}
+        .dream-note-body p{font-size:15px}
       }
     </style>
     <style>
@@ -1265,6 +1381,9 @@
             <li class="pill-nav__slot"><a class="pill-nav__item lib-item" href="#cangshu" aria-label="藏书阁（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>藏书阁</span><span class="pill-nav__face-alt" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>藏书阁</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item tea-item" href="#chaliao" aria-label="问道茶寮（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>问道茶寮</span><span class="pill-nav__face-alt" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>问道茶寮</span></a></li>
             <li class="pill-nav__slot"><a class="pill-nav__item func-item" href="#bazi" aria-label="生辰八字（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">生辰八字</span><span class="pill-nav__face-alt" aria-hidden="true">生辰八字</span></a></li>
+            <li class="pill-nav__slot"><a class="pill-nav__item func-item" href="#xuanli" aria-label="玄历（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">玄历</span><span class="pill-nav__face-alt" aria-hidden="true">玄历</span></a></li>
+            <li class="pill-nav__slot"><a class="pill-nav__item func-item" href="#gongguan" aria-label="宫观巡礼（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">宫观巡礼</span><span class="pill-nav__face-alt" aria-hidden="true">宫观巡礼</span></a></li>
+            <li class="pill-nav__slot"><a class="pill-nav__item func-item" href="#jiemeng" aria-label="周公解梦（功能入口，不计入章节）"><span class="pill-nav__fill" aria-hidden="true"></span><span class="pill-nav__face">周公解梦</span><span class="pill-nav__face-alt" aria-hidden="true">周公解梦</span></a></li>
           </ul>
           <span class="pill-nav__dot" aria-hidden="true"></span>
         </div>
@@ -1293,6 +1412,9 @@
           <li><button type="button" class="pill-nav__row lib-row" data-pn-target="cangshu">藏书阁<span class="lib-row-tag">独立入口</span></button></li>
           <li><button type="button" class="pill-nav__row tea-row" data-pn-target="chaliao">问道茶寮<span class="lib-row-tag">独立入口</span></button></li>
           <li><button type="button" class="pill-nav__row func-row" data-pn-target="bazi">生辰八字<span class="lib-row-tag">独立入口</span></button></li>
+          <li><button type="button" class="pill-nav__row func-row" data-pn-target="xuanli">玄历<span class="lib-row-tag">独立入口</span></button></li>
+          <li><button type="button" class="pill-nav__row func-row" data-pn-target="gongguan">宫观巡礼<span class="lib-row-tag">独立入口</span></button></li>
+          <li><button type="button" class="pill-nav__row func-row" data-pn-target="jiemeng">周公解梦<span class="lib-row-tag">独立入口</span></button></li>
         </ul>
         <span class="pill-nav__rim" aria-hidden="true"></span>
       </div>
@@ -1304,7 +1426,7 @@
       </button>
       <div class="pill-nav__measure" aria-hidden="true">
         <div class="pill-nav__measure-list">
-          <span class="pill-nav__ink-item">道家与道教</span><span class="pill-nav__ink-item">经典著作</span><span class="pill-nav__ink-item">核心思想</span><span class="pill-nav__ink-item">历史人物</span><span class="pill-nav__ink-item">宗派源流</span><span class="pill-nav__ink-item">修行养生</span><span class="pill-nav__ink-item">神仙宫观</span><span class="pill-nav__ink-item">文化影响</span><span class="pill-nav__ink-item">发展脉络</span><span class="pill-nav__ink-item">藏书阁</span><span class="pill-nav__ink-item">问道茶寮</span><span class="pill-nav__ink-item">生辰八字</span>
+          <span class="pill-nav__ink-item">道家与道教</span><span class="pill-nav__ink-item">经典著作</span><span class="pill-nav__ink-item">核心思想</span><span class="pill-nav__ink-item">历史人物</span><span class="pill-nav__ink-item">宗派源流</span><span class="pill-nav__ink-item">修行养生</span><span class="pill-nav__ink-item">神仙宫观</span><span class="pill-nav__ink-item">文化影响</span><span class="pill-nav__ink-item">发展脉络</span><span class="pill-nav__ink-item">藏书阁</span><span class="pill-nav__ink-item">问道茶寮</span><span class="pill-nav__ink-item">生辰八字</span><span class="pill-nav__ink-item">玄历</span><span class="pill-nav__ink-item">宫观巡礼</span><span class="pill-nav__ink-item">周公解梦</span>
         </div>
       </div>
     </nav>
@@ -1583,7 +1705,7 @@
 
       <!-- 藏书阁：书架 → 书详情 → 在线阅读器（原文数据按需加载，不进首屏） -->
       <section id="cangshu" data-sec>
-        <div class="sec-head"><span class="no no-lib">功能 · 不计章节</span><h2>藏书阁</h2></div>
+        <div class="sec-head"><h2>藏书阁</h2></div>
         <p class="sec-desc">前面各章提到的书，都收在这里：点开任意一本，先看详情，再进阅读器读原文——带本站自撰的白话对照，读到哪儿记到哪儿，下次接着读。第一批八本：《道德经》《庄子》全文，其余先备精选篇章，陆续补齐。</p>
 
         <div id="libShelf">
@@ -1743,7 +1865,7 @@
 
       <!-- 问道茶寮：独立入口、不计章节；留言走 Waline，访客填昵称即可落笔 -->
       <section id="chaliao" data-sec>
-        <div class="sec-head"><span class="no no-lib">功能 · 不计章节</span><h2>问道茶寮</h2></div>
+        <div class="sec-head"><h2>问道茶寮</h2></div>
         <div class="tea-intro">
           <span class="tea-intro-tag">茶寮小引</span>
           <p>阁外云深，且入茶寮一坐。问道不拘深浅，论道何必正襟。凡推门至此者，皆是同路之人。读经有得、心存疑惑，或只是路过歇脚、留三两闲话，皆可落笔于此。清茶已烹，静候高见。</p>
@@ -1760,7 +1882,7 @@
 
       <!-- 生辰八字 -->
       <section id="bazi" data-sec>
-        <div class="sec-head"><span class="no no-lib">功能 · 不计章节</span><h2>生辰八字解析</h2></div>
+        <div class="sec-head"><h2>生辰八字解析</h2></div>
         <p class="sec-desc">八字命理脱胎于道家的阴阳五行学说：把出生的年、月、日、时换算成四组干支（四柱八字），再看五行生克与日主强弱。输入出生日期、精确时间和出生地，网站会先按出生地经度把北京时间换算成真太阳时，再排盘——出生在时辰交界附近时，这一步可能直接改变时柱。排盘后还有九行四柱详表（主星、藏干、星运、空亡、纳音、神煞）、大运／流年／流月／流日四级联动时间轴、旺衰与用神可视化诊断、事业财富婚姻健康事项纲要，并可复制盘面或生成竖版分享卡，也能与另一副八字做简易合盘；另设「白话解读」页签，把盘面结论翻成人话，联系生活、学业、事业、钱财与姻缘来讲。</p>
         <div class="bazi-box">
           <div class="bz-layout">
@@ -2022,6 +2144,100 @@
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- 玄历 -->
+      <section id="xuanli" data-sec>
+        <div class="sec-head"><h2>玄历</h2></div>
+        <p class="sec-desc">每天翻一页的道家日历：干支按精确节气时刻分界，与生辰八字排盘同一套算法；宜忌按传统建除十二神推演，节日按农历与节气排。民俗内容仅供参考，不作趋吉避凶的依据。</p>
+        <div class="xl-bar">
+          <span class="xl-today" id="xlTodayLabel">今天</span>
+          <button type="button" class="bk-btn" id="xlPrev">← 前一天</button>
+          <button type="button" class="bk-btn" id="xlNext">后一天 →</button>
+          <input type="date" id="xlDate" aria-label="选择日期" />
+          <button type="button" class="bk-btn main" id="xlBackToday">回到今天</button>
+          <span class="xl-hint">可前后翻日，也可直接选日期；干支、节气、宜忌都随日期变。</span>
+        </div>
+        <div id="xlMain"></div>
+        <div class="xl-grid">
+          <article class="xl-card" data-search="二十四节气 立春 雨水 惊蛰 春分 清明 谷雨 立夏 小满 芒种 夏至 小暑 大暑 立秋 处暑 白露 秋分 寒露 霜降 立冬 小雪 大雪 冬至 节气表 玄历">
+            <h3>全年二十四节气<small id="xlTermsYear"></small></h3>
+            <div id="xlTerms"></div>
+            <p class="xl-note">时刻为北京时间，分钟精度，与八字排盘共用同一张寿星天文历节气表。</p>
+          </article>
+          <article class="xl-card" data-search="道教节日 上元节 下元节 中元节 老子诞辰 玉皇诞 真武诞 吕祖诞 太乙救苦天尊 斗姆元君 重阳 玄历">
+            <h3>道教节日<small>农历 · 全年</small></h3>
+            <div id="xlFest"></div>
+            <p class="xl-note">日期按农历排，遇闰月以常例为准；冬至按节气时刻算。</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 宫观巡礼 -->
+      <section id="gongguan" data-sec>
+        <div class="sec-head"><h2>宫观巡礼</h2></div>
+        <p class="sec-desc">十二处名山宫观，一张示意图、一段来历：从武当金顶到罗浮冲虚，从正一道祖庭到全真道祖庭。点地图上的名字或下面的卡片，就能看到它在哪座山、属哪一派、因何出名。</p>
+        <div class="lib-note" role="note">
+          <span class="lib-note-tag">阁主手记</span>
+          <p>他日若力所能及，阁中当开 VR 实景之门，诸君足不出户，亦可亲临诸山宫观。敬请期待。</p>
+        </div>
+        <div class="gg-filters">
+          <label for="ggRegion">地域</label>
+          <select id="ggRegion">
+            <option value="">全部地域</option>
+            <option value="华北">华北</option>
+            <option value="华东">华东</option>
+            <option value="华中">华中</option>
+            <option value="华南">华南</option>
+            <option value="西南">西南</option>
+            <option value="西北">西北</option>
+          </select>
+          <label for="ggSect">宗派</label>
+          <select id="ggSect">
+            <option value="">全部宗派</option>
+            <option value="正一道">正一道</option>
+            <option value="全真道">全真道</option>
+            <option value="上清派">上清派</option>
+            <option value="灵宝派">灵宝派</option>
+            <option value="丹鼎派">丹鼎派</option>
+            <option value="多派共奉">多派共奉</option>
+          </select>
+          <button type="button" class="bk-btn" id="ggReset">看全部</button>
+          <span class="xl-note">想了解宫观在道教里的位置，可去「神仙宫观」那章。</span>
+        </div>
+        <div class="gg-map" id="ggMap" role="group" aria-label="宫观示意地图"></div>
+        <div class="xl-grid">
+          <article class="xl-card gg-detail" id="ggDetail" data-search="宫观巡礼 武当山 青城山 龙虎山 白云观 楼观台 崂山 茅山 南岳 中岳 齐云山 阁皂山 罗浮山"></article>
+        </div>
+        <div class="grid" id="ggList"></div>
+        <p class="xl-note" style="margin-top:14px">地图位置为按经纬度换算的示意，非精确导航；宫观开放时间、门票以当地最新公布为准，出行前请再核对。</p>
+      </section>
+      <!-- 周公解梦：独立入口、不计章节；古本词条本地检索，纯前端解析 -->
+      <section id="jiemeng" data-sec>
+        <div class="sec-head"><h2>周公解梦</h2></div>
+        <p class="sec-desc">梦者，心之所之也。相传周公旦善占梦，孔子晚年叹“久矣吾不复梦见周公”，后世遂将民间梦占之法集为《周公解梦》。此页依古本整理，输入梦境即可查其所主，仅供民俗参考。</p>
+        <div class="lib-note dream-note" role="note">
+          <span class="lib-note-tag">阁主手记</span>
+          <div class="dream-note-body">
+            <h3>关于「周公解梦」搜索一事</h3>
+            <p>诸位同道入此一栏，寻梦问吉，先有一言相告：此处检索，未必尽如人意。</p>
+            <p>盖因今之周公解梦，多以「关键词」相匹配——见「蛇」则言蛇，见「水」则论水。然梦境幽微，差之毫厘，意象全非。譬如同样梦见长蛇，有人惊惶奔逃，有人却「蛇追我而心不惧」，其中语气、心境与场景大相径庭。欲真正读懂整句话、体察梦中悲喜，非死板的字词比对所能及，须借助今时之 AI 辨析语义方可。</p>
+            <p>然知玄阁立站之初，乃纯前端之轻简小阁，不设繁重后端接口，亦无力承担长久之算力资费。故眼下唯能以古籍词条作粗略检索，取其大意，难察秋毫。</p>
+            <p>梦由心生，解梦亦不过借古人意象观照内心罢了。诸位姑且一试，若搜寻未果，或词不达意，还望海涵——得其意而忘其象，便是好梦。</p>
+          </div>
+        </div>
+        <div class="dream-box" data-search="周公解梦 解梦 占梦 梦境 周公旦 梦见 查梦">
+          <form class="dream-form" id="dreamForm">
+            <label class="dream-label" for="dreamInput">写下昨夜的梦</label>
+            <div class="dream-row">
+              <textarea id="dreamInput" rows="2" placeholder="把梦写成一句话，如：梦见一条大蛇在水里游，后来自己又飞起来了" aria-label="输入梦境描述"></textarea>
+              <button class="btn" type="submit">解析梦境</button>
+            </div>
+            <p class="dream-hint">整段写下来即可：阁中会拆出其中的意象，一次列出命中的几条，按相关度排好，诸位自行对照取舍。</p>
+          </form>
+          <div id="dreamResults" aria-live="polite"></div>
+        </div>
+        <p class="disclaimer">说明：词条依通行本《周公解梦》整理，同一梦境不同版本说法有出入时取主流口径；解梦属传统民俗文化，仅供参考，不作行事与决断依据。</p>
       </section>
     </main>
 
@@ -4190,8 +4406,8 @@
           if (id && id !== currentView && viewIds.indexOf(id) !== -1) showView(id, false);
         });
         /* 每章底部自动加「上一章 / 下一章」翻页：只在九章之间流转，
-           藏书阁、问道茶寮、生辰八字都是功能入口、不占章节号，翻页跳过它们，它们自己也不挂章节翻页 */
-        var chapterSections = viewSections.filter(function (s) { return s.id !== "cangshu" && s.id !== "chaliao" && s.id !== "bazi"; });
+           藏书阁、问道茶寮、生辰八字、玄历、宫观巡礼、周公解梦都是功能入口、不占章节号，翻页跳过它们，它们自己也不挂章节翻页 */
+        var chapterSections = viewSections.filter(function (s) { return s.id !== "cangshu" && s.id !== "chaliao" && s.id !== "bazi" && s.id !== "xuanli" && s.id !== "gongguan" && s.id !== "jiemeng"; });
         var chapterIds = chapterSections.map(function (s) { return s.id; });
         chapterSections.forEach(function (s, i) {
           var pager = document.createElement("nav");
@@ -5553,5 +5769,1046 @@
         check();
       })();
     </script>
+    <script>
+      /* ---------- 玄历 · 宫观巡礼 ---------- */
+      (function () {
+        function XL_esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+        function XL_pad(n) { return (n < 10 ? "0" : "") + n; }
+        var XL_JIEQI = ["冬至", "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪"];
+        var XL_JIAN = ["建", "除", "满", "平", "定", "执", "破", "危", "成", "收", "开", "闭"];
+        var XL_YIJI = [
+          { yi: ["出行", "开市", "纳财", "裁衣", "盖屋"], ji: ["动土", "破土", "安葬"] },
+          { yi: ["解除", "沐浴", "扫舍", "求医", "治病"], ji: ["嫁娶", "出行", "开市"] },
+          { yi: ["祭祀", "祈福", "开市", "纳财", "栽种"], ji: ["嫁娶", "出行", "动土"] },
+          { yi: ["祭祀", "祈福", "求嗣", "斋醮", "修造"], ji: ["嫁娶", "出行"] },
+          { yi: ["祭祀", "祈福", "嫁娶", "出行", "开市"], ji: ["词讼", "开仓"] },
+          { yi: ["祭祀", "祈福", "求嗣", "出行", "开市"], ji: ["嫁娶", "移徙", "入宅"] },
+          { yi: ["破屋", "坏垣", "求医", "治病"], ji: ["嫁娶", "出行", "开市", "动土"] },
+          { yi: ["祭祀", "祈福", "求嗣", "出行", "开市"], ji: ["登高", "涉水", "安床"] },
+          { yi: ["嫁娶", "出行", "开市", "立券", "纳财"], ji: ["词讼", "诉讼"] },
+          { yi: ["祭祀", "祈福", "求嗣", "纳财", "栽种"], ji: ["出行", "开市", "动土"] },
+          { yi: ["嫁娶", "出行", "开市", "立券", "求医"], ji: ["安葬", "破土"] },
+          { yi: ["祭祀", "祈福", "求嗣", "安床", "筑堤"], ji: ["出行", "开市", "嫁娶"] }
+        ];
+        var XL_SHICHEN = [["子", "23:00–01:00"], ["丑", "01:00–03:00"], ["寅", "03:00–05:00"], ["卯", "05:00–07:00"], ["辰", "07:00–09:00"], ["巳", "09:00–11:00"], ["午", "11:00–13:00"], ["未", "13:00–15:00"], ["申", "15:00–17:00"], ["酉", "17:00–19:00"], ["戌", "19:00–21:00"], ["亥", "21:00–23:00"]];
+        var XL_GUIREN = [["丑", "未"], ["子", "申"], ["亥", "酉"], ["亥", "酉"], ["丑", "未"], ["子", "申"], ["丑", "未"], ["午", "寅"], ["巳", "卯"], ["巳", "卯"]];
+        var XL_WEEK = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var XL_LUNAR_M = ["正", "二", "三", "四", "五", "六", "七", "八", "九", "十", "冬", "腊"];
+        var XL_LUNAR_D = ["初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十", "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十"];
+        var XL_FEST = [
+          { lm: 1, ld: 9, name: "玉皇大帝圣诞", note: "玉皇诞，道教尊奉的玉皇大帝圣诞。" },
+          { lm: 1, ld: 15, name: "上元节 · 天官赐福", note: "上元节，天官赐福之辰。" },
+          { lm: 2, ld: 15, name: "太上老君圣诞", note: "老子诞辰，道教尊奉的太上老君圣诞。" },
+          { lm: 3, ld: 3, name: "玄天上帝圣诞", note: "真武大帝圣诞，武当山主祀之神。" },
+          { lm: 4, ld: 14, name: "吕洞宾圣诞", note: "吕祖诞，八仙之一吕洞宾圣诞。" },
+          { lm: 7, ld: 15, name: "中元节 · 地官赦罪", note: "中元节，地官赦罪之辰。" },
+          { lm: 9, ld: 9, name: "重阳节 · 斗姆元君圣诞", note: "重阳节，相传为斗姆元君圣诞。" },
+          { lm: 10, ld: 15, name: "下元节 · 水官解厄", note: "下元节，水官解厄之辰。" },
+          { lm: 11, ld: 11, name: "太乙救苦天尊圣诞", note: "太乙救苦天尊圣诞。" },
+          { term: 0, name: "冬至 · 元始天尊圣诞", note: "冬至日，相传为元始天尊圣诞。" }
+        ];
+
+        function XL_termDate(min) {
+          /* 与站内 minutesToYear 同一约定：TERM_T 是北京时间读数自 1900-01-01 00:00 起的分钟数，Date.UTC(1900,0,1)+min 再用 UTC 字段读，读到的就是北京时间（见 bazi-fix/gen_terms.py 的说明）；不要再 +480，否则会差 8 小时 */
+          var d = new Date(Date.UTC(1900, 0, 1) + min * 60000);
+          return { y: d.getUTCFullYear(), m: d.getUTCMonth() + 1, d: d.getUTCDate(), h: d.getUTCHours(), mi: d.getUTCMinutes() };
+        }
+        function XL_termStr(min) {
+          var t = XL_termDate(min);
+          return t.m + "月" + t.d + "日 " + XL_pad(t.h) + ":" + XL_pad(t.mi);
+        }
+        function XL_sameDay(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+        function XL_dayDiff(a, b) { return Math.round((new Date(b.getFullYear(), b.getMonth(), b.getDate()) - new Date(a.getFullYear(), a.getMonth(), a.getDate())) / 86400000); }
+
+        function XL_festDates(baseYear, fromDate) {
+          var out = [];
+          XL_FEST.forEach(function (f) {
+            var cands = [];
+            if (f.term != null) {
+              for (var k = 0; k < TERM_T.length; k++) {
+                if (TERM_J[k] === f.term) {
+                  var td = XL_termDate(TERM_T[k]);
+                  if (td.y === baseYear || td.y === baseYear + 1) cands.push(new Date(td.y, td.m - 1, td.d));
+                }
+              }
+            } else if (typeof lunarToSolar === "function") {
+              [baseYear, baseYear + 1].forEach(function (ly) {
+                var c = null;
+                try { c = lunarToSolar(ly, f.lm, f.ld, false); } catch (e) { c = null; }
+                if (c) cands.push(new Date(c.y, c.m - 1, c.d));
+              });
+            }
+            cands.forEach(function (dt) {
+              if (dt >= new Date(fromDate.getFullYear(), fromDate.getMonth(), fromDate.getDate())) out.push({ fest: f, date: dt });
+            });
+          });
+          out.sort(function (a, b) { return a.date - b.date; });
+          return out;
+        }
+
+        function XL_xuanliOf(y, m, d) {
+          var t0 = minutesSince1900(y, m, d, 0, 0);
+          var r = calcBazi(t0, 12);
+          var yearIdx = r.pillars[0].idx, monthIdx = r.pillars[1].idx, dayIdx = r.pillars[2].idx;
+          var lunar = null;
+          try { lunar = lunarPartsOf(new Date(y, m - 1, d)); } catch (e) { lunar = null; }
+          var ti = termIdxBefore(t0);
+          var curTerm = ti >= 0 ? { name: XL_JIEQI[TERM_J[ti]], min: TERM_T[ti] } : null;
+          var nextTerm = (ti + 1 < TERM_T.length) ? { name: XL_JIEQI[TERM_J[ti + 1]], min: TERM_T[ti + 1] } : null;
+          var monthBranch = monthIdx % 12, dayBranch = dayIdx % 12;
+          var jianIdx = ((dayBranch - monthBranch) % 12 + 12) % 12;
+          var dayStem = dayIdx % 10;
+          var guiren = XL_GUIREN[dayStem].map(function (b) {
+            var sc = null;
+            XL_SHICHEN.forEach(function (s) { if (s[0] === b) sc = s; });
+            return b + "时 " + (sc ? sc[1] : "");
+          });
+          return {
+            y: y, m: m, d: d, t0: t0,
+            year: gzName(yearIdx), month: gzName(monthIdx), day: gzName(dayIdx),
+            dayStem: dayStem, lunar: lunar, ti: ti,
+            curTerm: curTerm, nextTerm: nextTerm, jianIdx: jianIdx, guiren: guiren
+          };
+        }
+
+        var XL_sel = null;
+        function XL_render() {
+          var main = document.getElementById("xlMain");
+          if (!main || !XL_sel) return;
+          if (typeof calcBazi !== "function" || typeof termIdxBefore !== "function") {
+            main.innerHTML = '<p class="xl-note">干支算法未加载，请刷新页面再试。</p>';
+            return;
+          }
+          var x = XL_xuanliOf(XL_sel.y, XL_sel.m, XL_sel.d);
+          var selDate = new Date(XL_sel.y, XL_sel.m - 1, XL_sel.d);
+          var today = new Date();
+          var isToday = XL_sameDay(selDate, today);
+          var label = document.getElementById("xlTodayLabel");
+          if (label) label.textContent = isToday ? "今天" : XL_sel.y + "年" + XL_sel.m + "月" + XL_sel.d + "日";
+          var lunarStr = "农历未载入";
+          if (x.lunar) {
+            var lyGz = gzName(((x.lunar.y - 4) % 60 + 60) % 60);
+            lunarStr = "农历" + lyGz + "年" + (x.lunar.leap ? "闰" : "") + XL_LUNAR_M[x.lunar.m - 1] + "月" + XL_LUNAR_D[x.lunar.d - 1];
+          }
+          var nextDays = 0;
+          if (x.nextTerm) {
+            var nd = XL_termDate(x.nextTerm.min);
+            nextDays = XL_dayDiff(selDate, new Date(nd.y, nd.m - 1, nd.d));
+          }
+          var fests = XL_festDates(XL_sel.y, selDate);
+          var todayFest = fests.filter(function (f) { return XL_sameDay(f.date, selDate); });
+          var nextFest = fests.filter(function (f) { return !XL_sameDay(f.date, selDate); })[0];
+          var festHtml = "";
+          if (todayFest.length) {
+            festHtml = '<div class="xl-big">' + XL_esc(todayFest[0].fest.name) + '</div><p class="xl-sub">' + XL_esc(todayFest[0].fest.note) + '</p>';
+          } else if (nextFest) {
+            var dd = XL_dayDiff(selDate, nextFest.date);
+            festHtml = '<div class="xl-big">' + XL_esc(nextFest.fest.name) + '</div><p class="xl-sub">下一次：' + nextFest.date.getFullYear() + "年" + (nextFest.date.getMonth() + 1) + "月" + nextFest.date.getDate() + "日" + (dd === 0 ? "（今天）" : " · 还有 " + dd + " 天") + "<br>" + XL_esc(nextFest.fest.note) + "</p>";
+          } else {
+            festHtml = '<p class="xl-sub">这一年内没有待查的道教节日。</p>';
+          }
+          var yiji = XL_YIJI[x.jianIdx];
+          var h = "";
+          h += '<div class="xl-grid">';
+          h += '<article class="xl-card" data-search="玄历 干支 年柱 月柱 日柱 农历 ' + XL_esc(x.year + x.month + x.day) + '"><h3>今日干支<small>节气分界 · 与排盘同算法</small></h3>';
+          h += '<div class="xl-big">' + XL_sel.y + "年" + XL_sel.m + "月" + XL_sel.d + "日 · " + XL_WEEK[new Date(XL_sel.y, XL_sel.m - 1, XL_sel.d).getDay()] + '</div>';
+          h += '<p class="xl-sub">' + XL_esc(lunarStr) + '</p>';
+          h += '<div class="xl-pillars"><div class="xl-pillar"><b>' + XL_esc(x.year) + '</b><span>年柱</span></div><div class="xl-pillar"><b>' + XL_esc(x.month) + '</b><span>月柱</span></div><div class="xl-pillar"><b>' + XL_esc(x.day) + '</b><span>日柱</span></div></div></article>';
+          h += '<article class="xl-card" data-search="节气 ' + XL_esc((x.curTerm ? x.curTerm.name : "") + " " + (x.nextTerm ? x.nextTerm.name : "")) + '"><h3>节气<small>正在进行</small></h3>';
+          if (x.curTerm) h += '<div class="xl-big">' + XL_esc(x.curTerm.name) + '</div><p class="xl-sub">' + XL_termStr(x.curTerm.min) + ' 起 · 北京时间</p>';
+          if (x.nextTerm) h += '<p class="xl-sub" style="margin-top:10px">下一节气 <b>' + XL_esc(x.nextTerm.name) + '</b> · ' + XL_termStr(x.nextTerm.min) + (nextDays === 0 ? " · 就是今天" : " · 还有 " + nextDays + " 天") + '</p>';
+          h += '</article>';
+          h += '<article class="xl-card" data-search="建除十二神 ' + XL_esc(XL_JIAN[x.jianIdx]) + '日 宜忌"><h3>建除 · ' + XL_esc(XL_JIAN[x.jianIdx]) + '日<small>传统口诀推演</small></h3>';
+          h += '<div class="xl-yiji"><div><h4 class="yi">宜</h4><ul>' + yiji.yi.map(function (s) { return "<li>" + XL_esc(s) + "</li>"; }).join("") + '</ul></div><div><h4 class="ji">忌</h4><ul>' + yiji.ji.map(function (s) { return "<li>" + XL_esc(s) + "</li>"; }).join("") + '</ul></div></div>';
+          if (x.jianIdx === 6) h += '<p class="xl-note" style="margin-top:8px">破日传统上诸事不宜，上面只列了相对可做的几件，重要事建议另择日子。</p>';
+          h += '<p class="xl-note" style="margin-top:8px">建除以月建定日神：月建为何支，当月逢该支之日即为建日，往后依次为除、满、平、定、执、破、危、成、收、开、闭。</p></article>';
+          h += '<article class="xl-card" data-search="贵人时辰 吉时 天乙贵人"><h3>贵人时辰<small>按日干推演</small></h3>';
+          h += '<div class="xl-big" style="font-size:20px">' + XL_esc(x.guiren.join("、")) + '</div>';
+          h += '<p class="xl-sub">日干' + GAN[x.dayStem] + '的天乙贵人落在' + XL_esc(XL_GUIREN[x.dayStem].join("、")) + '，传统上视为当日相对顺遂的时辰。</p></article>';
+          h += '<article class="xl-card" data-search="道教节日 ' + XL_esc(todayFest.length ? todayFest[0].fest.name : (nextFest ? nextFest.fest.name : "")) + '"><h3>道教节日<small>今日 / 下一个</small></h3>' + festHtml + '</article>';
+          h += '<article class="xl-card" data-search="玄历 怎么看 干支 节气 建除"><h3>玄历怎么看<small>三句话</small></h3><p class="xl-note">一看干支：年、月柱以节气时刻为界，日柱按日推算；二看节气：当前节气与下一节气，顺时而作；三看建除：宜忌是传统口诀的民俗参考，日子该怎么过，还是由你自己定。</p><p class="xl-note" style="margin-top:8px">想算自己的八字，去「生辰八字」排一盘；想知道节气与修行养生的关系，去「修行养生」那章。</p></article>';
+          h += '</div>';
+          main.innerHTML = h;
+          /* 全年节气表 */
+          var ty = document.getElementById("xlTermsYear");
+          if (ty) ty.textContent = " · " + XL_sel.y + "年";
+          var termsEl = document.getElementById("xlTerms");
+          if (termsEl) {
+            var rows = "";
+            for (var k = 0; k < TERM_T.length; k++) {
+              var td = XL_termDate(TERM_T[k]);
+              if (td.y !== XL_sel.y) continue;
+              var cls = "";
+              if (k === x.ti) cls = ' class="cur"';
+              else if (k === x.ti + 1) cls = ' class="next"';
+              rows += "<tr" + cls + "><td>" + XL_esc(XL_JIEQI[TERM_J[k]]) + "</td><td>" + td.m + "月" + td.d + "日 " + XL_pad(td.h) + ":" + XL_pad(td.mi) + "</td><td>" + (k === x.ti ? "当前节气" : (k === x.ti + 1 ? "下一节气" : "")) + "</td></tr>";
+            }
+            termsEl.innerHTML = '<table class="xl-table"><tr><th>节气</th><th>时刻（北京时间）</th><th></th></tr>' + rows + "</table>";
+          }
+          /* 道教节日表：下一次日期随所选日期算 */
+          var festEl = document.getElementById("xlFest");
+          if (festEl) {
+            var byName = {};
+            fests.forEach(function (f) { if (!byName[f.fest.name]) byName[f.fest.name] = f; });
+            var fr = "";
+            XL_FEST.forEach(function (f) {
+              var nx = byName[f.name];
+              var when = f.term != null ? "冬至日" : "农历" + XL_LUNAR_M[f.lm - 1] + "月" + XL_LUNAR_D[f.ld - 1];
+              var nextStr = nx ? (nx.date.getFullYear() + "年" + (nx.date.getMonth() + 1) + "月" + nx.date.getDate() + "日") : "—";
+              fr += "<tr" + (nx && XL_sameDay(nx.date, selDate) ? ' class="cur"' : "") + "><td>" + XL_esc(f.name) + "</td><td>" + XL_esc(when) + "</td><td>" + nextStr + "</td></tr>";
+            });
+            festEl.innerHTML = '<table class="xl-table"><tr><th>节日</th><th>农历 / 节气</th><th>下一次</th></tr>' + fr + "</table>";
+          }
+        }
+        function XL_setDate(dt) {
+          XL_sel = { y: dt.getFullYear(), m: dt.getMonth() + 1, d: dt.getDate() };
+          var inp = document.getElementById("xlDate");
+          if (inp) inp.value = XL_sel.y + "-" + XL_pad(XL_sel.m) + "-" + XL_pad(XL_sel.d);
+          XL_render();
+        }
+        function XL_init() {
+          var sec = document.getElementById("xuanli");
+          if (!sec) return;
+          var now = new Date();
+          XL_setDate(now);
+          var prev = document.getElementById("xlPrev"), next = document.getElementById("xlNext"), back = document.getElementById("xlBackToday"), inp = document.getElementById("xlDate");
+          if (prev) prev.addEventListener("click", function () { var dt = new Date(XL_sel.y, XL_sel.m - 1, XL_sel.d); dt.setDate(dt.getDate() - 1); XL_setDate(dt); });
+          if (next) next.addEventListener("click", function () { var dt = new Date(XL_sel.y, XL_sel.m - 1, XL_sel.d); dt.setDate(dt.getDate() + 1); XL_setDate(dt); });
+          if (back) back.addEventListener("click", function () { XL_setDate(new Date()); });
+          if (inp) inp.addEventListener("change", function () {
+            if (!inp.value) return;
+            var p = inp.value.split("-");
+            var dt = new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+            if (!isNaN(dt.getTime())) XL_setDate(dt);
+          });
+        }
+
+        /* ---------- 宫观巡礼 ---------- */
+        var GG_TEMPLES = [
+          { id: "wudang", short: "武当山", name: "武当山 · 紫霄宫", place: "湖北十堰丹江口", mountain: "武当山", lat: 32.50, lon: 111.00, region: "华中", sect: "全真道", tag: "真武大帝道场", desc: "明代皇家道场，金顶、紫霄宫、南岩宫沿山势层层而上；真武大帝为武当主祀之神，武当山于 1994 年列入世界文化遗产。" },
+          { id: "qingcheng", short: "青城山", name: "青城山", place: "四川都江堰", mountain: "青城山", lat: 30.90, lon: 103.60, region: "西南", sect: "全真道", tag: "天师道发源地之一", desc: "东汉张道陵在此创教，天师道发源地之一；后为全真龙门派名山，青城山与都江堰同列世界文化遗产。" },
+          { id: "longhu", short: "龙虎山", name: "龙虎山 · 天师府", place: "江西鹰潭贵溪", mountain: "龙虎山", lat: 28.10, lon: 116.90, region: "华东", sect: "正一道", tag: "正一道祖庭", desc: "张天师世居之地，正一道祖庭；天师府是历代天师起居、授箓之所，龙虎山丹霞地貌与道教遗迹并存。" },
+          { id: "baiyun", short: "白云观", name: "白云观", place: "北京西城", mountain: "白云观", lat: 39.90, lon: 116.35, region: "华北", sect: "全真道", tag: "全真道祖庭", desc: "全真道祖庭，丘处机长春真人羽化之地；每年正月十九燕九节香客云集，是北京最负盛名的道观。" },
+          { id: "louguan", short: "楼观台", name: "楼观台", place: "陕西西安周至", mountain: "终南山", lat: 34.05, lon: 108.27, region: "西北", sect: "全真道", tag: "老子说经台", desc: "相传老子西出函谷、于此说经著《道德经》，楼观台为道教发源地之一，终南山下道家胜地。" },
+          { id: "laoshan", short: "崂山", name: "崂山 · 太清宫", place: "山东青岛", mountain: "崂山", lat: 36.15, lon: 120.60, region: "华东", sect: "全真道", tag: "海上名山第一观", desc: "崂山临海而立，太清宫为崂山最大道观；《聊斋志异》〈崂山道士〉的故事就发生在这里。" },
+          { id: "maoshan", short: "茅山", name: "茅山", place: "江苏镇江句容", mountain: "茅山", lat: 31.80, lon: 119.30, region: "华东", sect: "上清派", tag: "上清派祖庭", desc: "上清派祖庭，三茅真君得道之地；茅山道教以符箓、斋醮著称，九霄万福宫为茅山主观。" },
+          { id: "nanyue", short: "南岳", name: "南岳大庙", place: "湖南衡阳衡山", mountain: "衡山", lat: 27.30, lon: 112.70, region: "华中", sect: "多派共奉", tag: "五岳 · 南岳", desc: "祭祀南岳大帝的主庙，佛道共奉、香火千年；南岳衡山为五岳之南岳，祝融峰为衡山主峰。" },
+          { id: "zhongyue", short: "中岳庙", name: "中岳庙", place: "河南登封", mountain: "嵩山", lat: 34.47, lon: 113.06, region: "华中", sect: "全真道", tag: "五岳 · 中岳", desc: "祭祀中岳大帝，始建于秦代，是五岳庙中规模最大的；嵩山为五岳之宗，中岳庙现为全真道观。" },
+          { id: "qiyun", short: "齐云山", name: "齐云山", place: "安徽黄山休宁", mountain: "齐云山", lat: 29.80, lon: 118.00, region: "华东", sect: "正一道", tag: "真武道场 · 江南小武当", desc: "真武大帝道场，有“江南小武当”之称；山上宫观依丹霞地貌而建，正一道香火绵延。" },
+          { id: "gezao", short: "阁皂山", name: "阁皂山", place: "江西宜春樟树", mountain: "阁皂山", lat: 28.07, lon: 115.60, region: "华东", sect: "灵宝派", tag: "灵宝派祖庭", desc: "灵宝派祖庭，东汉葛玄在此炼丹、传灵宝经；阁皂山与龙虎山、茅山并称江南道教三大名山。" },
+          { id: "luofu", short: "罗浮山", name: "罗浮山 · 冲虚古观", place: "广东惠州博罗", mountain: "罗浮山", lat: 23.30, lon: 114.00, region: "华南", sect: "丹鼎派", tag: "葛洪炼丹之地", desc: "东晋葛洪在此炼丹著述，岭南道教名山；冲虚古观为葛洪故居，罗浮山有“岭南第一山”之称。" }
+        ];
+        var GG_sel = "wudang";
+        function GG_xy(t) {
+          var x = (t.lon - 73) / (136 - 73) * 100;
+          var y = (54 - t.lat) / (54 - 18) * 100;
+          return { x: Math.max(4, Math.min(96, x)), y: Math.max(4, Math.min(96, y)) };
+        }
+        function GG_filtered() {
+          var r = document.getElementById("ggRegion"), s = document.getElementById("ggSect");
+          var rv = r ? r.value : "", sv = s ? s.value : "";
+          return GG_TEMPLES.filter(function (t) { return (!rv || t.region === rv) && (!sv || t.sect === sv); });
+        }
+        var GG_MAP_SVG = '<svg class="gg-terrain" viewBox="0 0 630 360" preserveAspectRatio="none" aria-hidden="true" focusable="false"><rect x="0" y="0" width="630" height="360" fill="#d9e6e0"/><path d="M-30,-30L657.5,-30L655.9,-29.2L655.8,-27.8L655.5,-28.6L654.5,-28.4L652.6,-26.2L651.3,-25.9L651.3,-25.1L652.6,-24.7L652.2,-24.2L649.1,-23.6L647.2,-21.4L644.4,-20.5L643.9,-19.5L634.3,-15.7L631.6,-13.2L624.7,-10.6L621.7,-8.2L622.4,-7L626.5,-6.7L627.5,-5.7L638.2,-6.5L638.8,-5.9L638.1,-5.2L638.4,-4.3L637.4,-4.1L638.2,-3.2L637.5,-2.8L638.1,-1.6L636.6,0.6L636.8,1.9L637.8,2.3L641.9,1.5L642.9,-0.4L641.6,-0.4L640.6,-1.5L643.9,-3.1L647.4,-3.2L644.8,-0.8L644.4,-1.5L643.1,-1.2L643.2,-0.5L645.9,0.4L648.6,0.3L646.1,1.7L644.9,3.3L642.2,4L643.4,4.7L651.5,3.3L652.8,2.6L653.7,0.9L655.8,0L655.8,1.7L652.2,5L654.7,4.7L657.7,-0.2L657.7,-1L656.6,-0.8L657.5,-2.4L656.4,-3L660,-2.4L659.7,66.8L655.6,69.7L653.4,74.5L646.7,82.1L638.1,88.1L634.4,92.1L633.1,92.6L631.7,95L628.4,96.4L626.2,99.6L624.6,100.5L625.2,101.2L624.3,102.4L621.8,102.9L622.2,103.6L621.3,105L611.9,109.2L609.3,111.2L605.9,111.5L601.6,113.1L600.2,113L600.8,112.5L599.9,111.7L598.2,112.4L597.6,110.9L595.8,111.6L594,110.6L593.1,111.5L593.5,107L589.3,109.3L588.5,109L590.5,106.9L589.7,107.3L588.2,106.6L585.6,110L583.9,110.5L584.7,111.3L582.7,112.2L582.2,114.5L581.2,113.3L578.9,114L578.2,113.7L579.5,113.5L576.9,113.1L577.3,114.2L578.7,114.7L577,117L574.1,116.8L574,117.6L570.7,119.2L568.5,122.4L567.7,122.4L566.5,124.5L568.1,126.2L567.1,128.8L567.6,130.6L567.2,131.7L562.3,132.9L560.8,135.3L556.4,136.9L556.6,138L553.3,139.7L550.1,139.5L548.7,141.1L545.1,142.6L545.6,146.8L545,145.7L543.8,146.2L544.7,146.5L543.9,146.6L543.9,148L547.6,148.8L550.1,151.4L553.5,153L556.3,158.6L560.6,163.2L564.3,169.3L564.7,172.7L563.8,179.6L564.5,180.1L565.5,179.2L565.9,179.8L564.5,184.9L563.7,184.7L563.6,186.5L561.2,189L557.6,189.2L556,187.9L556.5,189.4L553.9,189.5L555,189.9L554.2,190.2L554.7,191.1L554.1,191.6L553.4,190.5L550.6,190.7L550.7,189.2L548.9,190.5L547.2,190.1L545.8,190.9L546.6,191.9L547.8,191.5L547.4,192.7L546.2,193L546.4,193.8L545.6,193.4L545.2,191.1L543.7,191.8L545,194.1L543.5,194.1L544.4,194.6L543.4,195.5L541.2,194.6L542.1,193.6L541.9,194.3L542.5,194.2L542.7,192.9L543.6,193L542.5,192.3L540.1,193.9L539,195.8L538.1,195.5L537.8,194.1L537.3,195.7L535.2,197.1L534.7,195.3L535.4,194.4L533,194.1L532.9,192.5L534.6,194.2L533.8,192.9L536.2,193.7L533.6,192.5L536.7,191.9L535.8,191.8L535.7,191L535.1,192.2L533.7,192.1L534.4,190.2L533.2,190.6L533.7,189.8L532.5,188.8L533.4,188.4L534.3,189.8L534.5,189L533.1,187.7L534.6,186.5L534.9,184.7L536.9,184.7L534.7,183.6L536.6,182.1L537.8,182.4L537,181.5L538.4,181.1L536.1,181.1L535.2,180.3L538.7,179.4L536.9,180L535.9,178.7L534.9,178.7L536,178.3L535.1,176.8L535.8,176.5L535,175.8L536.2,175.3L535,175.5L534.8,172.5L534.2,173.9L533.4,172.6L533,174.2L532.7,172.8L531.8,173.3L532.1,172.7L531.3,173L531.3,172.4L532.1,172.2L531.9,171.1L532.8,171.3L533.1,170.3L532.8,172L533.6,172.1L533.3,171.5L534.2,170.8L533.5,170L534.5,170L534.8,171.6L535.2,170.5L535.8,171L535,169.5L536.3,170L536.3,170.9L536.8,170.1L538,170.4L538.5,172.5L538.6,171.3L540.4,170.2L538.7,170.5L538.2,170L539.1,169.9L538.9,169L538.5,169.6L537.5,169.3L538.7,168.2L536.7,168.4L536.7,167.4L538.7,167.3L536,165.6L536.4,165L535.3,162.5L536.5,162.3L537.6,163.6L536.8,163.1L537,161.7L535.8,162.2L533.8,161.1L531.6,161.7L531.1,162.6L530.6,161.3L529.6,160.9L529.9,161.8L529.2,161.6L528,160.1L526,159.7L527.4,160.7L526.3,160.7L526.2,162.3L525.3,162L523.5,163.2L524.4,162.3L523.9,162L525.2,161.8L525.1,161.1L523.1,161.9L522.4,161.8L523.1,161.2L522.6,160.7L521.8,161.3L519.8,160.7L521.8,160.3L521.1,159.7L522.5,159.8L522.6,159.2L516.8,158.8L519.9,157.7L518.7,157.4L518.8,156.5L520.2,155L519.8,154.1L521.3,154.2L521.2,153.3L524.6,152.9L526.6,153.7L524.5,152.2L522.8,153L522.4,152.1L521.9,152.6L521.4,152L522,150.1L523.4,149.2L522.9,148.5L524.1,147.9L524.6,146.1L523.4,145.7L524.4,144.2L522.9,144.8L522.3,144.1L521.2,144.3L517.5,142.2L517.4,143.6L516.4,144.1L515.6,141.9L513.2,140.9L514.1,139.7L515,139.8L513.7,139L512.9,140.7L511.2,141.7L507.7,141.8L506.6,140.8L505.9,142.2L504.3,142.7L504.2,141.8L502.4,141.9L502.2,143.2L500.1,143.2L492.9,146.5L490.4,149.4L488.3,149.6L488.6,150.6L487.2,149.7L485.9,150.6L487,151.4L481.5,152.7L481.2,150.6L486.7,149.1L485.9,147.4L489.4,146L485.3,146.4L484.4,144.9L482.2,144.7L485.3,143.8L484.7,141.9L488.7,140.1L488.3,139.8L493,135L491.5,134L491.6,133L488.5,131.7L488.7,130L487.4,131.5L483.6,130.6L479.8,131.7L479.4,132.6L480.2,132.8L478.3,133.3L475.5,136L475.9,136.3L474.7,137.9L465.4,141.1L465.3,141.9L462.1,144.3L462.8,144.2L462.8,146.2L459.3,148.7L459.7,148.1L458.7,147.9L453.3,149.7L450.3,147.8L447.2,148.9L447.8,150.2L447,150L445.4,153.8L447.2,156.2L450.7,158.6L459.5,159L462.6,162.8L460.7,162.6L459.7,164.1L459.6,167L461.5,168.2L467.7,168.5L469,167.5L468.6,166.4L473,164L473.1,163.3L472.2,163.2L477.4,161.7L481.4,163L481.7,164.2L483.9,163.8L485.7,165.7L486.8,165.6L485.9,165.5L486.4,165.2L489.9,165.7L491.2,164.4L491.8,165.8L496.9,165.9L495.5,166.8L496.3,168.1L494.5,168.5L494,169.8L495.4,169.7L495.1,171L494.1,170.8L494.4,171.3L493.2,171.8L491.9,171.5L492.7,171L491.7,169.9L490.3,171L490.5,170.2L489.3,170.1L489.5,170.6L486.4,171.7L486.3,172.6L485,172.3L486.1,171.6L484.6,171.7L484,172.9L480.2,174.2L477.5,173.8L477.5,174.6L478.5,174L479.6,174.5L479.5,175.4L478.7,176.2L478.1,175.4L477.1,175.7L477.2,176.7L476.4,176.8L477,178.4L476.3,178.8L473.5,179.6L472.9,179.4L473.6,178.1L473.1,177.3L472.8,178.2L471,177.7L471.8,180.1L473,180.3L471,181L470,182.7L469.1,182.6L469,183.8L466.5,184.2L465.5,186.2L464.2,186.9L463.6,189L461.9,190L461.9,192.8L464.4,192.5L466.5,194.7L472.6,196.9L474.8,203.5L479,209.9L478.3,213L483.9,216.2L484.2,217.5L483.6,217.7L484.4,218.9L488.2,220.5L489.3,222.7L486.8,222.8L482.9,221.1L481.2,222L479.8,221.9L478.1,219.8L476.3,219.2L471.3,220.6L469.9,219.8L468.4,217L466.1,216.5L466.9,217.1L466.1,218L467.9,218L467.7,218.7L470.1,220.5L472.3,220.9L474.7,219.7L477.5,220.2L478.2,221.7L477.3,221.9L481.4,223.2L487.3,227.2L489.8,230.9L485.4,231.8L480.2,234.3L478.1,237L477,236.1L474.8,236L473.8,237.3L472.6,237L471.5,238L472.7,237.2L473.8,237.5L474.5,236.3L476.2,236.3L477.3,237.7L476.3,238.8L477.9,239.3L476.5,238.7L477.5,237.7L478.9,238.3L481.9,236.6L483.8,236.7L487.2,240.4L491.3,241L487,244.3L484.8,244.6L484.3,245.3L484.4,245.8L485,245.2L484.8,246.1L487.1,244.6L487.8,245.3L488.4,244.6L487.5,244.4L489.2,243.6L489.7,245.5L489,247L489.9,247.4L487.9,248.3L488.4,246.8L487.9,246.3L487.2,248.2L486.5,248.2L486.4,246.9L486.3,248.1L485.7,246.9L484.1,248.4L484.6,248.7L484,248.9L486.2,248.9L485.3,249.8L486.9,249.8L486.8,250.9L485,250.5L486.7,251.7L486.1,252.8L483.5,252.9L481.4,251.5L483,252.8L482.6,253.2L485.1,253.4L485.8,255L485.1,255.1L486.1,255.2L486.6,256.6L486.1,257.3L484.1,257L483.3,258.5L482.3,257.6L482.6,256.3L481.7,256.2L481.3,256.9L480.2,257L481.2,257.6L479.7,260.1L476.1,259.6L475.6,258.9L475.9,259.7L478.4,260.4L478.7,261.2L477.2,262.8L476.4,262.4L476.8,263.4L476,264.3L476.8,265.2L476.4,266.2L475,266.6L475.2,268L473,267.6L473.1,266.8L472,267L471.8,267.8L473.5,267.6L474.2,268.5L472.4,268.7L472.6,270L471.5,270.2L472.2,270.8L470.3,271L471.3,272L471.3,273.5L468.5,274.8L470.8,272L469.3,272.1L468.6,273.5L467.9,273.1L468.5,271.5L467.6,272.6L466.9,271.9L467.2,273L465.8,272.1L465.5,273.8L467.4,273.9L468.2,275.5L467.6,275.9L466.5,275L465.7,275.6L466.5,275.6L466.8,276.8L468.3,275.7L469.5,276.4L466.5,277.3L464.6,280.2L460.9,278.5L463.3,280.6L465.2,279.6L467,280L465.7,281.3L465.9,283.1L464.5,283.1L464.9,284.4L465.8,284.2L466.5,286.4L465.8,286.6L465.8,285.3L464.8,286.3L465.1,285.3L464.5,285.6L463.1,284L461,285.8L462,286.4L462,287.4L462.8,286.7L463.4,287.6L462.6,288.2L461.2,287.9L461,288.9L460.3,288.6L460.7,287.8L459.7,287.7L460.3,287.2L458.8,287.6L459.7,288.2L458.5,289.3L459.5,290L460,289.5L460.2,290.4L459.1,290.5L459.5,291.3L457.2,291.6L456.7,290.5L456.7,291.3L455.7,291.1L456.4,292.3L457.6,292.4L456.4,293.2L456.2,294.5L455.5,294.8L454.3,293L454,293.9L452.2,294.6L451.6,293.1L451.1,294.2L449.7,294.5L450.6,294.8L450.2,295.5L447.9,295.3L449.1,296.2L450.4,295.9L450.2,296.7L450.9,296.6L451.3,297.4L449.1,298.1L448.9,299.7L447.5,300.9L448,299.8L446.7,299.4L447,300.5L445.9,302.6L445.7,301L444.2,300.5L444.9,301.7L442.8,302.2L442.6,303.8L442.3,303.1L440.8,304.5L440.7,303.5L439.2,303.4L437.7,306.5L435.2,305.8L435.7,306.8L437.5,306.7L438,307.6L436.7,307.2L437.2,307.6L436.5,308.4L436.1,307.6L435.1,307.7L436,307.9L434.9,310.6L432.1,310.2L432.8,310.4L431.4,311.5L430.4,310.7L430.8,311.3L428.1,312.5L426.8,311.2L427.3,310.7L425.6,311.5L424.1,310.7L424.7,311.5L426.1,311.4L425.3,312.3L425.8,313.3L423.7,313.1L424.1,312.1L422.3,312.1L423,311L419.9,313.1L418.6,312.4L419.7,313.2L419,314.5L417.4,313.9L418.2,312L417,312.1L415.2,312.9L415.1,313.5L415.9,313.6L415,314.4L416.2,314.9L415.2,315.5L414.1,313.9L412.1,314.7L413.4,314.9L411.7,315.5L412.1,316L413.2,315.2L414,315.6L413.6,316.7L412.6,316.4L413,317.4L411,316.3L409.1,316.2L410.8,314.7L409.6,314.6L408.9,315.5L407.6,312.5L406.5,312.4L405.9,311.1L406.4,309.7L406,310.8L406.2,309.7L405.8,310.6L405.4,309.4L408.3,308.8L404.2,309L405,309.8L404.8,310.8L402.1,311L404.9,312.3L403.8,312.3L406,314.2L405.9,317.6L404.8,318.4L401.7,314.2L404,318.2L403,318.2L401.6,319.8L400.9,317.9L400.3,320.5L399.1,321.4L398.3,320.3L395.5,322.3L394.3,321.5L394.9,320.3L393.9,320.4L394,319.3L394,322L392.9,322.9L391.8,322.5L391.9,321.6L390.3,322L390.4,321.2L389.7,321.8L388.9,320.7L389,321.8L390,322.3L388.7,323.2L388.4,322.3L386.8,322.2L387.9,323.8L386.3,324.7L385.8,324.2L384.8,324.9L384.3,324L384.4,324.7L382.7,325.6L383,325L380.9,325.3L380.3,324.6L379.8,325.6L380.7,325.3L379.9,325.8L377.7,326L376.5,327.4L376.4,326.3L377.6,325.6L376.4,326.2L376.4,327.7L374.3,328.1L374.9,326.6L374.3,326.9L373.6,325.6L374,328.2L372,329.3L371.6,331.5L373.7,331.5L374.1,332.5L373.6,332.7L373.4,331.8L373,333.4L375.3,335.2L372.8,337.5L370.4,337L369.2,337.6L368.6,335.9L369.8,336.5L370.1,335.7L368.2,334.8L368.5,334L367.5,333.3L368.6,332.8L367.9,333.1L367.6,331.4L367.2,331.9L366.6,330.7L367.7,326.4L369.2,326.4L369.4,325.1L368.1,325.4L367.7,324.2L367.7,325.1L366.5,324.8L366.8,323.8L366.1,324.2L365.7,322.4L364.6,323.4L365.7,324.2L365.3,325.1L362.4,325.7L362.4,325.1L361.4,326L360.4,325.5L361.4,324.9L361.4,324L359.3,323.8L358.6,323.2L359.2,322.3L358,321.8L358.4,322.5L357.8,322.7L358.6,323.6L357.5,324L357.2,322.5L356.5,322.7L356.8,321.8L356.3,322.5L355.7,322.1L356.4,321.1L355.5,320.5L354.6,321.4L354.8,320.5L354.6,322.6L355.7,323.2L354.7,324.4L353.9,324.2L354.7,323.3L353.4,322.7L352.1,325L352.4,323.6L349.9,324.5L350.8,325.1L349.7,325.7L349,324.7L347.5,324.9L347.9,325.4L345.9,327.1L344.2,326.7L343.7,329.7L342,330.6L340.7,330.4L341.5,329.6L340.3,329.7L340,330.5L338.5,330.1L339.4,330.9L338.7,331.2L337.7,330.4L338,329.8L336.4,329.8L337.6,330.6L337,331.2L338.1,333.2L335.9,333.4L336.2,334.1L335.2,334.6L335.8,334.5L335.2,335.6L335.9,335.5L335.9,337.2L335,336.9L335.7,337.7L333.8,337.9L331.8,340.1L331.1,340.4L331.1,339.7L329.6,340.7L327.9,344L328.1,347.2L326.2,349.7L326.3,350.8L330.9,357.4L332.7,358L333.5,359.4L334.3,358.8L335.2,360.5L334.4,361.2L335,362.9L332.9,362.3L335,363.2L337.6,366.6L341.1,369.1L342,370.8L341.4,371.3L342.2,370.9L346.4,374.1L344.4,373.5L346.6,374.5L348.4,376.2L348.2,377L350.4,376.5L350.5,377.6L352,377.8L351.4,378.5L352.3,379.1L352,380L352.6,379.9L352.5,378.4L353.3,378.5L352.7,378.9L352.8,380L356.8,384.8L356.3,385.4L357,385.1L357.7,386.7L358.3,385.7L359.5,387.5L358.6,388.5L359.4,390L248,390L247.3,381.6L245.7,379.4L246.4,375.2L247.4,374.4L243.7,375.2L241.8,370.8L241.6,369.1L242.6,368.9L241.3,369.2L238.8,365.4L238.2,366.1L239.1,366.8L238.5,367.9L239.1,369.8L236.8,374.3L234.4,375.2L232.7,374L232.3,372.4L232.9,371.9L231.7,372.3L233.2,375.8L231.2,376.8L230.1,376.1L230.7,376.9L228,378.6L227.2,377.8L226.6,380.5L224.2,382.8L222.9,382.6L223.6,378.5L222.1,382.1L221.3,381.8L221,379.7L222.3,378.8L221.4,378.5L220.3,381.9L218.5,382.1L219,381.5L218.3,380.5L219.2,379.6L218.6,378.7L219.9,377.5L218.5,378.4L218.7,379.6L217.2,381.4L216,380.8L217.9,378.4L215.7,380.6L216.8,378.8L217.3,374.8L216.8,374.7L216.3,377.4L216.3,376.6L215.2,377L214.6,378.9L212.5,380.3L212.7,374.7L213.4,374.5L213.8,371L214.6,370.5L214.5,368.2L215.4,368.1L215.5,366.8L215.9,367.1L215.6,364.2L216.2,364.5L214.5,360.3L214.6,358.4L213.3,357.4L214.2,356.9L211.5,352.7L212.8,352.6L211.5,351.3L210.4,351.4L210.7,346.1L210.3,348L209.7,348.5L209.1,348.1L209.8,350.3L209.4,351.3L206.8,349.8L204.9,345.9L206.1,346L208,347.6L209.9,346.1L209.8,345.4L207.3,343.7L208.1,342.5L207.6,343.3L207.5,342.3L206,342.8L207.4,340.7L205.8,341.2L205.3,340L204.2,340.3L203.8,339.1L203.6,339.7L203.4,339L202.7,339.5L201.3,339.1L202.4,341.8L201.3,339.9L201.3,341.7L199.7,338.7L201.2,337.9L199.9,338.5L200.9,336.2L200.3,335.9L200.7,334.5L199,338.6L197.7,338L199.4,336.8L198.3,335L197.7,335.4L196.4,333L197.3,337.4L193.8,333L192.7,329.4L193.3,332.6L190.5,328.3L189.5,325.4L190.2,325.1L190.3,323L189.8,323.5L189.9,322.1L189,322.1L189.5,321.2L188.1,318.2L189.1,315.8L187.9,317.6L186.8,314.7L184.6,312.4L184.9,311L183.2,313L181.8,312.7L182.6,313.6L182,314.6L180.9,314.6L180.2,313.2L180.4,314.1L179.4,314.1L176.3,309.4L176.7,307.3L176,305.5L177.2,304.6L176.1,305.1L176.1,303.9L174.8,304.2L175.8,304.6L175.5,306.2L172.5,305.3L175.7,307.1L176.1,308L175.7,309.2L174.5,309.4L175.3,311.1L173.7,312.4L174.9,312.8L174.4,315.1L174.7,314.2L175.6,314.4L176.1,316.9L174.4,319.2L173.9,317.1L172.7,321.4L170.9,321.7L171.3,320.7L170.2,321.4L172.4,318L170.5,320.1L170,320L170.8,318.4L169.3,320L168.8,317.3L170.1,315.1L168.7,315.8L168.7,319.1L168,319.2L168.8,321.2L167.1,321.7L166.5,320.7L167,322.2L165.9,323L165.3,321.9L166.3,316.6L165.3,320.2L164.8,317L165.2,320.4L164.1,322.8L163.5,320.3L163,323.2L162.1,323.5L160.4,318.6L160.6,320.6L159.1,320.3L160.8,323.8L158.9,323.5L158.6,322.3L158.6,323.6L158.1,323.1L157.3,324.4L156.8,323L157.6,318.7L156.3,320.5L156.6,317.9L155.7,324.4L154.9,324.4L155,320.5L154.6,323.8L153.9,324L153.3,322.8L153.1,323.9L152.6,322L153.1,324.3L152.5,324.5L151.5,320.4L152,318.3L150.1,317.6L149.1,315.8L149.7,317.6L151.3,318.2L151.6,319.1L148.3,322.7L142,324.5L139.2,326.7L138.4,329.2L139.7,331.9L138.8,332.2L140.4,333L137.5,335.1L137.2,336.3L138.1,335.8L136.9,337.1L137.5,336.9L135,338.2L134.3,340L131.5,338.6L133.7,340.4L132.7,340.9L124.8,343.3L124.3,343L125.8,342.5L125.7,341.2L124.4,341L122.7,342.2L121.2,345.2L122.5,343.4L123.9,343.1L123.3,344.2L125.8,343.1L121.8,345.2L117.9,348.8L117.4,348.5L117.4,349.7L111.1,357L104.5,360.8L103.4,362.8L102.5,362.8L103,363.4L102.4,364.1L93.7,368.9L92.5,370.7L93.1,371.5L93.7,370.9L93.1,374.2L87.6,376.8L84.1,376.2L82.6,376.7L80.1,382.2L79.1,381.5L79,379.7L78.1,382.8L77.8,381.2L76.8,380.9L73.6,382.2L70.9,387L70.6,390L10.2,390L9.1,389.2L9.6,388.5L8.9,386.6L7.8,385.9L9.7,386.3L8,385.5L8.7,384.6L7.5,384.9L7.4,384L8.4,383.4L7.3,383.8L6.5,382.6L4.5,379.4L4.9,378.1L4.5,378.9L3,374.7L3.8,374.8L3.1,374L3.7,373.9L1.9,366.9L2.5,367.2L1.3,364.4L2,364.1L1.2,363.7L0.4,359.3L-0.7,357.8L-0.6,357.1L0.6,358.1L0.7,357.3L-0.9,356.4L-0.9,354.8L0.1,355.3L-1.4,353.2L-0.7,351.7L-0,352.7L-0.2,351.3L-1,351.1L0.6,349.8L-0.1,350L-0.3,348.4L-1.8,351L-2.3,350.5L-2.1,346.9L0.5,347.8L-2.4,346.2L-2.5,345.2L-1.2,344.7L-2.8,344.6L-2.7,342.2L-3.2,342.5L-3.5,341.5L-0.5,332.4L-1,331.3L-1.6,331.6L-1.1,330.2L-2.3,329.8L-1.5,329.5L-1.9,328.7L-3.8,328.9L-2.7,328L-4.4,326.1L-2.5,325.5L-4.2,325.8L-1.8,323.6L1.3,322.4L-4.5,323.3L-4.3,321.5L-2.7,320.1L-4.6,320.9L-5,320.2L-4.2,318.1L-2.5,318.4L-0.8,317.3L-5.3,317.7L-6.1,317.5L-6,316.3L-6.7,317.4L-8.5,317.2L-6.9,317.7L-6.9,319.2L-8.3,320.2L-9,319.9L-9.7,320.6L-8.4,320.7L-8.3,321.6L-9.4,321L-9,321.6L-10,321.4L-10,322L-8.3,322.1L-7,323.7L-9,327.9L-18.6,332.3L-22.6,332.8L-26.6,330.7L-30,327.8L-30,314.6L-28.2,314.4L-24.8,309.3L-25.3,308.7L-25.9,309.1L-26.1,310.6L-28.7,310.1L-28.6,310.7L-30,311.1Z M493,356L493.1,357.5L491.7,359L491.4,362.6L492.5,366.4L494.1,366.8L494.2,368.5L495.3,369.1L492,375.7L492,377.6L490,379.7L491.1,377.4L485.7,380.8L486.3,383.4L483.8,386.9L485.5,390L470.6,390L470.1,387.3L468.9,385.7L469.6,384.9L468.7,382.6L469,381.3L467.6,380.6L467.6,378L468,376.4L468.9,376.1L469,377.5L470.9,378.4L471.2,379.4L473.7,379.3L474,377.9L472.8,373.9L474.3,370.2L474.4,366.1L473.3,364.4L475.8,356.7L475.7,355L477.7,354.4L478.1,353.6L479.3,354.3L481.1,353.6L486.5,356.9L486.5,356.3L489.9,357.1L491.5,354.8L493,356Z M586.6,215.2L583.4,226.3L580.7,225.5L580.1,226.4L581.3,227.2L576.6,230L578,226.6L577,224.5L575.9,224.1L577.6,224.4L577.8,222.9L576.4,222.9L575.3,224.9L575.6,226.7L576.6,227.3L575.9,228.4L574.5,227.5L572.2,227.5L571.2,225.9L572.3,226.2L573.3,224.4L571.7,222.1L572.4,221.8L571.8,219.1L573.2,218.8L575.1,216.6L576.7,213.5L574.5,213.8L576.3,213L576.1,212.1L574.4,210.8L574.2,209.1L572.4,208.1L571.3,208.8L572.2,210.2L571.1,211.2L573.4,211.4L573.6,213.1L571.7,214.1L571.3,213.2L572.1,212.5L570.9,212.1L567.4,214.3L568.6,212.8L566.4,210.7L566.8,209.1L568.2,210.2L567.9,211.3L570,211.5L569.5,209.8L567.5,209.3L567.1,208.4L566.7,209L565.5,207.7L565.8,206.3L566.7,206L568.5,207.2L568.7,206L567.9,205.5L568.7,205.6L568.5,204.5L570.2,205.5L571.7,204.7L570.9,204.3L572.1,203.3L572.9,204.3L573.9,204L574,203.3L572.9,203.2L574.4,202.8L574.9,201.4L577.6,200.6L579.1,201.1L580.1,200.3L579.6,201.8L581,203.8L583.7,204.3L585.2,203.2L586.7,203.3L587.4,205.2L586,206.5L585.1,206.4L585.1,207.3L589,207.3L588.1,208.7L590,209.1L589,210.2L590.8,210.6L586.6,215.2Z M604.2,195.5L602.8,196.8L602.5,195.7L601.9,197.2L600.8,197.4L601.7,196.4L600.9,196.1L596.6,198L595.5,198.1L595.2,196.5L593.5,196.5L592.2,197.6L591.6,201.6L590.4,202.2L591,201.3L587.8,200.3L588.2,199.7L587.4,199.4L584.4,200.2L583.9,199.6L582.6,200.8L580.4,199.5L579,200.8L578.7,197.2L580.3,196.2L579.3,196L579.8,195.6L581.7,196.3L581.7,195.7L582.8,195.9L582.1,196.3L584.1,195.8L586,193.4L588.6,192.9L596.4,187.1L596.4,185.6L600.9,184L603.1,184.2L602.6,185L604,185.5L605.8,184.7L612.4,184.5L615.4,183.3L619.3,183.6L622.3,182.3L623.1,183.3L621.9,184.5L622.5,184.1L623.2,185.5L624.6,184L625.3,185.1L628.3,184.7L628.1,183.6L629.8,183.7L629.6,182.7L630.2,182.3L630.8,183.2L631,182.2L629.6,180.3L631.2,177.5L634.3,175.7L637.6,171.3L636.7,168.5L637.5,166.4L643.4,164.8L642.6,166.8L640.1,168.2L639.5,167.7L638.6,169.2L640.5,169L640.1,171.6L643.3,172.4L644.5,170.7L652.4,168.2L655.5,166.2L658.3,162L660,160.9L659.9,193.5L658.4,194L657.7,193.5L657.6,190.2L659.1,189.7L657,188.6L653.5,191L652.2,192.9L652.3,194.1L645.5,193.2L640.2,194.2L640.7,193.4L643.4,192.7L642.8,191.9L640.2,192.2L639.8,190.8L639.2,192.2L639.7,193L638.6,192.6L638.2,190.5L638.9,189.1L638.3,189.2L636.6,190.2L635.2,193.2L635.5,194L639.2,195.7L639,197.3L637.1,196.7L633.4,198.2L632.2,199.2L632.7,200.3L631,201.1L629.6,204.1L627.6,205.7L624.4,204.5L623.3,203.3L623.9,202.9L620.6,201.2L621.6,199.8L621.2,198.6L621.9,198.5L620.6,197.3L623.7,195.2L624.1,193.1L620.5,193.8L617.4,192.3L614.9,192.1L613.5,192.9L612.1,192.7L612.8,193L611.5,194L609.4,194.1L610.5,194.2L609.4,195.5L607.9,195.6L607.2,194.7L604.2,195.5Z M177.9,315L178.6,315.7L178.4,318.2L176.5,320.1L176.9,316.2L175.6,314L175.8,312.4L176.5,312.1L177.9,315Z M405.6,318.4L405.5,318.9L405.6,318.4Z M79.7,382L79.4,382.6L78.7,381.9L79.7,382Z M389.6,323.4L390,323.8L388.1,324.3L388.4,323.6L389.6,323.4Z M403.9,319.7L403.1,319.8L403.8,319.1L403.9,319.7Z M403.6,318.4L402.8,319.3L403.6,318.4Z M440.7,305.3L441.3,306L439.4,305.7L440.7,305.3Z M463.1,279.6L464,280.2L462.6,280L462.1,279L463.1,279.6Z M492.4,236.9L492,237.6L490.7,237.1L492.4,236.9Z M494,235.4L492.7,235.6L494,235.4Z M488.4,226.2L488.3,227.1L488.4,226.2Z M468.8,218.7L469,219.3L467.9,218.8L468.2,218L467.2,217.3L468.1,217.2L468.8,218.7Z M600.7,178.7L600.4,179.4L599.5,179.4L600.7,178.7Z M589.2,109.8L588.8,110.4L587.6,110.1L588.3,109.3L589.2,109.8Z M376.2,328.1L375.4,329L374.2,328.2L376.2,328.1Z M158.7,324L159.1,324.7L158.4,324.7L158.7,324Z M161.2,322.2L161.3,322.8L160.5,322.1L160.5,320.8L161.2,322.2Z M156.4,320.8L156.5,322.1L155.8,321.7L156.4,320.8Z M175.2,306.8L174.3,306.1L175.2,306.8Z M538.1,276.5L537.9,277L537,276.3L538.1,276.5Z M557,265.5L555.3,266.3L557,265.5Z M570.3,256.3L570,257.1L569.1,257L570.3,256.3Z M489.6,248.8L488.9,249.3L488.7,248.5L489.6,248.8Z M488.8,239.2L488.6,240.2L488.8,239.2Z M571.5,218L571.5,218.9L571.5,218Z M600,197.9L600.3,197L600,197.9Z M541.7,195.2L542.4,195.5L541.2,195.6L541.7,195.2Z M648.2,-4.6L649.2,-4.6L647.2,-3.7L648.2,-4.6Z M646.2,-5.7L646.4,-4L645.7,-4L645.5,-5.2L646.2,-5.7Z M483.9,351L484.8,351.2L484.3,351.4L482.8,351.4L483.9,351Z M489.8,344.2L489.8,345L489,344.6L489.8,344.2Z M470.1,377.3L469.2,377L469.8,376.5L470.1,377.3Z M487.6,226.3L485.8,225.6L487.6,226.3Z M398.4,322.3L397.6,324.2L397.7,323.1L397.1,323L398.4,322.3Z M482.6,258.6L482.8,259.1L481.5,259.6L481.2,258.6L482.3,257.8L482.6,258.6Z M534.1,175.4L534.3,175.9L533.6,175.9L533.3,175.3L533.4,174L534.1,175.4Z M216.6,377.8L216.3,379.2L214,381.6L213.9,380L216.6,377.8Z M245.9,375.8L245.5,378L244.5,375.5L245.2,374.9L246.1,375.2L245.9,375.8Z M207.5,352L207.3,353.1L206.5,353.2L204.8,351.3L206.2,350.9L207.4,351.3L207.5,352Z M209.7,345.8L208,347.2L206.4,345.1L207.2,344.4L209.7,345.8Z M205.1,341.9L205.1,342.5L204.4,341.9L204,340.5L205.1,341.9Z M199.6,339.6L200.2,341.7L199.6,339.6Z M340.8,332L340.5,333L339.1,331.6L340.8,332Z M375.5,329.6L375.2,330.6L374.4,329.9L372.5,330.1L373.9,329L375.5,329.6Z M345.8,327.9L343.7,329.4L344.6,327.2L345.8,327.9Z M189.4,322.4L189.7,324.8L188.8,325.2L188.5,322.7L188.9,323.2L189.4,322.4Z M181.5,316.4L181.9,317.7L180.2,319.1L180.7,316.1L181.5,316.4Z M184.7,314.1L185.6,316L184.5,315.5L184.7,314.1Z M508.1,296.1L509.3,296.3L508.7,297.4L506.7,297L508.1,296.1Z M453.9,294.8L454.6,295.7L452.8,296L452.8,295.2L453.9,294.8Z M513.3,294.2L512.4,296.4L511.4,296.6L510.8,295.6L512.1,295.5L513.3,294.2Z M523.9,292.2L524.4,292.6L522.6,292.7L522.6,291.1L523.9,292.2Z M468.5,284.6L467.6,286L466.7,285.1L467.8,284.8L466.9,284.1L467.6,283.4L468.5,284.6Z M559.9,261.9L560.2,262.4L559.3,263.1L558.9,261.1L559.5,260.9L559.9,261.9Z M493.3,239.8L492.9,240.7L490.2,240L489.6,238.6L493.3,239.8Z M576.7,236.3L576,237.5L574.9,237.7L573.8,236.1L575,235.3L576.7,236.3Z M580.5,231.6L580.6,233.9L579.6,236.3L578.7,236.6L578.5,235.3L580.5,231.6Z M574.1,214.9L574.7,214.9L573.6,216.3L572.1,215.6L574.1,214.9Z M571.6,214.5L572,216.6L570,218.1L569.6,217.5L570.6,216.9L569.8,216.7L570,214.7L571.6,214.5Z M558.8,213.3L557.7,214.3L556,213.9L556.6,212.2L558.1,212L558.8,213.3Z M561,210.1L561.8,210.2L560.6,211.8L559.8,210.5L560.8,209.8L561.1,208.3L561,210.1Z M565.6,205.9L564.9,207.5L563.4,208.2L565.6,205.9Z M567.8,202.3L567.2,203L566.6,202.6L566.9,201.3L567.8,202.3Z M592.4,201.3L592.3,200.5L593.3,201L594.7,200.6L593.7,201.6L592.4,201.3Z M563.1,197.2L562.8,198.7L561.7,198.9L562.1,196.7L563.1,197.2Z M533.8,195L532.1,196.4L531,196L532.5,194.3L533.8,195Z M620,193.9L619,196.3L619.6,197.3L617.3,198.1L616.8,196.7L620,193.9Z M564.5,193.8L563.6,195.9L564,196.6L562.3,196.4L563.2,193.5L564.6,193L564.5,193.8Z M530.6,190.9L529.9,191.4L530.6,190.9Z M550.7,191.8L550.6,193L549.4,192.3L548.9,192.9L548.3,191.3L549,190.6L549.2,191.6L550.7,191.8Z M603.7,177.3L603.3,178.4L601.9,177.8L602.9,176.6L603.7,177.3Z M535.1,164L533.7,163.7L534.1,161.8L535.2,162.3L535.1,164Z M641.7,-11.2L640.7,-9.3L636.7,-9.1L641.7,-11.2Z M490.1,389.9L488.2,390L490.1,389.9Z M489.7,350.2L488.3,351.7L488.9,350L489.7,350.2Z M485.3,346.8L485,347.4L483.5,346.2L485.2,346.1L485.3,346.8Z M613.7,194.5L613.5,195.7L611.6,195.2L613.7,194.5Z M531.7,192.7L530.7,192.3L531.7,192.7Z M531.7,192.1L530.9,192.1L531.7,192.1Z M530.8,191.8L531.5,191.3L530.8,191.8Z M550.7,191.5L549.6,191.4L550.2,190.8L550.7,191.5Z M408.5,318L408.9,317.1L410.5,316.6L410,317.8L408.5,318Z M405.5,312.6L406.4,314L404.8,312.8L405.5,312.6Z M560.3,211L559.7,211.3L560.3,211Z M444.7,302.5L445.3,302.6L444.3,304.2L443.2,304.3L443.7,302.3L444.7,302.5Z M601.2,178.9L600.8,179.8L601.2,178.9Z M533,162L532.2,162.4L533,162Z M493.2,148.3L494,147.9L493.2,148.3Z M496.4,147.7L497.4,147.6L496.4,147.7Z M496.8,147.4L495.1,147L496.8,147.4Z M484.2,145.3L484.2,146.3L483.4,146.2L483.6,145.5L482.6,146.1L484.2,145.3Z M499.6,144.8L500.4,144.7L499.6,144.8Z M246.6,384.3L246.6,385L246.6,384.3Z M376,330.4L375.9,331.2L376,330.4Z M345.3,330.9L344.6,331.9L345.3,330.9Z M347.5,329.8L347.9,330.1L347.4,330.6L347.5,329.8Z M346.2,328.8L345.6,330.1L346.2,328.8Z M348.1,326.4L347.1,326.9L348.1,326.4Z M348.7,326.1L350,326L348.7,326.1Z M150.5,322.9L151.5,321.3L151.4,323.7L150.5,322.9Z M150.8,321.5L151.2,320.5L150.8,321.5Z M175.9,320.1L175,321.4L175.9,320.1Z M173.3,320.6L173.9,320L173.2,321.6L173.3,320.6Z M173.9,319.5L173.4,320.3L173.9,319.5Z M174.4,319.6L174.9,320.2L174.2,321L174.4,319.6Z M485.6,319.6L484.9,319.2L485.6,319.6Z M175.4,319.4L174.9,319.2L176.1,318.4L175.4,319.4Z M179.4,317.9L179.3,318.8L179.4,317.9Z M179.8,318.1L179.8,317.4L179.8,318.1Z M179.5,317.7L179.8,316.4L179.5,317.7Z M176.2,315.8L176.4,316.9L176.2,315.8Z M176.5,315.8L176.5,315.2L176.5,315.8Z M181.6,315L182,315.3L181.1,315.4L181.6,315Z M176.5,311.5L176.8,311.9L175.9,311.9L175.2,312.9L174.6,312.3L174.7,311.3L176.5,311.5Z M175.1,309.3L174.7,309.9L175.1,309.3Z M500,295.3L499.4,295.6L500,295.3Z M582.6,281.3L582.1,281.7L582.6,281.3Z M568.9,241.3L569.2,241.8L568.4,241.5L568.9,241.3Z M592.4,202.1L591.9,202.2L592.4,202.1Z M529.9,192.9L529.2,193.1L529.9,192.9Z M530.1,192.2L528.9,192.6L530.1,192.2Z M531.1,189.5L530.7,189L531.7,188.6L531.1,189.5Z M600.1,179.9L600.8,180.1L600.1,179.9Z M535.6,164.9L534.4,165.8L533.6,165.3L535.6,164.9Z M533.6,163L532.8,163L533.6,163Z M518.8,154.7L517.9,154.8L518.8,154.7Z M488.4,336.5L488.7,337.2L488.4,336.5Z M548.1,272.6L547.6,272.9L548.1,272.6Z M550,269.1L549.3,269.9L550,269.1Z M572.2,235.3L572.1,235.8L571.4,235.1L572.2,235.3Z M554.5,269.5L554,269.6L554.5,269.5Z M545.3,195.5L544.5,195.3L545.3,195.5Z M547.8,194.9L547.1,194.7L547.8,194.9Z M531,194L530.4,194.7L531,194Z M530.4,194.3L530.3,193.7L530.4,194.3Z M524.5,193.1L524,193.7L524.5,193.1Z M531.8,189.5L531.3,189.5L531.8,189.5Z M558.4,189.8L558,189.4L558.4,189.8Z M532.6,184.3L533.1,183.8L532.6,184.3Z M531,167.7L531.6,167.7L531,167.7Z M534.8,167.2L534.4,167.6L534.8,167.2Z M536.1,167.4L535.4,168L535.4,167.2L536.1,167.4Z M523.3,162.3L522.2,163L523.3,162.3Z M521.5,162.1L521.9,161.8L521.5,162.1Z M517.2,161.5L516.8,162L517.2,161.5Z M501.8,149.1L501.6,149.7L501.8,149.1Z M516.9,144.6L516,144.6L516.9,144.6Z M374.7,333.5L374.6,334.1L374.2,333.5L374.7,333.5Z M402.8,320.7L402.3,321L402.8,320.7Z M413.1,319.4L412.1,319.7L413.1,319.4Z M404.7,319L405.5,319.1L404.7,319Z M411.4,318.2L411.1,317.6L411.4,318.2Z M405.3,310.4L405.5,311.2L405.3,310.4Z M470.2,305.5L471.2,304.5L470.2,305.5Z M440,304.4L439.4,304.7L440,304.4Z M522,291.5L521.4,291.8L522,291.5Z M465.5,287.9L464.4,287.7L465.5,287.9Z M463.5,284.3L463,285.8L463.5,284.3Z M466.3,278.9L465.5,279L466.3,278.9Z M543.7,277.9L543.5,278.5L543.7,277.9Z M473.3,270.6L473.9,270.6L473.3,270.6Z M481.8,261.4L481,261.8L481.8,261.4Z M480.5,260.5L481.4,260.3L480.5,260.5Z M488.6,248.7L487.8,248.8L488.6,248.7Z M493,241.8L492.3,241.6L493,241.8Z M493.5,237.6L492.8,237.6L493.5,237.6Z M495.3,232.8L494.3,233L495.3,232.8Z M569.3,221.3L568.2,221.5L569.3,221.3Z M572.4,217L572.1,217.4L572.4,217Z M574.5,214L574.3,214.6L574.5,214Z M559,211.8L558.4,212.2L559,211.8Z M559.5,211.3L559.5,212L558.8,211.4L559.5,211.3Z M561.4,207L560.8,207.4L561.4,207Z M565.6,205.1L565,205.3L565.6,205.1Z M596.4,199.9L595.9,200.4L596.4,199.9Z M521.3,199.5L521,199L521.3,199.5Z M536,198.3L535.1,198.6L536,198.3Z M600.9,198.3L600.2,198.8L600.9,198.3Z M536.7,198.5L536.5,198L536.7,198.5Z M597.4,198L596.9,198.1L597.4,198Z M539.1,198L538.5,198.4L539.1,198Z M536.1,197.8L535.5,198.1L536.1,197.8Z M599.2,197.2L598.5,197.8L599.2,197.2Z M593.4,197L592.7,197.6L593.4,197Z M530.9,196.9L530.2,197L530.9,196.9Z M538.5,196.9L537.6,196.6L538.5,196.9Z M540.9,196.6L539.9,196.4L540.9,196.6Z M537.6,196.2L538.2,195.6L538.6,196.1L537.6,196.2Z M622.1,195.7L622.6,195.6L622.1,195.7Z M610.5,195.3L611,195.1L610.5,195.3Z M552.9,193.6L552.3,193.7L552.9,193.6Z M553.9,191.8L554.2,192.4L553.9,191.8Z M533.4,191.4L532.3,191.5L533,190.8L533.4,191.4Z M532.3,189.5L531.6,189.1L532.3,189.5Z M640.5,168.5L639.1,168.6L640.5,168.5Z M594.5,111.7L594.3,111L594.5,111.7Z M651.9,-7.2L652.4,-7.1L651.9,-7.2Z M396.5,322.9L396.5,323.6L395.3,324L396.5,322.9Z M405.9,312.2L404,311L405.9,312.2Z M567.8,222L567.3,223.6L566.6,223.6L567.8,222Z M519.3,144L518.2,145L519.3,144Z M218.3,380.7L218,382L217.2,381.9L218.3,380.7Z M338.4,331.2L338.7,332.1L337.7,331.4L337.9,330.7L338.4,331.2Z M345.3,329.8L345.1,330.8L344,331L345.3,329.8Z M188.9,321.3L188.3,322.7L188.4,321.1L188.9,321.3Z M176.7,310.5L175.1,310.2L175.9,309.7L176.7,310.5Z M450.9,294.4L451.8,294.6L451.4,295.7L450.7,295.4L450.9,294.4Z M563,258.8L562.2,259L561.8,258.1L563,258.8Z M491.4,242.7L491.6,243.5L490.3,242.7L491.1,242.1L491.4,242.7Z M494,241.2L493.3,240.5L494.1,240.5L494,241.2Z M595.6,199.3L594.6,199.1L595.2,198.3L595.6,199.3Z M547.8,193.2L548,194.2L547.4,193.7L547.8,193.2Z M557.5,191.3L556.9,192.6L555.8,192.9L556,191.6L554.9,191.3L556.5,191.1L556.1,190.5L557,189.7L557.5,191.3Z M579,164.5L579,165.4L578.1,165.1L579,164.5Z M517.3,160.2L516.1,160.5L517.3,160.2Z M482.1,348.2L482.4,349.8L482.1,348.2Z M490.1,335.1L489.2,336.5L490.1,335.1Z M488.8,332.3L487.9,333L488.5,331.7L488.8,332.3Z M466.5,304L466.7,304.5L465.3,304.6L466.5,304Z M464.8,304L464.4,304.4L464.8,304Z M465.7,303.7L465.7,303.2L465.7,303.7Z M412.2,317.1L412.1,318.1L411.1,317.3L412.2,317.1Z M537.6,196.9L536.5,196.1L537.6,196.9Z M456.3,149.3L454.8,150.7L454.8,149.6L455.6,150L456.3,149.3Z M553.4,272L551.4,274.5L548.5,275.6L549.2,276.9L548.3,276.8L548,278.6L546.5,279.2L547.2,275.7L549.6,274.4L548.8,273.1L550.6,273.6L552.6,271.1L553.4,272Z M567.1,255.4L564.5,257.1L563.8,258.8L561.5,257.5L562.7,257.4L562.6,256.7L566.4,255.6L566.7,254.9L567.1,255.4Z M488.4,223.9L489.9,225L488.2,225.5L481.8,222.2L483.2,221.7L488.4,223.9Z M539.5,205.2L538.4,206.9L536.1,207.6L532.7,208L531.6,207L533.1,205.4L534.8,204.8L537.9,204.4L539.5,205.2Z M654.6,159.3L655.8,159.3L655,160.9L652.2,162L653.4,160.3L652.3,159.9L653.1,158.3L655.1,156.8L654.6,159.3Z M650.5,-10.6L652.1,-10.4L647.2,-6.2L644.9,-8.8L642.3,-7.8L645.7,-11.9L649.5,-11.5L649.9,-11L648.8,-10L650.5,-10.6Z M380.1,343.2L378.8,344.6L377.9,344L378,345.2L375.8,348.4L374.8,348.3L375.5,349.1L375.8,348.5L374.3,351.8L374.9,352.1L375,351.2L375.3,352.1L370.3,354.9L370.4,356.2L369.7,356.1L370.2,355.5L367.5,356L367.3,357.3L366.7,357.3L367.4,357.4L367.1,357.9L365.6,358.3L365.6,357.4L364.8,358.1L364.4,357.1L361.6,357.1L361.4,356.4L356.8,354.8L356.3,347.3L360.1,344L363.1,342.9L362.7,342.1L361.6,342.8L362.6,341L365.8,341.4L365.3,340.5L367.2,339.9L368.4,340.7L369.4,340.1L369.9,340.9L371.6,339.3L373.4,339.4L374.2,340.8L373.8,339.2L376.1,340.8L375.7,339.3L376.8,338.4L377.9,339.9L379.3,340L380.1,343.2Z M489.1,290.5L488.1,292.2L488.8,294L486.1,299.2L484,308.5L479.5,314.7L478.4,321L477.1,320.6L476.2,317L472.9,314.2L471.7,309.7L470.6,309.6L471.6,306.4L471.8,302.4L480.6,289.5L484.4,288.6L484.4,287.6L485.8,287.2L487,288.4L489.1,288.9L490.1,290L489.1,290.5Z M355.4,380.5L354.9,380.4L355.4,380.5Z M491.5,354.2L491.1,354.9L491.5,354.2Z M338.1,331.8L337.6,331.6L338.1,331.8Z M343.5,330.8L343.9,330.4L343.5,330.8Z M343.7,330.9L344.5,330.4L343.7,330.9Z M337.4,330.5L336.9,330.2L337.4,330.5Z M345.2,329.5L345.8,328.8L345.2,329.5Z M346.7,328L346.6,328.6L346.7,328Z M402.2,320L401.8,320.4L402.2,320Z M439.3,304.6L439.7,304L439.3,304.6Z M452.6,295.5L452.1,295.9L452.6,295.5Z M461.2,289.6L461.5,289L461.2,289.6Z M469.7,278.1L470.1,277.8L469.7,278.1Z M471.3,274.4L471.6,274L471.3,274.4Z M466.7,273.6L467.6,273.3L466.7,273.6Z M480.3,261.3L480.8,261.3L480.3,261.3Z M562.6,259.6L562.1,259.7L562.6,259.6Z M492.6,243.1L492,242.8L492.6,243.1Z M493.1,242.6L492.2,242.2L493.1,242.6Z M489.7,242.1L490.3,241.8L489.7,242.1Z M493.4,241.2L492.8,241.4L493.4,241.2Z M492,238.2L491.5,238.4L492,238.2Z M489.6,237L489.8,236.6L489.6,237Z M573.1,232L572.6,232.2L573.1,232Z M573.7,216.5L573,216.9L573.7,216.5Z M565.9,209.8L566.4,209.4L565.9,209.8Z M593.1,208.5L592.6,208.2L593.1,208.5Z M561.2,208.4L561.2,207.9L561.2,208.4Z M560.9,207.9L560.3,208L560.9,207.9Z M564.3,205.9L564.1,206.5L564.3,205.9Z M567.8,205.6L567.2,205.8L567.8,205.6Z M596.9,200.7L596.7,201.3L596.9,200.7Z M588.7,200.2L588.1,200.6L588.7,200.2Z M598.5,198.1L598,198.4L598.5,198.1Z M601.2,197.8L600.5,197.9L601.2,197.8Z M540,196.6L539.6,196.8L540,196.6Z M538.7,196.1L539.5,195.9L538.7,196.1Z M544.6,195.2L544.5,194.6L544.6,195.2Z M528.6,193.8L528,193.8L528.6,193.8Z M531.9,193.6L531.2,193.5L531.9,193.6Z M556.5,189.8L556.1,190.3L556.5,189.8Z M531.7,190L531.3,190.5L531,190L531.7,190Z M560.7,189L560.9,189.5L560.7,189Z M534.6,176.4L533.8,176.2L534.6,176.4Z M533.4,167.4L532.8,167.4L533.4,167.4Z M519.8,153.8L519.9,153.3L519.8,153.8Z M447.1,150.3L448.1,150.9L447.1,150.3Z M447.2,150.3L448.8,150.7L447.2,150.3Z M447.7,149.5L448.2,150.2L447.7,149.5Z M616.9,201.7L613.1,204.3L611.8,207.6L609.3,205.1L607.4,204.6L602.9,206.4L602.3,208.4L600,210.1L600,212.9L599.2,212.2L596.3,212.5L597.1,210.9L595,211.1L594.7,209.6L593.8,209.8L594.9,208.7L593.9,208L595.5,207.7L595.3,206.9L593.8,206.8L594.2,205.6L590.1,206.5L596.8,202.8L597.1,201L599.2,199.3L599,198.8L601.3,200.7L605.1,200.3L606.4,199.2L605.6,197.4L607,197.7L609.4,196.2L611.4,196.1L614.4,197.9L616.5,197.6L615.9,199.7L617,200.5L616.9,201.7Z" fill="#ecefdc" stroke="#b7c2a4" stroke-width="1" fill-rule="evenodd"/><path d="M50,270L250,260L300,220L270,180L190,160L90,160L30,200Z" fill="#d8e4cf" opacity="0.35"/><path d="M310,190L350,180L390,160L400,150L370,140L330,150L300,170Z" fill="#eadfc8" opacity="0.4"/><path d="M300,250L340,240L350,230L320,220L300,230Z" fill="#e3ead6" opacity="0.35"/><path d="M490,120L540,100L550,60L510,50L480,80Z" fill="#e6ecdc" opacity="0.35"/><path d="M410,190L460,170L470,150L430,140L400,170Z" fill="#e8edda" opacity="0.35"/><path d="M390,240L450,230L470,220L430,215L390,230Z" fill="#e4ecda" opacity="0.35"/><path d="M640.7,35.5L641,37L640.6,37.8L638.7,39L637.7,40.9L638.1,42.4" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M429.8,247.2L432,242.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M384.8,214.3L380,212.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M242.9,191.6L240.7,190.7" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M247.6,189.1L247.1,190.4L245.5,191.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M-2.2,193.8L-1.5,197.4L-2.9,199.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M399,249.7L398,250.7L395.4,251.6L389.9,250.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M399.9,248.5L400.7,246.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M638.1,42.4L638.3,44.1L633.9,46.3L632.7,49.1L631.6,50.1L627.4,52.4L621.8,53L620.8,53.6L619.6,55.8L612.1,56.4L608.4,57.3L604.7,59L601.4,58.9L597.1,60.5L594.8,62.9L580,63.1L577.3,59.8L577.1,58.7L578,56.6L575.5,54L576.2,52.3L575.5,51.4L572,51.1L565,46.1L560.7,46.3L558.2,45.4L557,44L552.4,44.4L548.1,43.8L545,41.3L545.1,39.3L545.9,37.9" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M660,26.3L650.7,31.4L641.9,33.9L640.7,35.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M484.1,6.8L479.9,7.2L477,8.3L470.4,12.8L470.7,13.7L471.7,14L476.6,14.3L477,15.1L476.7,17L477.5,19L475.1,21.5L470.7,24L464.5,33L461.6,35.9L463.5,37.2L462.6,39.3L454.5,41.6L448.7,44.9" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M167.4,296.7L167.4,301.4L172.7,305.4" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M167.4,296.7L168.1,298.3L172.1,301.3L172.4,302.7L175.6,304.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M224,260L224.4,261.2L223.7,261.9L218,265.1L215.2,269.3L211.9,271.1L207.5,272.7L202.5,272.8L193.1,275.1L189.7,277.3L186.4,278.4L181.5,278L177.6,278.4L175.8,278L170.9,279.3L168.9,281L167,285.1L166.1,290.5L167.3,293.5L167.4,296.7" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M308.5,253.3L313.4,253.6L317.5,251.8L320.9,252.8L325.8,250.8L327.8,250.9L328.6,251.6L328.7,249.8L331.5,248.7L332.5,247.3L335.2,245.7L335.7,244.1L338,244.1L340.8,242.1L341.5,242.8L343.5,242.8L344.6,241.4L346.3,241.3L353.1,234.2L355,231.1L365.5,229.7L372.8,229.5L381.6,231.7L385.1,235.9L385.4,237.1L388.2,235.7L389.7,236.8L392.5,237.2L392.1,238.7L393.6,239.8L394.1,242.6L397.1,242L399.4,242.6L399.2,244.7L401.3,245.4" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M414.1,292.9L417.3,291.2L417.5,289.5L419,288L419.3,285.7L420.9,282.5L420.7,281.4L419.1,280.7L419.5,277.6L417.4,275L417.2,273.9L420,271.5L419.9,269.2L420.8,268L421.3,264.9L423.7,262.1L424.5,260.3L428.5,256.8L428.2,254.2L430.2,249.5L429.8,247.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M164.8,317.2L164.3,315L163,313.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M163,313.8L162.6,315.5L163.8,319.4L163.5,322.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M154.4,310.1L153.4,313.7L151.2,315.9L150.9,317.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M154.4,310.1L156.8,310.5L158.2,311.4L160.5,317.3L160.5,319.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M170.7,304.3L171.3,307.5L173,309.1L174.4,312.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M161.1,300.1L162.2,301.9L166,305.6L166.4,307.5L170.1,313.1L169.9,315.3" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M161.1,300.1L165,301.6L167.5,301.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M154,296.1L156.4,299.9L158.6,301.4L157.6,304.7L159.9,306.7L161.1,311.1L163,313.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M154,296.1L156.4,296.7L157.7,298.6L159.3,298.4L161.1,300.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M149.2,291.7L149.4,293.3L152.4,297.7L151.8,303L153.4,304.7L153.8,307.4L154.9,308.7L154.4,310.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M149.2,291.7L151.5,295.1L152.9,295.2L154,296.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M68.4,231.1L68.6,233.2L67.4,234.6L64.7,234.8L62.3,237L57.8,237.4L56.1,238.8L52.8,239.1L50.2,245.1L51.1,248.2L51,251.2L52.8,256.5L54.3,258.5L65.2,264.3L67.3,267.8L69.2,268.7L76.5,278.6L81.2,280.1L84.6,283.5L86.9,284.8L89.1,285.1L89,285.9L90.4,286.9L95.1,288.2L96.2,287.8L98.8,288.6L101.4,286.6L101.7,284.9L104.9,285.6L106,284.2L108.7,284.8L111.7,282.8L118.3,282.5L121.2,283.2L123.4,284.6L127.9,285.1L132.4,287L135.7,285.5L136.7,287.2L138.4,286.7L142.2,287.3L144.4,286.1L147.8,288.1L149.4,290.4L149.2,291.7" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M448.7,44.9L450.6,46.8L454.4,45.6L457.5,47.9L462.3,48L464.5,47.3L471.2,47.7L475.2,47.4L479.1,46.3L492.9,41.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M384.8,214.3L386,215.3L387.8,218.6L391,219.6L391.9,220.3L392.3,222.3L393.9,223.4L394.3,226.9L395.7,228.2L395.2,229.6L396.3,231.5L396,232.9L397.2,234.2L403.8,235.9L405.1,235.6L406.7,234L409.4,233.4L412.9,234.3" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M334,209.3L336.8,208.6L340.3,209.6L349.1,207.7L349.6,208.9L352.7,210.4L352.9,211.9L354.1,212.7L355.1,214.5L356.5,214.9L360.6,212.7L367.4,210.6L373.1,211.9L378.1,211.5L380,212.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M545.9,37.9L543.4,36.5L543.1,32.9L539.2,29L538.1,24.9L537.1,24.3L537,23L535.1,20.7L533.4,16.4L530.2,13.9L530.5,12.6L528.7,11.3L527.3,11.1L526.5,9.6L520.8,8L518.1,8.7L506.1,4.5L493.4,5.1L484.1,6.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M335.2,337.1L332.7,336.5L331.5,334.3L329.5,332.4L328.4,329.5L322,326.4L316.9,321.3L304.8,311L299.1,307.6L291.2,304.9L287.5,301.4L283.5,294.9L282.4,294.6L278.1,290L273.5,288.5L271.8,285.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M339.4,287.8L340.2,289.4L342.8,291.3L343.6,294L346.1,297.2L345.1,299.7L346.7,300.4L349,302.8L354.5,299.7L358.3,301.6L359.2,303.4L363.2,303L364.7,301.5L365.3,302" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M242.9,191.6L245.5,191.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M247.6,189.1L249.3,189.2L253.8,192L253.5,194.1L255.6,196.1L257.1,196.2L258.1,195.3L260,195.7L261.2,200.8L263.2,202.5L263.9,201.9L267.2,202.1L271.9,204L273.3,202.4L277.4,200.7L279.4,202.2L281.2,201.7L284.8,203.2L286.6,203.2L290.7,206.4L294.8,205.2L292.1,201L283.3,197.3L278.8,193.2L276.3,192.9L273.8,191.7L272.2,187.6L272.6,187.2L271.7,185.8L272.5,183L279,178.6L283.4,179.4L287.6,178.5L291.8,181.6L299.5,181.9L301.8,181.9L303,181.2L303.2,180.7L302.3,180.3L303.9,178.6L310,179.2L311.8,176.8L317.1,173.7L316.3,172L313.3,170.5L313.5,168.3L320,165.4L328,164.4L334.6,156.2L336.4,152.2L338.7,149.2L337.6,145.2L337.2,139.8L341.5,136L342.4,134.1L347.5,131.6L350.7,131.3L353.9,131.8L358.8,134.5L373,135.2L376.7,137L381.3,137.7L384.1,139.9L383.8,142.1L384.3,144.2L381.7,146L382,147.6L379.8,150.4L378.9,154.4L375,158.9L375.1,159.9L377.8,163.9L376.1,167.8L373.8,169.9L375.8,184.7L373.2,188.7L372.7,193.6L374.7,194L378,193.5L381,192.1L385.9,191L388.4,189.3L398.6,191.9L404,190.3L409,191.1L414.7,190.9L416.8,190.7L418.3,189.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M231.6,188.7L237.5,189.5L240.7,190.7" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M418.4,189.8L419.1,187.7L420.1,186.7L423.4,185L424.6,183.2L428.7,181.2L431.2,178.6L435.8,175.6L437.4,173.4L440.2,172.3L443.5,169.2L446.1,167.7L451.3,166.5L453.9,164L459.5,161.8L460.4,161.9" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M67.3,215.6L64.3,212.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M64.4,212.6L60.4,208.7L56.4,207.9L52.5,206L45.3,198.9L39.7,197.1L32.9,192.9L32.1,190.8L28.6,187L25.7,186.4L22.6,184.1L18.3,183.1L17,181.6L16.5,181.7L15.8,185L14.6,185.5L12.2,185.9L4.2,184.6L3,185.3L2.8,186.7L1.8,188L-1.1,190L-0.5,191.5L-2.2,193.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M-2.9,199.1L-7,200.4L-8,202.3L-9.6,202.4L-10.9,205L-12.4,206.3L-13.5,210.1L-15.8,211.6L-16.6,215.2L-21.4,224.3L-22,227L-21.7,230.8L-22.3,231.9L-21.7,240L-23.4,244.5L-23,246.5L-23.4,249L-30,254" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M264,258.8L264.3,261.6L266,265.7L270,271L272.3,266L273,262.1L273.9,261.6L275.5,267L274.5,268.3L274.9,269.5L274.1,272L274.6,277.6L278,278.2L279.6,277.9L283.5,276.2L285.9,274.1L287.3,274L288.4,274.5L289.4,276.4L288.5,279.8L290.3,280.1L294.9,276.6L295.8,276.3L296.9,277.6L299.9,276L300.4,274.8L299,269.9L299,266.9L299.7,265.9L301.5,265.7L304.8,261.9L305.3,260.8L304.4,259.3L304.8,258.4L305.9,257.5L307,257.7L308.4,257L308.5,253.3" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M255.4,223.1L258.6,226.8L258,227.4L256.4,227.2L256.1,227.9L259.5,232.9L260.4,241.5L260.1,244.5L261.5,253.6L262.2,256.4L264,258.7" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M239.4,220.3L242.1,225.4L241.9,228.7L243.3,230.2L243.8,232.2L249.6,238.4L256.2,248.7L255.9,249.9L260.1,261.4L260.1,263.8L261.8,269.3L261.1,274.7L261.4,279.8L263.1,283.6L263.4,286.8L269.4,292.4L271.1,293.1L273.3,292.5L275.1,294.6L275.3,297.9L271.8,303.8L270.7,307.2L274.2,313.6L275.7,315L277.7,319.5L279.8,321.6L281.7,322.1L281.5,324.2L280.8,325.3L277,327.5L275.4,330.1L275.2,330.8L276.2,331.4L272.5,332.7L271.1,337.4L273.2,336.1L275.5,338.3L276.5,341.7L278.6,341.2L284.8,341.8L291.4,339.1L292.3,339.9L288.2,344L288.9,346.3L288.2,348.2L288.3,353L284.1,358.8L284.6,361L285.6,361.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M505.5,105.2L506.1,106L505.3,109.8L505.7,112.4L508.3,115.9L505.1,118L500.3,119.2L498.9,120.4L496.8,124.2L496.4,126.8L494,128.7L494.1,130L491.5,131.8L491.4,133.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M285.6,361.8L287.7,359.7L289.5,359.2L291,357.9L295.5,360.3L296.6,361.8L298.1,360.5L300.5,359.7L300.9,358.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M300.9,358.6L300.9,358.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M300.9,358.6L300.9,358.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M300.9,358.6L302.6,357.2L302.9,355.9L309.5,356.8L314.3,363L317.4,365.4L318.2,367L317.4,371.2L318.2,375.3L320.5,378.4L324.1,380.1L324,381.7L326.2,383L326.2,385.1L325.2,386.7L326.7,387.3L328.8,390" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M307.2,244.6L308.6,247.1L312.5,250L313,251L316.2,252.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M309.2,281.2L308.4,282.8L308.8,286.6L308.1,288.7L304.9,290.6L303.9,290L302.2,290.1L300.6,293.2L300.8,296.8L301.7,301.3L302.3,302L306.1,300.8L306.2,298.5L309.9,295.6L313.5,294.4L315.4,292.6L316.8,293.4L318,293.3L322.1,290.1L325.8,292.1L329.9,293.4L331.5,292.2L331.7,290.7L332.3,290.2L339.4,287.8" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M185.2,220.6L185.5,221.9L186.9,223L187.9,225.2L191.3,227L192.2,227L194.3,225.1L198.7,224.4L215.3,225.3L215.8,225.6L215.3,227.5L217.1,229.1L221.8,228.1L224,228.6L225.6,230.2L231.6,230.8L233.4,231.6L235.5,235.6L236,235.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M255.1,330.5L256.8,337.3L255.5,338.5L249.4,340.4L247.7,341.5L245.3,346.7L244.6,351.5L243.5,351.6L243.3,352.2L243.8,355.1L245.2,357L246.3,357.1L247.4,360.6L247,361.7L247.5,365.6L246.1,370.5L246.7,374.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M516.7,85.5L518.1,85.5L519.5,84.8L521.6,86.1L527.4,85.1L531.1,83L535.3,82.6L539.2,80L544.2,80.8L545.6,79.9L549.1,80.8L557.6,80.4L560.4,81L570,72.4L573.3,71.7" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M595.6,62.3L594.1,64.3L590.1,67.2L578.1,68.5L573.3,71.6" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M78.9,135.3L82.4,134.7L85.5,132.9L94.9,130.1L97.5,130L100.8,130.7L104.5,130L108.4,130.3L112.5,128.2L117.8,128.3L124.1,130.2L130.4,129.3L134.9,129.4L135.1,129L133.4,127.9L133.8,127.2L128.8,125.7L128,123.5L128.9,122.6L132.1,121.9L137.5,121.7" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M400.4,312L404.2,318.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M400.4,312L405.5,314.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M399.8,309.6L404.5,309.4" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M398,308.5L398.9,310.8L400.4,312" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M398,308.5L399.1,308.9L400.9,310.9L403.4,311.1" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M383,305.2L384.3,305.5L385.4,307.5L387.1,308.4L391.4,309.1L392.7,308.6L394.3,309.2L396.4,308.3L398,308.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M370.9,305.9L372,304.5L373.3,304.4L378.7,306L383,305.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M401.3,245.4L407,240.5L409.9,239.5L410.1,238.8L408.9,237.5L410.3,237.5L414,233.4L418.4,234.4L418.9,235.8L420.6,236.6L421,237.7L425,241.2L428.4,242.4L432.1,242.1" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M432,242.5L432.1,242.1" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M432.1,242.1L434.5,241.3L437.8,239L439,237.3L439,236L442.1,234.5L442.5,233.3L446,232.2L448.4,228.8L449.2,229L450,228L453.1,226.6L454,223.5L456.9,219.3L459.6,218L466.4,217.6L467.7,217.9L470.7,220.4" fill="none" stroke="#7ba3a8" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/><path d="M146.6,248.5L147.5,247.1L149.2,246.2L170.8,246.4L173.9,247.3L177.5,246.6L190.8,247.2L194.7,247.7L196.9,249L201.2,248.9L202.5,249.9L204.3,248.6L209.3,248.3L213.6,246.9" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M345,276.6L345.6,278.4L347.1,277.8L348.3,274.7L352.5,271.6L354,271.8L355.7,273.6L356.4,273.8L357.5,273L358.7,274.2L361.9,273.2L364.4,271.1L364.4,269.2L366.7,268.2L366.9,268.7L367.6,268.1L369.4,268.5L370.5,268.1L372.2,265.8L373.7,261.7L371.1,259.2L371.8,257.1L373.5,256.1L374.8,254L380.9,251.5L382.8,252.4L384,252.1L385.6,250L389.9,250.2" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M399,249.7L399.9,248.5" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M400.7,246.1L401.3,245.4" fill="none" stroke="#7ba3a8" stroke-width="1.3" stroke-linecap="round" opacity="0.85"/><path d="M30,180L120,180L170,185L220,180" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M30,180L120,180L170,185L220,180" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M20,120L170,105" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M20,120L170,105" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M50,235L90,240L130,255L170,255L210,245" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M50,235L90,240L130,255L170,255L210,245" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M210,155L250,155L290,160" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M210,155L250,155L290,160" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M250,220L270,260L280,275" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M250,220L270,260L280,275" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M300,202L330,202L360,205L390,202" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M300,202L330,202L360,205L390,202" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M390,175L400,160L405,140" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M390,175L400,160L405,140" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M330,130L360,128L390,130" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M330,130L360,128L390,130" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M480,60L500,20" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M480,60L500,20" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M540,60L560,50" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M540,60L560,50" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M540,120L550,115L570,110" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M540,120L550,115L570,110" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M410,230L430,228" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M410,230L430,228" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M430,270L450,260" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M430,270L450,260" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M360,290L390,290L420,295" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M360,290L390,290L420,295" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M355,255L370,260L380,270" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M355,255L370,260L380,270" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M365,230L375,232" fill="none" stroke="#6d8a68" stroke-width="6" stroke-linecap="round" opacity="0.16"/><path d="M365,230L375,232" fill="none" stroke="#55704f" stroke-width="1.6" stroke-linecap="round"/><path d="M166,191L170,180L174,191Z M166,111L170,100L174,111Z M126,261L130,250L134,261Z M246,161L250,150L254,161Z M266,266L270,255L274,266Z M356,211L360,200L364,211Z M396,166L400,155L404,166Z M356,134L360,123L364,134Z M496,26L500,15L504,26Z M556,56L560,45L564,56Z M546,121L550,110L554,121Z M426,234L430,223L434,234Z M446,266L450,255L454,266Z M386,296L390,285L394,296Z M366,266L370,255L374,266Z M371,238L375,227L379,238Z" fill="#55704f" opacity="0.8"/></svg>';
+        var GG_MAP_LABELS = [
+          { lon: 118.0, lat: 38.8, t: "渤海" }, { lon: 124.0, lat: 33.0, t: "黄海" },
+          { lon: 123.5, lat: 28.8, t: "东海" }, { lon: 112.5, lat: 20.6, t: "南海" },
+          { lon: 119.5, lat: 24.6, t: "台湾海峡" }, { lon: 107.0, lat: 37.6, t: "黄河" },
+          { lon: 112.5, lat: 30.0, t: "长江" }, { lon: 110.5, lat: 23.0, t: "珠江" }
+        ];
+        function GG_render() {
+          var map = document.getElementById("ggMap");
+          var list = document.getElementById("ggList");
+          var detail = document.getElementById("ggDetail");
+          if (!map || !list || !detail) return;
+          var filtered = GG_filtered();
+          var ids = {};
+          filtered.forEach(function (t) { ids[t.id] = true; });
+          if (!ids[GG_sel] && filtered.length) GG_sel = filtered[0].id;
+          var mh = GG_MAP_SVG;
+          [85, 95, 105, 115, 125].forEach(function (lon) {
+            var x = (lon - 73) / 63 * 100;
+            mh += '<span class="gg-gridline" style="left:' + x + '%;top:0;bottom:0;width:1px"></span><span class="gg-coord" style="left:' + x + '%;bottom:26px;transform:translateX(-50%)">' + lon + '°E</span>';
+          });
+          [25, 30, 35, 40, 45, 50].forEach(function (lat) {
+            var y = (54 - lat) / 36 * 100;
+            mh += '<span class="gg-gridline" style="top:' + y + '%;left:0;right:0;height:1px"></span><span class="gg-coord" style="top:' + y + '%;left:8px;transform:translateY(-50%)">' + lat + '°N</span>';
+          });
+          GG_MAP_LABELS.forEach(function (lb) {
+            var p = GG_xy(lb);
+            mh += '<span class="gg-sealabel" style="left:' + p.x.toFixed(1) + '%;top:' + p.y.toFixed(1) + '%">' + lb.t + '</span>';
+          });
+          GG_TEMPLES.forEach(function (t) {
+            var p = GG_xy(t);
+            mh += '<button type="button" class="gg-dot' + (t.id === GG_sel ? " sel" : "") + (!ids[t.id] ? " dim" : "") + '" data-gg="' + t.id + '" style="left:' + p.x.toFixed(1) + '%;top:' + p.y.toFixed(1) + '%" aria-label="' + XL_esc(t.name) + '">' + XL_esc(t.short) + '</button>';
+          });
+          mh += '<span class="gg-map-note">示意位置 · 按经纬度换算，非精确导航</span>';
+          map.innerHTML = mh;
+          Array.prototype.forEach.call(map.querySelectorAll("[data-gg]"), function (b) {
+            b.addEventListener("click", function () { GG_sel = b.getAttribute("data-gg"); GG_render(); });
+          });
+          var sel = null;
+          GG_TEMPLES.forEach(function (t) { if (t.id === GG_sel) sel = t; });
+          if (sel) {
+            detail.innerHTML = '<img class="gg-hero" src="assets/gongguan/' + sel.id + '.jpg" alt="' + XL_esc(sel.name) + '" loading="lazy"><h3>' + XL_esc(sel.name) + '</h3><div class="meta">' + XL_esc(sel.mountain) + ' · ' + XL_esc(sel.place) + ' · ' + XL_esc(sel.sect) + ' · ' + XL_esc(sel.tag) + '</div><p>' + XL_esc(sel.desc) + '</p><div class="bk-btns"><button type="button" class="bk-btn" id="ggToShenxian">去「神仙宫观」那章看看</button></div>';
+            var go = document.getElementById("ggToShenxian");
+            if (go) go.addEventListener("click", function () { if (window.__showView) window.__showView("shenxian"); else location.hash = "#shenxian"; });
+          }
+          var lh = "";
+          filtered.forEach(function (t) {
+            lh += '<article class="card" data-search="宫观 ' + XL_esc(t.name + " " + t.mountain + " " + t.place + " " + t.sect + " " + t.tag) + '"><img class="gg-thumb" src="assets/gongguan/' + t.id + '.jpg" alt="' + XL_esc(t.name) + '" loading="lazy"><h3>' + XL_esc(t.name) + '</h3><div class="meta">' + XL_esc(t.mountain) + ' · ' + XL_esc(t.place) + '</div><p>' + XL_esc(t.tag) + ' · ' + XL_esc(t.sect) + '</p><p>' + XL_esc(t.desc) + '</p><div class="bk-btns"><button type="button" class="bk-btn' + (t.id === GG_sel ? " main" : "") + '" data-gg-pick="' + t.id + '">' + (t.id === GG_sel ? "正在看这处" : "在地图上看看") + '</button></div></article>';
+          });
+          if (!filtered.length) lh = '<p class="xl-note">这个组合下没有宫观，换个地域或宗派试试。</p>';
+          list.innerHTML = lh;
+          Array.prototype.forEach.call(list.querySelectorAll("[data-gg-pick]"), function (b) {
+            b.addEventListener("click", function () {
+              GG_sel = b.getAttribute("data-gg-pick");
+              GG_render();
+              var mp = document.getElementById("ggMap");
+              if (mp) mp.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            });
+          });
+          if (typeof GG_bcAfterRender === "function") GG_bcAfterRender();
+        }
+        function GG_init() {
+          var sec = document.getElementById("gongguan");
+          if (!sec) return;
+          GG_render();
+          var r = document.getElementById("ggRegion"), s = document.getElementById("ggSect"), rs = document.getElementById("ggReset");
+          if (r) r.addEventListener("change", GG_render);
+          if (s) s.addEventListener("change", GG_render);
+          if (rs) rs.addEventListener("click", function () {
+            if (r) r.value = "";
+            if (s) s.value = "";
+            GG_render();
+          });
+        }
+        /* ---------- 宫观小卡片：BounceCards（React Bits）原生移植 ---------- */
+        /* 按实际画面适配：网格布局保留（扇形排布不适用文字卡片），只移植弹簧物理；
+           参数随容器实宽调整——窄屏（手机）推力小、不倾斜；宽屏推力与倾斜稍大；
+           减弱动效（prefers-reduced-motion）时直接显示，不播动画。 */
+        var GG_BC_PATTERN = [1, 0.5, -0.3, -1, 0.2, 0.75, -0.6, 0.35, -0.85, 0.1];
+        var GG_bc = { bodies: [], hovered: -1, raf: 0, last: 0, time: 0, sig: "", layer: -2, reduce: false };
+        function GG_bcParams() {
+          var list = document.getElementById("ggList");
+          var w = list ? list.clientWidth : 0;
+          if (!w) w = window.innerWidth || 800;
+          var mobile = w < 640;
+          return { push: mobile ? 10 : 22, rot: mobile ? 0 : 3, hoverScale: 1.06, delay: mobile ? 0.2 : 0.25, stagger: mobile ? 0.05 : 0.06, bounciness: 0.6 };
+        }
+        function GG_bcStep(value, velocity, target, stiffness, damping, dt) {
+          var next = velocity + ((target - value) * stiffness - velocity * damping) * dt;
+          return [value + next * dt, next];
+        }
+        function GG_bcCards() {
+          var list = document.getElementById("ggList");
+          return list ? Array.prototype.slice.call(list.querySelectorAll("article.card")) : [];
+        }
+        function GG_bcSig(cards) {
+          return cards.map(function (el) { var h = el.querySelector("h3"); return h ? h.textContent : ""; }).join("|");
+        }
+        function GG_bcRaf(cb) {
+          if (window.requestAnimationFrame) return window.requestAnimationFrame(cb);
+          return window.setTimeout(function () { cb(performance.now()); }, 16);
+        }
+        function GG_bcCancel(id) {
+          if (window.cancelAnimationFrame) window.cancelAnimationFrame(id); else window.clearTimeout(id);
+        }
+        function GG_bcPlay() {
+          var cards = GG_bcCards();
+          if (!cards.length) return;
+          var p = GG_bcParams();
+          GG_bc.reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+          GG_bc.sig = GG_bcSig(cards);
+          GG_bc.hovered = -1;
+          GG_bc.layer = -2;
+          GG_bc.bodies = cards.map(function (el, i) {
+            return { el: el, x: 0, y: 0, rot: p.rot * GG_BC_PATTERN[i % GG_BC_PATTERN.length], scale: GG_bc.reduce ? 1 : 0, vx: 0, vy: 0, vr: 0, vs: 0 };
+          });
+          GG_bc.time = 0;
+          GG_bcWake();
+        }
+        function GG_bcWake() {
+          if (GG_bc.raf) return;
+          GG_bc.last = performance.now();
+          GG_bc.raf = GG_bcRaf(GG_bcFrame);
+        }
+        function GG_bcFrame(now) {
+          GG_bc.raf = 0;
+          var p = GG_bcParams();
+          var dt = Math.min(1 / 30, Math.max(1 / 240, (now - GG_bc.last) / 1000));
+          GG_bc.last = now;
+          GG_bc.time += dt;
+          var hovered = GG_bc.hovered;
+          var popStiffness = 170;
+          var popDamping = 2 * (1 - 0.85 * p.bounciness) * Math.sqrt(popStiffness);
+          var moveStiffness = 210;
+          var moveDamping = 2 * (GG_bc.reduce ? 1 : 0.72) * Math.sqrt(moveStiffness);
+          var substeps = Math.ceil(dt / (1 / 240));
+          var h = dt / substeps;
+          var moving = 0;
+          var hx = null;
+          if (hovered >= 0 && GG_bc.bodies[hovered]) {
+            var hr = GG_bc.bodies[hovered].el.getBoundingClientRect();
+            hx = hr.left + hr.width / 2;
+          }
+          GG_bc.bodies.forEach(function (b, i) {
+            var appeared = GG_bc.reduce || GG_bc.time >= p.delay + i * p.stagger;
+            var targetX = 0, targetY = 0, targetRot = b.rot, targetScale = appeared ? 1 : 0;
+            if (hovered >= 0 && appeared) {
+              if (i === hovered) { targetY = -6; targetRot = 0; targetScale = p.hoverScale; }
+              else if (hx !== null) {
+                var r = b.el.getBoundingClientRect();
+                var cx = r.left + r.width / 2;
+                var d = cx - hx;
+                if (Math.abs(d) > 1) targetX = (d > 0 ? 1 : -1) * p.push;
+              }
+            }
+            for (var k = 0; k < substeps; k++) {
+              var s1 = GG_bcStep(b.x, b.vx, targetX, moveStiffness, moveDamping, h); b.x = s1[0]; b.vx = s1[1];
+              var s2 = GG_bcStep(b.y, b.vy, targetY, moveStiffness, moveDamping, h); b.y = s2[0]; b.vy = s2[1];
+              var s3 = GG_bcStep(b.rot, b.vr, targetRot, moveStiffness, moveDamping, h); b.rot = s3[0]; b.vr = s3[1];
+              if (GG_bc.reduce) { b.scale = targetScale; b.vs = 0; }
+              else { var s4 = GG_bcStep(b.scale, b.vs, targetScale, popStiffness, popDamping, h); b.scale = s4[0]; b.vs = s4[1]; }
+            }
+            moving += Math.abs(b.vx) + Math.abs(b.vy) + Math.abs(b.vr) + Math.abs(b.vs) * 100 + Math.abs(targetX - b.x) + Math.abs(targetY - b.y) + Math.abs(targetRot - b.rot) + Math.abs(targetScale - b.scale) * 100 + (appeared ? 0 : 1);
+            b.el.style.transform = "translate3d(" + b.x.toFixed(2) + "px," + b.y.toFixed(2) + "px,0) rotate(" + b.rot.toFixed(3) + "deg) scale(" + Math.max(0, b.scale).toFixed(4) + ")";
+          });
+          if (GG_bc.layer !== hovered) {
+            GG_bc.layer = hovered;
+            GG_bc.bodies.forEach(function (b, i) {
+              b.el.style.zIndex = i === hovered ? "5" : "";
+              if (i === hovered) b.el.setAttribute("data-active", ""); else b.el.removeAttribute("data-active");
+            });
+          }
+          if (moving > 0.02) GG_bc.raf = GG_bcRaf(GG_bcFrame);
+        }
+        function GG_bcAfterRender() {
+          var sec = document.getElementById("gongguan");
+          if (!sec || !sec.classList.contains("view-on")) return;
+          var cards = GG_bcCards();
+          if (!cards.length) return;
+          if (GG_bcSig(cards) !== GG_bc.sig) { GG_bcPlay(); return; }
+          /* 同一批卡片重渲染（只换了选中项）：节点是新的，弹簧状态要接到新节点上；
+             已落定的卡片直接定格在 scale 1，不重播入场，悬停继续生效。 */
+          var p = GG_bcParams();
+          GG_bc.bodies = cards.map(function (el, i) {
+            return { el: el, x: 0, y: 0, rot: p.rot * GG_BC_PATTERN[i % GG_BC_PATTERN.length], scale: GG_bc.reduce ? 1 : 1, vx: 0, vy: 0, vr: 0, vs: 0 };
+          });
+          GG_bc.hovered = -1;
+          GG_bcWake();
+        }
+        function GG_bcSetup() {
+          var list = document.getElementById("ggList");
+          var sec = document.getElementById("gongguan");
+          if (!list || !sec) return;
+          list.addEventListener("pointermove", function (e) {
+            var cards = GG_bcCards();
+            var best = -1, bd = Infinity;
+            cards.forEach(function (el, i) {
+              var r = el.getBoundingClientRect();
+              var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+              var d = Math.abs(e.clientX - cx) + Math.abs(e.clientY - cy);
+              if (d < bd) { bd = d; best = i; }
+            });
+            if (best >= 0) {
+              var r = cards[best].getBoundingClientRect();
+              if (e.clientX < r.left - 12 || e.clientX > r.right + 12 || e.clientY < r.top - 12 || e.clientY > r.bottom + 12) best = -1;
+            }
+            if (best !== GG_bc.hovered) { GG_bc.hovered = best; GG_bcWake(); }
+          });
+          list.addEventListener("pointerleave", function () { if (GG_bc.hovered !== -1) { GG_bc.hovered = -1; GG_bcWake(); } });
+          list.addEventListener("pointerdown", function (e) {
+            var t = e.target && e.target.closest ? e.target.closest("article.card") : null;
+            if (!t) return;
+            var idx = GG_bcCards().indexOf(t);
+            if (idx >= 0 && GG_bc.bodies[idx] && !GG_bc.reduce) { GG_bc.bodies[idx].vs -= 2.2; GG_bcWake(); }
+          });
+          var mo = new MutationObserver(function () { GG_bcAfterRender(); });
+          mo.observe(sec, { attributes: true, attributeFilter: ["class"] });
+          GG_bcAfterRender();
+        }
+        XL_init();
+        GG_init();
+        GG_bcSetup();
+      })();
+    </script>
+    <script>
+      /* ---------- 周公解梦：本地词库 + 别名 / 长词优先 / 组合词 / 多结果 / 容错检索 ----------
+         词条格式：{t 标题, s 吉凶中, a 古文一句, b 白话解, tip 提示, k 别名库, c 组合词（须同时出现）}
+         检索规则：关键词命中按词长计分（长词优先）；组合词全中另加重分；
+         一次列出得分最高的几条供自行对照；无精确命中时再做去字近似匹配容错。 */
+      (function () {
+        var DREAM_DB = [
+          {t:"梦见蛇",s:"中",a:"蛇入怀中，主口舌之扰；蛇盘不动，主财气暗藏。",b:"蛇是古本里最常见的梦象，吉凶全看情状：安静盘绕多主财气与贵人，扑咬缠绕多主口舌烦恼，不可一概而论。",tip:"先想梦里怕不怕——不怕多偏吉，惊惧奔逃则提醒近期少惹口舌。",k:["蛇","大蛇","长蛇","蟒蛇","小蛇","毒蛇","花蛇"]},
+          {t:"被蛇咬",s:"吉",a:"蛇咬人，主得大财；咬而不痛，福气将至。",b:"通行本多以被蛇咬为主得财、交好运，是蛇梦里偏吉的一种；若梦里痛极惊惧，则另作受扰解。",tip:"醒来若不慌，多半是财气口；若心有余悸，近日行事稳些即可。",k:["被蛇咬","蛇咬","让蛇咬","蛇咬了","蛇咬我"],c:["蛇","咬"]},
+          {t:"蛇缠身",s:"凶",a:"蛇绕身者，主有缠扰之事，久难脱身。",b:"蛇缠身多主被琐事、人情或旧账缠住，古本亦有主生病之说，重在提醒梦者有一件拖着的事该了结了。",tip:"想想最近有什么事一直拖着——先了结它，比解梦更管用。",k:["蛇缠身","蛇缠","被蛇缠","蛇绕身","蛇盘身"],c:["蛇","缠"]},
+          {t:"蛇追人",s:"中",a:"蛇追而不及，主虚惊；追及咬之，反主得财。",b:"蛇追人多主心里躲着一件事：怕什么来什么。若梦里逃脱，多为虚惊；若被追上咬到，反按被蛇咬的吉口解。",tip:"躲的往往不是蛇，是白天没处理完的那件事。",k:["蛇追","被蛇追","蛇追我","蛇在追"],c:["蛇","追"]},
+          {t:"打蛇、杀蛇",s:"吉",a:"打蛇、杀蛇者，主克敌制胜，忧患得除。",b:"梦里能制住蛇，主自己有能力摆平眼前的麻烦，古本作战胜对手、除去隐患解，是蛇梦里少见的明确吉口。",tip:"手里正愁的事，不妨主动出手，别再等。",k:["打蛇","杀蛇","打死蛇","砍蛇","蛇被打死"],c:["蛇","打"]},
+          {t:"蛇进家",s:"吉",a:"蛇入宅门，主财喜临门，亦主家有喜事。",b:"蛇自己进家门，通行本多主财气入门、家中将有喜事；若梦里全家惊慌赶蛇，则喜中带扰，另作口舌解。",tip:"家里近期若有喜事筹备，此梦多顺水推舟。",k:["蛇进家","蛇进屋","蛇入宅","蛇来家","家里有蛇","蛇进门"]},
+          {t:"梦见龙",s:"吉",a:"乘龙上天，主大贵；见龙在水，主得贵人提携。",b:"龙是梦象里的极贵之象，多主地位、机遇与贵人。梦龙飞天主运势大开，梦龙潜水则主机会尚在暗处，待时而动。",tip:"有贵人之象，近期遇长者、前辈，多听一句。",k:["龙","飞龙","巨龙","龙飞","见龙","金龙"]},
+          {t:"梦见老虎",s:"凶",a:"虎啸山林，主强敌压境，行事宜避其锋。",b:"老虎多主强势的人或难关：上司、竞争者，或一件压得人喘不过气的事。虎不伤人主虚惊，虎扑人则提醒正面冲突将至。",tip:"近期避免与强势者硬碰，绕开锋芒再图后计。",k:["老虎","虎","猛虎","大老虎"]},
+          {t:"被老虎咬",s:"凶",a:"虎咬身者，主病扰与官非，宜静养避争。",b:"被虎咬比见虎更进一层，古本多主身体抱恙或与权威起冲突，是提醒收敛锋芒、顾好身体的梦。",tip:"累了就歇，别把小病拖成大病。",k:["被老虎咬","虎咬我","老虎咬","被虎咬"],c:["虎","咬"]},
+          {t:"梦见狗",s:"中",a:"犬吠主有口舌，犬摇尾主朋友相助。",b:"狗多主朋友与人际：狗对你亲近，主友人可靠；狗吠不止，主背后有闲话；狗的情状就是人际的情状。",tip:"对你摇尾的狗是谁，梦里的人际答案就在那儿。",k:["狗","小狗","大狗","狗狗","狗叫","黑狗","白狗"]},
+          {t:"被狗咬",s:"凶",a:"恶犬咬人，主朋友反目、遭人暗算。",b:"被狗咬多主信任的人出问题：朋友失信、伙伴拆台，或被熟人背后议论，是人际里偏凶的一口。",tip:"近期的钱与承诺，别只凭交情，先落纸面。",k:["被狗咬","狗咬","狗咬我","让狗咬"],c:["狗","咬"]},
+          {t:"梦见猫",s:"中",a:"猫捕鼠者主得利，猫挠人者主小人口舌。",b:"猫多主暗处的人情与小心思：猫温顺主有暗中相助者，猫挠人、猫眼发绿，则提醒身边有人心思不纯。",tip:"温柔待你的未必无求，留三分清醒。",k:["猫","小猫","猫咪","野猫","黑猫"]},
+          {t:"梦见老鼠",s:"凶",a:"鼠窜仓廪，主小人窃利，宜防失财。",b:"老鼠多主小人、暗耗与卫生之患：鼠多主家中有暗漏，鼠咬东西主小财受损，宜查漏补缺。",tip:"查一查最近的小额支出和闲置物品，多半有暗漏。",k:["老鼠","耗子","鼠","鼠窜","大老鼠"]},
+          {t:"梦见牛",s:"吉",a:"牛耕田野，主勤劳致富，家业渐兴。",b:"牛主勤恳与家业：牛壮、牛耕主靠踏实积累见成效；牛瘦、牛病则提醒操劳过度，家业根基要顾。",tip:"这是个宜守成、宜苦干的象，忌投机。",k:["牛","水牛","黄牛","牛耕","放牛","老牛"]},
+          {t:"梦见马",s:"吉",a:"骏马奔腾，主远行得志，事业有成。",b:"马主行动力与远方：马奔主机会在外、动中求财；马立不动主计划待发；马惊马脱则主行程生变。",tip:"有出门、调动、跳槽之念的，此梦多主可动。",k:["马","骏马","白马","马跑","黑马","马群"]},
+          {t:"骑马",s:"吉",a:"骑马扬鞭，主升迁得意，名利双收。",b:"骑马比见马更进一步，主自己掌控局面：骑得稳主升迁顺遂，马失前蹄则提醒得意时莫忘形。",tip:"正当顺风，更要握紧缰绳。",k:["骑马","骑在马上","策马","骑着马"],c:["骑","马"]},
+          {t:"梦见猪",s:"吉",a:"肥猪满圈，主家财丰积，福气自来。",b:"猪在古本里是财与福的象：猪肥主进财，猪多主家业兴旺；猪瘦猪脏则主财来财去、疏于打理。",tip:"财象虽好，也要勤打理，猪圈乱了福气也散。",k:["猪","肥猪","猪圈","野猪","小猪","母猪"]},
+          {t:"梦见羊",s:"吉",a:"群羊安卧，主祥和顺遂，三阳开泰。",b:"羊与祥通，羊群安顺主家宅和睦、诸事平顺；羊走失、羊相斗则主和气有损，宜退让。",tip:"和气生财的时节，别为小事伤了和气。",k:["羊","山羊","绵羊","羊群","小羊"]},
+          {t:"梦见鸡",s:"中",a:"鸡鸣报晓，主时运转来；鸡斗主口舌争端。",b:"鸡主报晓与勤勉：鸡鸣主新机会将至、宜早起行事；鸡飞狗跳、群鸡相斗则主家中琐事口舌多。",tip:"闻鸡起舞不是虚话——机会偏爱早动手的人。",k:["鸡","公鸡","母鸡","鸡叫","鸡鸣","大公鸡"]},
+          {t:"梦见鸭",s:"中",a:"群鸭游水，主财路平稳，亦主闲言碎语。",b:"鸭多主平顺的财路与热闹的人情：鸭游水主进账稳定，鸭声嘈杂则主耳边闲话多，听过即可。",tip:"闲话如鸭声，嘎嘎一阵就过去了，不必回嘴。",k:["鸭","鸭子","群鸭","野鸭"]},
+          {t:"梦见鱼",s:"吉",a:"鱼跃水面，主年年有余，财源不竭。",b:"鱼与余通，是最稳的财喜之象：鱼多鱼大主进财与喜事，鱼死鱼逃则主机会溜走，宜及时把握。",tip:"机会像鱼，到了手边就别犹豫太久。",k:["鱼","大鱼","小鱼","鱼群","金鱼","鲤鱼","鱼儿"]},
+          {t:"抓鱼、钓鱼",s:"吉",a:"临渊钓鱼，主愿望得偿，所求有着落。",b:"亲手抓鱼钓鱼，主靠自己本事得财：钓到大鱼主所求有成，久钓无获则提醒方法不对，该换饵换位。",tip:"久等无获时，先换方法，再谈运气。",k:["抓鱼","钓鱼","捕鱼","捉鱼","钓到鱼","网鱼","摸鱼"]},
+          {t:"梦见鸟",s:"中",a:"鸟飞高空，主志向得展；鸟入笼中，主自由受限。",b:"鸟主消息与心境：鸟飞主志向、远方的消息，鸟鸣主有音讯至，鸟困笼中则主自己觉得受束缚。",tip:"留意近期的一条远方消息，可能比梦更要紧。",k:["鸟","小鸟","鸟飞","群鸟","鸟叫","大鸟"]},
+          {t:"梦见蝴蝶",s:"中",a:"蝶舞花间，主情思缭乱，亦主虚华之喜。",b:"蝴蝶多主感情与心绪：蝶舞成双主情意，蝶飞远去主一段心思将淡，蝶多而乱则主心不定。",tip:"心乱时先别做关于感情的决定。",k:["蝴蝶","蝶","蝴蝶飞","花蝴蝶"]},
+          {t:"蜜蜂、被蜂蛰",s:"凶",a:"蜂蛰人者，主小人中伤；蜂采蜜者，主勤劳得利。",b:"蜂是两面象：蜂采蜜、蜂成群主勤劳有获；被蜂蛰则主被小话刺中、遭人暗算，宜谨言。",tip:"被蛰的梦之后，说话做事都慢半拍。",k:["蜜蜂","蜂","被蜂蛰","蜂蛰","马蜂","蜂群"],c:["蜂","蛰"]},
+          {t:"梦见蚂蚁",s:"中",a:"蚁聚成群，主小事成堆，积少可以成多。",b:"蚂蚁主琐碎与积累：蚁多成群主手头小事堆积，理清了便是进账；蚁上身、蚁咬则主被小事烦得睡不着。",tip:"把堆着的小事列个单子，一件件销掉。",k:["蚂蚁","蚁","蚂蚁成群","蚂蚁上身"]},
+          {t:"梦见蜘蛛",s:"中",a:"蛛网垂丝，主有牵连之事，亦主喜事临门。",b:"蜘蛛结网，民间一作喜蛛主喜事，一作牵缠主有放不下的人和事；网整主事有头绪，网破主牵连将断。",tip:"门口的喜蛛别赶——先看看是不是好消息到了。",k:["蜘蛛","蛛网","蜘蛛网","喜蛛"]},
+          {t:"梦见蟑螂",s:"凶",a:"蟑螂满屋，主家有暗秽，宜清扫除患。",b:"蟑螂多主暗处滋生的小麻烦：卫生、旧物、拖着没处理的小问题，越拖越多，宜动手清理。",tip:"先收拾屋子，有些心烦是环境给的。",k:["蟑螂","小强","蟑螂满屋"]},
+          {t:"梦见虫子",s:"凶",a:"虫蚀衣物，主小患暗生，防微杜渐为上。",b:"虫子多主小麻烦与不适感：虫少主小事扰心，虫多成灾则提醒一件小事已经拖大，该正面处理了。",tip:"小患不除，必成大烦——今天就处理最小的那件。",k:["虫子","虫","毛毛虫","蛆","虫子爬"]},
+          {t:"梦见青蛙",s:"中",a:"蛙鸣田间，主田事丰，亦主耳边聒噪。",b:"青蛙主收获与声响：蛙鸣成片主忙而有获，蛙入宅主有客至或消息至；嫌吵则主心浮气躁。",tip:"忙季将至，先把睡眠养足。",k:["青蛙","蛙","蛤蟆","蟾蜍","蛙鸣"]},
+          {t:"梦见乌龟",s:"吉",a:"龟行稳健，主长寿安康，福泽绵长。",b:"乌龟是长寿与稳健的象：龟至主家有长寿之福、事宜缓图；龟缩头主自己有所退缩，不妨再进一步。",tip:"慢不是输，龟的路子适合眼下这件事。",k:["乌龟","龟","海龟","老龟","金龟"]},
+          {t:"梦见兔子",s:"吉",a:"白兔入怀，主喜事临门，人缘渐佳。",b:"兔子主温和与喜事：兔安顺主有人缘、有小喜；兔受惊逃窜主机会胆小易失，宜出手果断些。",tip:"机会来时别学兔子先跑，伸手接住。",k:["兔子","兔","白兔","小兔子"]},
+          {t:"梦见猴子",s:"中",a:"猴戏于前，主小人弄巧，防被戏耍。",b:"猴子主机灵与戏弄：猴逗人主身边有爱开玩笑、耍小聪明的人；猴偷食则提醒看好自己的东西与功劳。",tip:"功劳与财物，自己先留好凭据。",k:["猴子","猴","猿","猴群"]},
+          {t:"梦见狼",s:"凶",a:"狼群环伺，主敌意暗藏，夜行宜慎。",b:"狼多主有敌意的人或环境：狼远观主有人暗中觊觎，狼扑咬则主冲突迫近，宜结伴、宜留证据。",tip:"这段时间，重要的事别单独扛、单独谈。",k:["狼","狼群","饿狼","野狼"]},
+          {t:"梦见熊",s:"凶",a:"熊罴当道，主强敌难缠，亦主自身倦怠。",b:"熊主强劲的对手或沉重的压力：熊立不攻主压力在而未发，熊追熊扑则主一件硬仗躲不过去。",tip:"硬仗之前，先把体力与帮手备齐。",k:["熊","黑熊","狗熊","大熊","棕熊"]},
+          {t:"梦见大象",s:"吉",a:"巨象徐行，主根基稳固，贵人扶持。",b:"大象主稳重与根基：象至主有靠山、有长辈扶持，所谋之事宜按大步骤推进，不宜投机取巧。",tip:"大步慢行，是这象给的法子。",k:["大象","象","象群","白象"]},
+          {t:"梦见鹿",s:"吉",a:"鹿鸣呦呦，主禄位将至，喜事盈门。",b:"鹿与禄同音，主俸禄、职位与喜事：鹿安然主升迁有望，鹿受惊主到手的喜事还差临门一脚。",tip:"差临门一脚时，别松劲。",k:["鹿","梅花鹿","小鹿","鹿群"]},
+          {t:"梦见凤凰",s:"吉",a:"凤凰来仪，主天下祥瑞，个人大贵之兆。",b:"凤凰是梦象中的顶级吉兆，主声名、机遇与命运转折，多应在事业与名望上，古本视为难得之梦。",tip:"这样的梦一年难得几回，值得为手头的大事加把劲。",k:["凤凰","凤","朱雀","凤凰飞"]},
+          {t:"梦见蝙蝠",s:"中",a:"蝙蝠倒悬，主福祸难辨，静观其变为上。",b:"蝙蝠因蝠同福，民间有主福至一说；但其夜行避光，古本亦主心事不明。吉凶参半，宜静观。",tip:"看不清局势时，先不动，是最好的动。",k:["蝙蝠","蝠","蝙蝠飞"]},
+          {t:"梦见燕子",s:"吉",a:"燕子归巢，主家宅安宁，远人将归。",b:"燕子主家与归人：燕筑巢主家宅兴旺、添丁进口，燕南飞主有远行或远人消息，燕入怀主喜事。",tip:"留意家里与远方亲人的一条消息。",k:["燕子","燕","飞燕","燕子筑巢"]},
+          {t:"梦见乌鸦",s:"凶",a:"乌鸦噪鸣，主口舌是非，宜避争敛言。",b:"乌鸦多主坏消息与是非：鸦鸣主耳边将有不中听的话，鸦群主是非场，宜远离议论、不传话。",tip:"不传话、不评断，是躲开是非最稳的法子。",k:["乌鸦","鸦","乌鸦叫","乌鸦群"]},
+          {t:"梦见喜鹊",s:"吉",a:"喜鹊登枝，主喜事将至，佳音可期。",b:"喜鹊主报喜：鹊鸣枝头主好消息在路上，多应考试、婚嫁、升迁、远方来信诸事。",tip:"好消息未到之前，先把该备的备齐。",k:["喜鹊","鹊","喜鹊叫"]},
+          {t:"梦见鹤",s:"吉",a:"鹤舞云间，主长寿清高，名声远播。",b:"鹤主长寿与清名：鹤飞主志向高远、名声在外，鹤立主家中有长寿老人之福，鹤鸣主有清贵之友至。",tip:"名声之事急不得，鹤的步子是慢而稳的。",k:["鹤","仙鹤","白鹤","丹顶鹤","鹤飞"]},
+          {t:"梦见鹰",s:"中",a:"鹰击长空，主志在千里，亦主对手强劲。",b:"鹰主志向与锐气：鹰飞高空主自己有大志可展，鹰扑食主竞争激烈，鹰立崖头主静待时机。",tip:"志向之外，还要等一阵对的风。",k:["鹰","老鹰","雄鹰","苍鹰","鹰飞"]},
+          {t:"梦见水",s:"中",a:"水之清浊深浅，皆主心境与财路之象。",b:"水是梦里的大宗：水主财路与情绪。水清主顺，水浊主烦，水大主势，水小主细水长流——须再看清浊动静细分解。",tip:"记不清细节时，先按情绪定吉凶：梦里安然多不差。",k:["水","水里","水中","水面","水边"]},
+          {t:"梦见清水",s:"吉",a:"清泉澄澈，主心境清明，财路通达。",b:"清水是水梦里的吉口：水清见底主心事坦然、人际清白、财路干净，久困之事将有清朗的说法。",tip:"心里坦荡时做的决定，多半不会错。",k:["清水","清澈的水","清泉","泉水","净水","清清的水"],c:["水","清"]},
+          {t:"梦见浊水",s:"凶",a:"浊水浑泥，主心绪烦乱，财路不清。",b:"浊水与清水正相反：主烦心事搅成一团、账目或人情不清不楚，宜先停手厘清，再谈进取。",tip:"浑水里先别摸鱼，把水搅清了再说。",k:["浊水","浑水","脏水","污水","泥水","水浑","浑"],c:["水","浊"]},
+          {t:"梦见大水、洪水",s:"凶",a:"洪水滔天，主势不可挡，宜避险守成。",b:"大水洪水主超出掌控的局面：水势大主压力或变故来得猛；若梦里能登高避水，则主有惊无险、终能脱身。",tip:"势头不对时先登高——保住根本，比抢东西重要。",k:["大水","洪水","发水","涨水","水淹","被水淹","发大水","好大的水"]},
+          {t:"梦见河水",s:"中",a:"河水长流，主生涯有路，顺流者顺。",b:"河主人生路径：顺流而下主行事顺遂，逆流、渡河主正过一道关口，河水干涸则主路子暂时走不通。",tip:"过河的梦，多半应在一件正在推进的事上。",k:["河","河水","江河","小河","河边","江水","大江","过河"]},
+          {t:"梦见大海",s:"中",a:"沧海无涯，主胸怀与际遇皆在远方。",b:"大海主格局与未知：海平主心境开阔、际遇平稳，海浪大主机会与风险并存，海啸则主变故将至宜避。",tip:"海浪越大，越要先看清岸在哪里。",k:["大海","海","海水","海边","海洋","海浪","海面"]},
+          {t:"梦见下雨",s:"中",a:"雨润万物，主恩泽将至；暴雨倾盆，主烦忧压顶。",b:"雨主滋润与情绪：细雨主小恩小惠、心情得润，暴雨主烦忧集中爆发，雨后天晴则主困局将解。",tip:"若是梦里雨后天晴，眼前的难处快到头了。",k:["下雨","雨","雨水","淋雨","暴雨","大雨","小雨","细雨"]},
+          {t:"梦见下雪",s:"吉",a:"瑞雪覆野，主丰年之兆，旧事得清白。",b:"雪主洁净与丰年：雪景安然主心境澄清、冤屈得白，雪大封路则主行程受阻、计划宜缓。",tip:"雪化之前不宜赶路，手头的事缓一缓无妨。",k:["下雪","雪","雪花","积雪","雪地","白雪","大雪"]},
+          {t:"梦见打雷",s:"凶",a:"雷声震野，主惊变在近，宜慎言慎行。",b:"雷主突发与威压：雷声大主将有震动性的消息，雷击中物主变故落在实处，只闻雷不见雨多为虚惊。",tip:"消息未证实之前，别急着表态。",k:["打雷","雷","雷声","雷电","惊雷","响雷"]},
+          {t:"梦见闪电",s:"中",a:"电光一闪，主灵机乍现，亦主事发突然。",b:"闪电主瞬间：或是一个突然的念头、一则快讯，或一件来得快去得快的事，吉凶看梦里是惊是喜。",tip:"一闪而过的念头，先记下来再说。",k:["闪电","电光","霹雳","电闪"]},
+          {t:"梦见刮风",s:"中",a:"风行草偃，主局势将变，顺风者昌。",b:"风主变化与风向：顺风主借势，逆风、大风折树主局势对自己不利，风停则主一波变化将过。",tip:"先看清风向，再决定要不要扬帆。",k:["刮风","大风","狂风","风","台风","龙卷风","起风"]},
+          {t:"梦见地震",s:"凶",a:"地动山摇，主根基不稳，宜未雨绸缪。",b:"地震主根基动摇：工作、家庭或身体的根基有一处不稳，梦里逃出无碍则主能化险，宜提前加固。",tip:"把最不稳的那一处先补上：合同、体检、存款，任选其一。",k:["地震","地动","地陷","地震了"]},
+          {t:"梦见火",s:"中",a:"火势光明，主事业红火；火烈焚物，主心火过盛。",b:"火是两面象：火旺光明主事业、名声有起色，火失控、烧到自身则主心急惹祸、与人冲突。",tip:"火气上来的时候，决定往后推一天。",k:["火","火焰","火光","大火","火苗"]},
+          {t:"梦见着火",s:"凶",a:"宅舍失火，主家事纷扰，宜防患于未然。",b:"着火比见火更急：主一件麻烦正在烧起来，房子着火多主家事，身上着火多主自身卷入是非。梦里能扑灭则主可控。",tip:"先想想家里、身上，有没有正在冒烟的小事。",k:["着火","火灾","失火","房子着火","起火","家里着火"]},
+          {t:"梦见山",s:"中",a:"高山仰止，主靠山与阻力，皆在一念之间。",b:"山主靠山，也主阻力：山青主有依靠、有根基，山陡山险主眼前有一道难关，山崩则另作根基动摇解。",tip:"山在面前，先找路上山，别急着翻。",k:["山","高山","大山","山顶","山峰","青山"]},
+          {t:"爬山、上山",s:"吉",a:"登高望远，主步步高升，所谋渐成。",b:"爬山主进取的过程：爬得顺、登了顶主目标将成，半路力竭主计划超出体力，宜分段而行。",tip:"登顶靠的不是猛劲，是不停脚。",k:["爬山","上山","登山","攀山","爬到山顶","爬山坡"],c:["山","爬"]},
+          {t:"梦见太阳",s:"吉",a:"旭日东升，主时运昌明，贵人当道。",b:"太阳是梦象里的明吉之象：日出主新局开启、名声与地位见长，日头正盛主正当得意，宜把握。",tip:"运头正亮时，该亮相的事别藏着。",k:["太阳","日出","阳光","日头","旭日","太阳升起"]},
+          {t:"梦见日落",s:"中",a:"日薄西山，主一段事将收尾，宜善始善终。",b:"日落主收尾与转场：一件事到了尾声，或一段关系、一个阶段将翻篇，梦里不慌则主平稳过渡。",tip:"收尾收得好，下一程才起得稳。",k:["日落","夕阳","黄昏","太阳下山","落日","日落西山"]},
+          {t:"梦见月亮",s:"中",a:"明月当空，主阴柔之助，女子与文事皆吉。",b:"月亮主柔性的助力和心绪：满月主团圆、心事得圆，弯月主事尚在半途，月被云遮主心事未明。",tip:"满月之梦，多应团圆与消息。",k:["月亮","明月","月光","满月","弯月","月","月色"]},
+          {t:"梦见星星",s:"吉",a:"繁星满天，主希望在前，贵人如星拱月。",b:"星星主希望与指引：星多星亮主前路有指望、有贵人点拨，流星主一个短暂而亮的机会，要快接。",tip:"流星式的机会，许愿不如伸手。",k:["星星","星","繁星","星空","流星","满天星"]},
+          {t:"梦见彩虹",s:"吉",a:"彩虹横空，主苦尽甘来，心愿得偿。",b:"彩虹是困局后的吉象：主一段难处将过、所盼之事见着亮色，多应在坚持已久的事情上。",tip:"虹在雨后——难的那段，多半已经走完大半。",k:["彩虹","虹","彩虹桥"]},
+          {t:"梦见云",s:"中",a:"云卷云舒，主世事浮沉，心宽则安。",b:"云主浮动的人事：白云主闲适、贵人远助，乌云主心头压着事、是非将至，云开见日则主困局解开。",tip:"乌云的梦之后，少掺和别人的纷争。",k:["云","白云","乌云","云彩","云层","彩云"]},
+          {t:"梦见雾",s:"中",a:"雾锁前路，主方向未明，宜缓行观望。",b:"雾主看不清：局势、人心或自己的心意有一层没揭开，雾散主真相将明，雾愈浓则愈不宜做决定。",tip:"雾里不赶路，看不清时先停一停。",k:["雾","大雾","雾气","浓雾","起雾"]},
+          {t:"梦见桥",s:"中",a:"桥通两岸，主过渡与转机，正在搭桥铺路。",b:"桥主连接与过渡：桥稳主转机可靠、有人搭桥，桥断桥险则主正在过渡的这件事有断裂之险。",tip:"过渡期最忌回头，先稳稳走到对岸。",k:["桥","桥上","大桥","小桥","石桥","木桥"]},
+          {t:"梦见过桥",s:"吉",a:"安然过桥，主难关已渡，前景渐宽。",b:"过桥主过关：顺利过桥主一道难关将成过去，桥上停滞主还差一步，桥下水急则提醒过关时莫分心。",tip:"到了桥中间，就别往下看了。",k:["过桥","走过桥","桥上走","过了桥"],c:["桥","过"]},
+          {t:"梦见路",s:"中",a:"路之宽窄曲直，即生涯之顺逆。",b:"路主人生走向：路宽路直主前程顺遂，路窄路岔主选择将至，路断路堵则主此路暂时不通，宜改道。",tip:"岔路口的梦，多半心里已经有答案了。",k:["路","大路","小路","路上","道路","山路","路口"]},
+          {t:"梦见迷路",s:"凶",a:"迷途难返，主心无定向，宜求人指引。",b:"迷路主方向感丢失：现实中多半有一件事拿不定主意。梦里有人指路主贵人将至，自己走出主靠自己破局。",tip:"拿不定主意时，找个过来人问一句。",k:["迷路","找不到路","走失","迷失方向","找不到方向"]},
+          {t:"梦见树",s:"吉",a:"古树参天，主根基深厚，福荫子孙。",b:"树主根基与成长：树茂主事业家庭根基稳、正在向好，树枯树倒则主根基有损，宜回头检视。",tip:"长得慢的树，根都扎得深。",k:["树","大树","树木","古树","树下","树叶"]},
+          {t:"梦见开花",s:"吉",a:"花开富贵，主喜事将临，姻缘与名声皆动。",b:"花主喜事与绽放：花开正盛主好事在近处，花谢主一段热闹将散，花骨朵主好事还在酝酿。",tip:"花期短，好事到了要懂得珍惜当下。",k:["开花","花开","花","鲜花","花朵","桃花","梅花","荷花","牡丹","花儿"]},
+          {t:"梦见果树",s:"吉",a:"果实满枝，主辛勤有报，收获在望。",b:"果树主成果：果多果熟主付出将有回报，果青果落则主火候未到，宜再等一等、再养一养。",tip:"果子青时摘不得，再等一等。",k:["果树","果子","结果","树上果","果实"]},
+          {t:"梦见森林",s:"中",a:"密林深处，主心事重重，亦主资源丰厚。",b:"森林主丰盛与迷茫并存：林茂主手头资源多、人脉广，林中迷路则主被繁杂事务围住，宜先定主线。",tip:"树多的时候，先认准一棵往前走。",k:["森林","树林","林子","密林","大森林"]},
+          {t:"梦见田野",s:"中",a:"田野广阔，主生计有着落，心境得开阔。",b:"田野主生计与心境：庄稼长势好主收入有指望，田荒地裂则主生计上有缺口，宜开源节流。",tip:"地里的收成，骗不了人，也急不得。",k:["田野","田地","庄稼","麦田","稻田","农田","田里"]},
+          {t:"梦见沙漠",s:"凶",a:"黄沙漫漫，主孤立无援，资源匮乏之象。",b:"沙漠主匮乏与孤单：缺水缺伴，多应在资源、人手或情绪的低谷期；梦里见绿洲则主转机在前。",tip:"低谷期先保水——保住现金流和睡眠。",k:["沙漠","沙地","黄沙","大漠"]},
+          {t:"梦见冰",s:"中",a:"冰封水面，主关系冷淡，亦主心境澄澈。",b:"冰主冷与净：冰面行走主与某人的关系处于小心翼翼期，冰化主僵局将解，冰厚主冷战尚久。",tip:"破冰要慢慢来，急敲只会裂得更深。",k:["冰","结冰","冰面","冰雪","冰块","冰上"]},
+          {t:"梦见黑暗",s:"凶",a:"长夜难明，主心绪低迷，前路未卜。",b:"黑暗主低迷与未知：多在压力大、睡眠差时出现。梦里见光、摸到门主出路将现，纯黑无边则提醒先顾身心。",tip:"这类梦多与睡眠有关，先睡个好觉再说。",k:["黑暗","黑夜","伸手不见五指","天黑","漆黑","一片黑"]},
+          {t:"梦见光明",s:"吉",a:"光明乍现，主困局得解，希望重燃。",b:"光明是黑暗的反口：主压抑将过、事情见着说法，多应在久拖未决之事上，是心先一步看见了出路。",tip:"心先亮了，路就快亮了。",k:["光明","光","亮光","光芒","天亮","有光"]},
+          {t:"梦见井",s:"中",a:"古井无波，主家底深厚，亦主心事深藏。",b:"井主家底与深藏的心事：井水清主家底殷实、心有源头，井枯井塌则主一处依靠将失，宜早备。",tip:"井再深，也要常汲——关系与本事都要常用常新。",k:["井","水井","井水","古井","井边"]},
+          {t:"梦见船",s:"中",a:"舟行水上，主生涯浮沉，顺风则达。",b:"船主载体与行程：船稳主所托的平台、团队可靠，船漏船翻主所托非人或计划有漏洞，宜换船或补漏。",tip:"上船之前，先看看船底漏不漏。",k:["船","坐船","船上","大船","小船","划船","渡船"]},
+          {t:"梦见瀑布",s:"中",a:"飞瀑直下，主声势浩大，财气与情绪俱涌。",b:"瀑布主势能：水势浩大主一件事将以很大的声势推进，宜顺势而为；被水冲则主被局势裹挟，宜站稳。",tip:"声势大的事，先站稳，再谈参与。",k:["瀑布","飞瀑","瀑布水"]},
+          {t:"梦见石头",s:"中",a:"顽石当道，主阻力坚硬，亦主根基坚实。",b:"石头主硬：挡路的石头主硬阻力，基石、压舱石则主根基稳。梦里搬石主正在硬啃一件事。",tip:"搬不动时，先看看能不能绕——山不过来，我过去。",k:["石头","石","巨石","岩石","大石头"]},
+          {t:"梦见泥土",s:"中",a:"黄土厚重，主脚踏实地，亦主操劳辛苦。",b:"泥土主踏实与辛劳：土肥主根基与收成有指望，泥泞难行主眼下这段路走得吃力，宜换鞋换法。",tip:"泥泞路最忌快，稳一步是一步。",k:["泥土","泥","泥泞","黄土","土地","泥地"]},
+          {t:"梦见草地",s:"吉",a:"青草茵茵，主生机盎然，人际和顺。",b:"草地主生机与舒展：草青草盛主状态回升、人缘和顺，草枯则主精力透支，宜休整。",tip:"状态回升的信号，先从睡个午觉开始接。",k:["草地","草","青草","草原","绿草","草坪"]},
+          {t:"梦见湖",s:"中",a:"湖光平静，主心境澄然，蓄势待发。",b:"湖主静水深流：湖平主心境稳、在积蓄，湖起波澜主平静日子将有事，湖干则主一处资源将竭。",tip:"静水深流的人和事，都值得多看一眼。",k:["湖","湖水","湖边","湖面","大湖"]},
+          {t:"梦见掉牙",s:"凶",a:"牙齿脱落，主亲人有忧，亦主自身根基动摇。",b:"掉牙是古本里的经典凶口，多主牵挂家中长辈，或自己有一件根基性的事在松动；现代人多在压力大、睡眠差时做此梦。",tip:"先给家里长辈打个电话问声好，再看看自己的牙——磨牙、牙病也会入梦。",k:["掉牙","牙齿掉","牙掉","牙齿脱落","牙脱落","牙碎","门牙掉","牙齿掉了","牙掉了","掉牙齿","牙齿松动","牙齿碎了"]},
+          {t:"梦见牙疼",s:"中",a:"牙疼龈肿，主口舌将至，亦主小疾缠身。",b:"牙疼多主口舌与小病：或是近期说话惹了不快，或是牙齿本身在提醒你。梦里的疼，多半是白天忍着的那点不适。",tip:"牙真不舒服就去看牙医，别拿解梦当诊断。",k:["牙疼","牙痛","牙齿疼","牙龈疼"]},
+          {t:"梦见长新牙",s:"吉",a:"齿落更生，主旧去新来，家有后继之喜。",b:"长新牙是掉牙的反口：主更新换代，旧阶段结束、新机会萌芽，也主家中添丁进口之喜。",tip:"正在换工作、换活法的人，此梦多顺。",k:["长牙","长新牙","新牙","牙齿长","长出新牙"]},
+          {t:"梦见掉头发",s:"凶",a:"发落簪脱，主烦恼丛生，亦主精力耗损。",b:"掉头发多主烦恼与耗损：愁事多、睡得少，头发先知。古本亦有主亲人忧者，重在提醒减负。",tip:"先减一件最耗神的事，再谈别的。",k:["掉头发","脱发","头发掉","头发脱落","头发一把把掉","秃"]},
+          {t:"梦见剪头发",s:"中",a:"断发去旧，主斩断烦恼，亦主形象一新。",b:"剪头发主主动了断：剪得爽利主与旧事、旧人切割干净；被人强剪则主被迫改变，心有不甘。",tip:"自己剪的主动权在自己手里，是好事。",k:["剪头发","理发","剪发","剃头","剃发","剪了头发"]},
+          {t:"梦见白头发",s:"中",a:"华发早生，主操劳得名，亦主忧思过重。",b:"白头发主操劳与资历：或主辛苦得人敬重，或主忧思太过。照镜见白发而惊者，多是心里怕老、怕来不及。",tip:"忧思的白发，先从睡个整觉开始退。",k:["白头发","白发","头发白","满头白发","头发全白"]},
+          {t:"梦见长头发",s:"中",a:"长发及腰，主情思绵长，亦主烦恼滋生。",b:"长头发主情思与魅力：发长而顺主感情、人缘有进展，发乱难梳则主一团心事理不清。",tip:"心事像头发，得一缕一缕慢慢梳。",k:["长头发","头发长","长发","头发变长","长头发及腰"]},
+          {t:"梦见流血",s:"凶",a:"见血流注，主财损与伤灾，宜守不宜进。",b:"流血是古本的明确警示口：主破财、受伤或精力大耗。血止住了主可控，血流不止则提醒手头一件事正在失血。",tip:"先止血：把最烧钱、最耗人的那件事按住。",k:["流血","出血","血","见血","吐血","血流","流了很多血"]},
+          {t:"梦见受伤",s:"凶",a:"身有创伤，主行事受挫，宜避锋芒。",b:"受伤主受挫与脆弱：伤在何处，多对应哪方面吃紧——手主做事，脚主前程，头主决策。梦里得人医治则主有援手。",tip:"受伤的部位，就是白天最该护着的那一面。",k:["受伤","伤口","受了伤","负伤","伤了"]},
+          {t:"梦见生病",s:"凶",a:"卧病在床，主心身俱疲，宜休养避劳。",b:"生病多主疲惫的实信号：身体或心气有一处在告急。病得人照顾主有依靠，自己硬撑则提醒别再硬撑。",tip:"这不是预言，是身体在敲桌子：先休息。",k:["生病","病了","得病","患病","身体不舒服","病重"]},
+          {t:"梦见呕吐",s:"中",a:"呕吐秽物，主排浊去病，亦主心有积郁。",b:"呕吐多主排出：吐出秽物反而主去掉一件积压的心事或坏习惯；吐不止则主近期肠胃与情绪都要顾。",tip:"吐完了的梦，多半是心里先松了一口。",k:["呕吐","吐了","想吐","恶心想吐","吐"]},
+          {t:"梦见眼睛",s:"中",a:"目明则视远，目障则事有未明。",b:"眼睛主看清与判断：眼明主心里有数，眼痛眼盲主有一件事你不愿看清或确实被蒙在鼓里。",tip:"被蒙着的那件事，去问个明白。",k:["眼睛","眼","眼瞎","眼睛看不见","眼盲","眼睛疼"]},
+          {t:"梦见耳朵",s:"中",a:"耳闻千里，主消息将至；耳障主忠言逆耳。",b:"耳朵主消息与听劝：耳聪主将有重要消息，耳鸣耳聋主有一句难听的真话你没听进去。",tip:"最近那句不中听的话，回头再想一遍。",k:["耳朵","耳","耳鸣","耳朵听不见","耳朵疼"]},
+          {t:"梦见手",s:"中",a:"手主作为，断折则事有中梗。",b:"手主做事的能力与抓握：手有力主掌控感强，手受伤、手指断主一件正做的事要出岔子，宜复核。",tip:"正签的字、正发的货，再核一遍。",k:["手","手指","手断","手受伤","手指头"]},
+          {t:"梦见脚",s:"中",a:"脚主行程与根基，伤脚则行有阻滞。",b:"脚主前程与落脚处：脚稳主步步落地，光脚、脚伤主根基未稳或行程受阻，洗脚则主收尾休整。",tip:"落脚处未稳之前，别跑太快。",k:["脚","脚受伤","光脚","赤脚","脚疼","脚上"]},
+          {t:"梦见洗澡",s:"吉",a:"沐浴更衣，主除旧布新，身心俱爽。",b:"洗澡是洗去晦气的吉口：主一段烦扰将洗净、身心状态回升，也主在人前形象一新。",tip:"洗完澡的梦之后，适合去见重要的人。",k:["洗澡","沐浴","洗浴","泡澡","冲凉"]},
+          {t:"梦见照镜子",s:"中",a:"对镜自照，主自省其身，亦主名声之虑。",b:"照镜子主自我审视：镜中清楚主心里有数，镜中模糊、镜中非我则主对自己的状态没把握，或在意旁人眼光。",tip:"镜子里的那个人，最近过得怎么样，自己最清楚。",k:["照镜子","镜中","对着镜子","镜子里"]},
+          {t:"梦见裸体",s:"中",a:"赤身无衣，主坦诚见心，亦主羞惭之虑。",b:"裸体多主无遮掩的处境：自己坦然主心里无愧、想做真实的自己，羞惭躲藏则主怕一件私事被看穿。",tip:"坦然的裸梦不坏，慌的裸梦提醒你先把那件事处理好。",k:["裸体","光身子","没穿衣服","赤身","裸奔","光着身子"]},
+          {t:"梦见怀孕",s:"中",a:"怀胎在腹，主新事孕育，时机未到莫催生。",b:"怀孕多主孕育中的计划：一个项目、一段关系、一门手艺正在成形，未到收获时。亦主对新生活的期待。",tip:"孕育期的事，忌催、忌晒，先养着。",k:["怀孕","有孕","怀了孕","大肚子","孕","怀上"]},
+          {t:"梦见生孩子",s:"吉",a:"分娩得子，主新局开启，苦尽甘来。",b:"生孩子主成果落地：酝酿已久的一件事将见分晓，过程虽苦，结果多喜；亦主生活进入新阶段。",tip:"临门一脚的苦，熬过去就是新局。",k:["生孩子","生了孩子","分娩","生娃","产子","生了个孩子"]},
+          {t:"梦见婴儿",s:"中",a:"婴孩啼哭，主新始之事需呵护，亦主牵挂。",b:"婴儿主新开始与牵挂：抱婴主手里多了一件要小心呵护的新事，婴哭主这件事正在向你求关注。",tip:"新接手的事，先当婴儿养，别急着让它跑。",k:["婴儿","宝宝","婴孩","新生儿","小婴儿"]},
+          {t:"梦见哭",s:"凶",a:"梦中恸哭，主积郁得泄，醒后反主心宽。",b:"梦里哭多是情绪的出口：古本反有哭主喜的说法——压抑得泄，醒来反觉轻松。哭不出声则主郁结未解。",tip:"梦里哭过一场，白天就别再硬撑了。",k:["哭","哭泣","大哭","哭了","痛哭","哭得很伤心"]},
+          {t:"梦见笑",s:"吉",a:"梦中欢笑，主心事得解，人缘和顺。",b:"笑主心宽与和顺：开怀大笑主一件心事放下，含笑主小确幸将至；若笑声怪异、停不下来，则主乐极生悲之戒。",tip:"好梦之后，把这份松弛带进白天。",k:["笑","大笑","微笑","哈哈大笑","笑了","笑出声"]},
+          {t:"梦见流泪",s:"中",a:"泪落无声，主情有所动，旧事上心头。",b:"流泪主情感被触动：或是一段旧情、一个旧人上了心头。泪干则主释怀，泪不止主还有话没说出口。",tip:"没说出口的那句话，找个方式说出去。",k:["流泪","眼泪","泪水","掉眼泪","流眼泪"]},
+          {t:"梦见出汗",s:"中",a:"汗透重衣，主辛劳有报，亦主心虚之兆。",b:"出汗主辛劳与紧张：劳作之汗主付出有回响，心虚之汗、盗汗则主一件瞒着的事在心里发烫。",tip:"心虚的汗，只有把事办了才止得住。",k:["出汗","汗","冒汗","大汗","一身汗"]},
+          {t:"梦见饥饿",s:"中",a:"腹中饥馁，主所求未满，进取之心正盛。",b:"饥饿主匮乏感与欲望：或是物质上紧，或是心里有一处不满足。梦里得食主所求将有着落。",tip:"分清是真缺，还是心缺——补法不同。",k:["饿","饥饿","饿肚子","很饿","饿了"]},
+          {t:"梦见梳头",s:"中",a:"梳头理发，主理清头绪，烦恼渐顺。",b:"梳头主梳理：把乱成一团的人事、心绪慢慢理顺。梳得通主事情将有头绪，梳子断、发打结则主还得费些时日。",tip:"理不清时，一件一件来，别一把抓。",k:["梳头","梳头发","梳子"]},
+          {t:"梦见洗头",s:"中",a:"洗头去垢，主除烦解忧，思路一清。",b:"洗头主清思路、去烦恼：洗得干净主压在心头的一件事将有清爽的了结，也主形象与状态更新。",tip:"适合在洗头梦之后，去谈那件拖着的正事。",k:["洗头","洗头发","洗了头"]},
+          {t:"梦见指甲",s:"中",a:"指甲长断，主小节有亏，防微杜渐。",b:"指甲主小节与抓握：指甲长主小事积压，剪指甲主修整自身，指甲断、指甲劈则主一个小环节要出纰漏。",tip:"大局之外，先查一遍小环节。",k:["指甲","剪指甲","指甲长","指甲断","指甲盖"]},
+          {t:"梦见死人",s:"中",a:"见亡者，主旧事将了；亡者言语，须字字记清。",b:"死人入梦版本最多：通行口径主旧阶段结束、旧事了结。若死者在梦中开口说话，古本嘱要记清内容，多有所指。",tip:"梦里那句话，醒来先写下来再想。",k:["死人","尸体","死者","亡者","死去的人"]},
+          {t:"梦见已故亲人",s:"中",a:"亡亲入梦，主思念所致，亦主家有未了之言。",b:"梦见过世的亲人，多半是思念成梦：亲人安然主心里惦记，亲人有所嘱托、有所求，则提醒家里有一件小事待办——祭扫、旧物、未说完的话。",tip:"得空去祭扫一次，或把那件小事办了，心就安了。",k:["已故亲人","去世的亲人","过世的亲人","亡亲","死去的亲人","去世的父母","过世的奶奶","过世的爷爷","去世的奶奶","去世的爷爷","去世的妈妈","去世的爸爸","去世"]},
+          {t:"梦见棺材",s:"吉",a:"棺材者，升官发财之兆也。",b:"棺材谐音官与财，是民俗里有名的反口吉梦：主升迁、进财。棺材出入、抬棺皆作此解；唯独棺中死人坐起另作惊扰论。",tip:"这是民俗里最经典的以凶为吉，别被吓着。",k:["棺材","棺","寿棺","抬棺材"]},
+          {t:"梦见坟墓",s:"中",a:"新坟主旧事翻篇，古墓主有待发之藏。",b:"坟墓主埋藏与了结：上坟扫墓主尽孝思亲、旧事翻篇，坟头草盛主一件事拖得太久，该给个说法了。",tip:"拖着没给说法的那件事，主动去收尾。",k:["坟墓","坟","墓地","坟地","上坟","扫墓","坟头"]},
+          {t:"梦见葬礼",s:"凶",a:"送葬出殡，主送旧迎新，亦主破费操劳。",b:"葬礼主送别一个阶段：古本有主破费、操劳一说，也有送旧迎新的转口。哭声大者多主情绪要发泄一场。",tip:"送别之后记得迎新，别只停在告别里。",k:["葬礼","出殡","丧事","送葬","白事","办丧事"]},
+          {t:"梦见自己死了",s:"中",a:"梦身死者，主脱胎换骨，旧我将去新我来。",b:"自己死在梦里，通行新解多不作凶：主一个旧阶段彻底结束——离职、毕业、搬家、分手之后常有此梦，是心在翻篇。",tip:"翻篇的梦，醒来该把旧物收一收了。",k:["自己死","我死了","自己死了","我去世了","自己去世"]},
+          {t:"梦见结婚",s:"吉",a:"婚嫁之喜，主合卺之庆，亦主新约将成。",b:"结婚主结合与新约：自己结婚主一段合作、一个承诺将落定；参加他人婚礼主人缘喜事近。已婚者梦此多主对关系的再确认。",tip:"将要签的约、将要定的事，此梦多顺。",k:["结婚","成亲","婚礼","嫁人","娶妻","办喜事","结婚了"]},
+          {t:"梦见新娘、新郎",s:"中",a:"新妇新郎，主身边有喜，亦主自身待字待聘之心。",b:"见新娘新郎，主喜气在近处：或主身边人有喜事，或主自己对婚恋、合作有期待。抢亲、逃婚则主对承诺心存犹豫。",tip:"犹豫的那份承诺，先想清再点头。",k:["新娘","新郎","新娘子","新郎官"]},
+          {t:"梦见恋人",s:"中",a:"情人入梦，主情之所钟，甜忧皆在神情。",b:"恋人入梦，吉凶看梦里情状：相处甜蜜主感情稳固，争吵冷战主白天正有一处别扭，恋人远去主不安感作祟。",tip:"梦是感情的镜子，别拿梦去质问对方。",k:["恋人","对象","男朋友","女朋友","爱人","情侣","男友","女友"]},
+          {t:"梦见前任",s:"中",a:"旧人重现，主未了之情，亦主今昔对照。",b:"前任入梦多半不是旧情复燃，而是今昔对照：现阶段的某种感受，与当年相似，心便把旧人请出来当参照。",tip:"想的往往不是那个人，是那时的自己。",k:["前任","前男友","前女友","旧爱","前对象"]},
+          {t:"梦见暗恋的人",s:"中",a:"心仪之人入梦，主情思暗涌，愿而未达。",b:"暗恋对象入梦，是心思太满的直给：梦里得近主期待正盛，梦里疏远主自己先怯了。古本作情思之梦，不主成败。",tip:"梦给不了答案，行动才行——或进，或放下。",k:["暗恋的人","暗恋","喜欢的人","心仪的人","心仪之人"]},
+          {t:"梦见父母",s:"中",a:"父母安在，主家宅有靠；父母疾忧，主梦者牵挂。",b:"父母入梦多主牵挂与依靠：父母安然健谈主心里踏实，父母生病、远行主自己正担心家里，或正学着独立。",tip:"醒来给爸妈打个电话，这梦就解了一半。",k:["父母","爸爸","妈妈","父亲","母亲","爸妈","我爸","我妈"]},
+          {t:"梦见孩子",s:"中",a:"孩童嬉戏，主生机与牵挂，皆系于心头一事。",b:"孩子入梦主牵挂与新事：自家孩子主实牵挂，别家孩子主手头一件嫩生生的新计划，孩子笑主顺，孩子哭主该上心。",tip:"孩子在梦里要什么，多半是你心里那件新事在要什么。",k:["孩子","小孩","小孩子","儿童","小朋友"]},
+          {t:"梦见孩子走丢",s:"凶",a:"失子寻子，主牵挂失控，宜查漏补缺。",b:"孩子走丢是焦虑的直给：主一件最在意的事感觉要脱手。梦里找回主有惊无险，遍寻不见则提醒立刻去把那件事确认一遍。",tip:"别光焦虑，去把那件事的现状确认清楚。",k:["孩子走丢","孩子丢了","丢孩子","孩子不见了","孩子丢"],c:["孩子","丢"]},
+          {t:"梦见老人",s:"吉",a:"长者临门，主有指点迷津之福。",b:"老人主智慧与庇护：老人赠言、赠物主将有过来人指点，老人安然主家有长寿之福，宜把梦中之言记牢。",tip:"老人说的话，醒来先记下来，多半有用。",k:["老人","老者","老头","老太太","长者","老爷爷","老奶奶"]},
+          {t:"梦见陌生人",s:"中",a:"生人入梦，主新遇将至，亦主自身另一面。",b:"陌生人多主未遇的人事，或自己不熟悉的一面：生人和善主新缘分将至，生人面目模糊主一件事还没看清对方底细。",tip:"新接触的人和事，先看清再投入。",k:["陌生人","生人","不认识的人","陌生面孔"]},
+          {t:"梦见贵人",s:"吉",a:"贵人临门，主提携之喜，困局有解。",b:"梦见皇帝、大官、贵人相助，主将得上位者青眼：所托之事有人点头，所争之位有人说话，是顺势的吉口。",tip:"该递的材料、该见的人，趁势办了。",k:["贵人","皇帝","皇上","大官","圣旨","当官的"]},
+          {t:"梦见乞丐",s:"中",a:"乞者入门，主舍财得福，亦主自省不足。",b:"乞丐主匮乏与施舍：施舍乞丐主舍小得大、人缘积福，自己成乞丐则主一段低谷自省，古本有否极泰来之转口。",tip:"小额的善意，近期不妨多给一点。",k:["乞丐","要饭的","乞讨","叫花子"]},
+          {t:"梦见警察、军人",s:"中",a:"官兵临身，主规矩与约束，亦主有靠山。",b:"警察军人主秩序与权威：被查被追主心里有件怕被追究的事，得其相助则主困时有公力可借。",tip:"怕被追究的那件事，趁早自己了结。",k:["警察","公安","警官","当兵的","士兵","军人","警察追"]},
+          {t:"梦见老师",s:"中",a:"师者临梦，主有未解之惑，亦主自省不足。",b:"老师主指点与考较：老师讲课主将有新知入怀，老师批评、考试主心里正被一件事考较着，没底。",tip:"没底的那件事，补课比拜佛管用。",k:["老师","先生","夫子","教师","班主任"]},
+          {t:"梦见医生",s:"中",a:"医者临身，主身心有待调治之处。",b:"医生主修复：或身体在发信号，或一件事需要专业的人出手。医生说能治主问题可解，宜尽快落实检查与求助。",tip:"该体检的体检，该求助的求助，别拖。",k:["医生","大夫","郎中","看病","医生给我"]},
+          {t:"梦见和尚、道士",s:"中",a:"方外之人临梦，主心求清静，世事宜看淡。",b:"僧道入梦主清静与点化：得其赠言主心里将有一悟，僧道远去主清静难求，多半是最近太吵、太累了。",tip:"给自己留半天安静，这梦就应了。",k:["和尚","道士","僧人","尼姑","出家人","道长","僧道"]},
+          {t:"梦见神仙",s:"吉",a:"神仙降临，主大运将至，心愿有偿。",b:"神仙入梦是古本里的上吉：主时运、心愿有一件将得偿。神仙赠物、赠言尤要记清，多应在最挂心的那件事上。",tip:"赠言赠物都记下来，好梦值得认真对待一次。",k:["神仙","仙人","神明","菩萨","佛祖","老君","神仙下凡"]},
+          {t:"梦见鬼",s:"凶",a:"鬼魅近身，主心有暗惧，亦主旧事未消。",b:"鬼多主心里放不下的暗惧：怕鬼主有一件不敢面对的事，鬼不近身主虚惊，与鬼说话则古本嘱记清其言。",tip:"不敢面对的那件事，白天先看它一眼。",k:["鬼","鬼魂","幽灵","见鬼","闹鬼","有鬼"]},
+          {t:"梦见吵架",s:"凶",a:"口角相争，主人际有隙，宜忍让三分。",b:"吵架主积着的不满：与谁吵，多半白天与谁有一处没说开。吵赢主郁气得泄，吵输、吵不赢主还有话堵在心里。",tip:"梦里吵过的架，白天用好好说话的方式补上。",k:["吵架","争吵","拌嘴","吵嘴","争执","吵起来"]},
+          {t:"梦见打架",s:"凶",a:"拳脚相向，主冲突升级，宜避其锋。",b:"打架主冲突已到动手一级：提醒现实中有一处对立正在升温。打赢主尚有余力，打输、被打则主该求援或退场了。",tip:"升温中的对立，先降温，再讲理。",k:["打架","斗殴","动手打人","被人打","挨打","打起来"]},
+          {t:"被人追赶",s:"凶",a:"为人所追，主债扰与压力，逃无可逃须面对。",b:"被人追赶是压力的经典象：追者是谁不重要，重要的是你在躲什么——债、责、期限，还是一个人。梦里被追上，反主事情将摊开解决。",tip:"躲的那件事，列个面对它的最小第一步。",k:["被人追","被追","追赶","有人追","追我","被追赶","逃命","有人追我"],c:["追","赶"]},
+          {t:"梦见接吻",s:"中",a:"唇齿相亲，主情意相通，亦主和解之兆。",b:"接吻主亲近与和解：与恋人主情浓，与不相干的人主与某方将达成和解或合作，与故人主一段旧情翻篇。",tip:"和解的窗口开着时，先伸手。",k:["接吻","亲吻","亲嘴","亲了","亲吻我"]},
+          {t:"梦见拥抱",s:"中",a:"相拥而泣或而笑，皆主情有所归。",b:"拥抱主情感的落点：抱亲人主思念，抱恋人主情稳，抱陌生人主将接纳一件新事物，抱而哭主委屈得慰。",tip:"醒来想抱谁，就去抱谁，梦替你先说了。",k:["拥抱","抱抱","抱住","相拥","抱着"]},
+          {t:"梦见分手",s:"凶",a:"劳燕分飞，主情有裂痕，亦主一段事将散。",b:"分手离婚之梦多主不安：或感情里有一处裂痕在放大，或一件合作、一段关系走到了散场口。梦里平静者，反主放下。",tip:"先补裂痕，别拿梦当判决书。",k:["分手","分开","离婚","离别","分别","分手了"]},
+          {t:"梦见重逢",s:"吉",a:"久别重逢，主旧缘再续，失物有望。",b:"重逢主续缘：与故人重逢主一段旧关系、旧机会将有回音，失散之物、搁置之事也有望重启。",tip:"想重启的那件事，先递一句话过去。",k:["重逢","相逢","久别重逢","又见面","重逢了"]},
+          {t:"梦见朋友",s:"中",a:"故友临门，主人缘有信，亦主自身之影。",b:"朋友入梦主的是人际与信义：朋友相助主现实中将有援手，朋友疏远主一处关系在变淡，该主动维系了。",tip:"梦到谁，就顺手问候谁一句。",k:["朋友","好友","老朋友","友人","好朋友"]},
+          {t:"梦见故人",s:"中",a:"故人如昨，主怀旧之思，亦主旧事有信。",b:"多年不见的故人入梦，多主怀旧，或一件与当年相关的事将有消息。故人有所托，宜记清。",tip:"旧事有信时，别装作没听见。",k:["故人","旧友","老熟人","多年不见的人","老同学"]},
+          {t:"梦见小偷",s:"凶",a:"盗贼入室，主暗损将至，宜锁户防人。",b:"小偷主暗损：或财物、或功劳、或一段关系里有人在悄悄拿走什么。抓住小偷主能止损，宜尽快核查。",tip:"核查一遍账目、权限和贵重物品。",k:["小偷","偷东西","被偷","遭贼","贼","进贼"]},
+          {t:"梦见杀人",s:"凶",a:"梦中行凶，主积怒已深，宜泄不宜压。",b:"杀人之梦多非预言，而是积怒与决绝的象征：想彻底了断一件事、一段关系的心已经很硬。古本戒之在心平气和。",tip:"先睡好、吃好，再决定要不要了断。",k:["杀人","杀了人","杀死人","行凶","杀人了"]},
+          {t:"梦见救人",s:"吉",a:"舍身救人，主德行得报，困中有援。",b:"救人主善意与能力：救得成主自己正走出困局、亦将得人回报，救而无力则主想帮的人事超出眼下能力，宜量力。",tip:"量力而行的善，才走得长。",k:["救人","救命","救了人","舍身救人","救人一命"]},
+          {t:"梦见孕妇",s:"中",a:"孕者临门，主喜事在育，静待花开。",b:"孕妇主孕育中的喜事在别人或自己身边：将有新项目、新成员、新气象，宜道贺、宜沾喜气。",tip:"身边的喜事，主动去沾一沾。",k:["孕妇","怀孕的女人","大肚子女人","怀孕的人"]},
+          {t:"梦见双胞胎",s:"吉",a:"双生临门，主好事成双，福禄并至。",b:"双胞胎是成双的吉口：主一件喜事带出另一件，或一个机会开出两条路，宜都接住、再取舍。",tip:"好事成双时，先全接住，再慢慢挑。",k:["双胞胎","双生","龙凤胎","双胞"]},
+          {t:"梦见飞",s:"吉",a:"御风而飞，主志得意满，束缚尽去。",b:"飞是梦里最自由的象：飞得高、飞得稳主状态正佳、心愿将近；飞不起来、飞得吃力则主现实里有一处束缚未解。",tip:"飞得吃力的梦，多半是白天太累了。",k:["飞","飞起来","飞上天","在天上飞","飞翔","会飞","飞起","飞起来了","天上飞"]},
+          {t:"梦见坠落",s:"凶",a:"身坠深渊，主根基不稳，宜固本培元。",b:"坠落主失控感：手头最要紧的一件事感觉要脱手，或身体在睡眠中发出的信号。坠地惊醒多虚惊，宜查根基。",tip:"先把最要紧那件事的底，再确认一遍。",k:["坠落","掉下去","跌落","掉落","往下掉","摔下去","掉下来","坠下去"]},
+          {t:"梦见坠崖",s:"凶",a:"临崖失足，主行至险处，宜勒马回身。",b:"坠崖比坠落更具体：主一件事已经走到悬崖边——投资、关系或身体。再往前一步的决定，宜先勒马。",tip:"悬崖边的决定，押后再议。",k:["坠崖","掉下悬崖","跳崖","悬崖","掉下山崖"]},
+          {t:"梦见跑步",s:"中",a:"奔走不停，主心有所逐，亦主操劳无功。",b:"跑步主追逐与消耗：跑得轻快主目标在望、状态正好，跑不动、跑不完主目标定得太赶，该调配速。",tip:"把大目标拆小，梦里的腿就轻了。",k:["跑步","奔跑","赛跑","跑","一直在跑"]},
+          {t:"梦见游泳",s:"中",a:"泅水渡江，主在局中周旋，顺逆看水势。",b:"游泳主在环境中自处：游得顺主适应得好，呛水、力竭主眼下这个局有点超出负荷，宜上岸歇一歇。",tip:"负荷超了就先上岸，不丢人。",k:["游泳","游水","在水里游","泅水","游水里"]},
+          {t:"梦见赶车",s:"凶",a:"追车不及，主机会将逝，宜早做准备。",b:"赶车主怕错过：车象征机会与进程。赶上主虚惊、终能搭上，赶不上则提醒下一趟要提前候场，别再踩点。",tip:"重要的事，提前量再多留一倍。",k:["赶车","赶火车","赶不上车","追车","赶飞机","误车","赶不上"]},
+          {t:"梦见迟到",s:"凶",a:"误了时辰，主心中有愧，怕负所托。",b:"迟到主焦虑与愧疚：怕辜负一个期限、一个人。梦里越急越到不了，是白天那根弦绷太紧的回声。",tip:"把期限列出来，能提前交的先交一件。",k:["迟到","来不及","迟了","要迟到","快迟到"]},
+          {t:"梦见考试",s:"中",a:"临场应试，主人生有考，心中有底则无惧。",b:"考试是成年后最常见的焦虑梦：主正被一件事评判、验收。答得顺主底气足，找不到考场、答不出主准备不足，宜补课。",tip:"毕业多年还梦考试，说明心里那场验收还没过。",k:["考试","考场","答题","试卷","考卷","参加考试","考试了"]},
+          {t:"梦见考试落榜",s:"凶",a:"名落孙山，主所谋未成，宜另寻他路。",b:"落榜主怕失败的预演：多在结果将揭晓时做此梦，古本主所谋一事此路不通，宜备第二方案，未必主真败。",tip:"先把第二方案写出来，心就不慌了。",k:["考试不及格","落榜","没考上","考试失败","考砸","没考好","考试没过"]},
+          {t:"梦见上学",s:"中",a:"重入庠序，主有待学之课，亦主怀旧。",b:"上学主学习与回炉：或现实中正学新东西，或心里有一课一直没补——人情、专业、还是与自己相处。",tip:"那一课是什么，醒来多半心里有数。",k:["上学","上课","课堂","学校上课","去上学","上学了"]},
+          {t:"梦见工作",s:"中",a:"案牍劳形，主事业心重，亦主倦意已生。",b:"工作入梦多是日有所思：忙中出错主负荷已满，升职加薪主期待正盛，与上司争执主白天有一口气没顺。",tip:"梦里还在上班的人，该休个整假了。",k:["工作","上班","办公","做事","干活","在上班"]},
+          {t:"梦见唱歌",s:"吉",a:"引吭高歌，主心怀舒展，声名将播。",b:"唱歌主表达与舒展：唱得好听主心事得抒、有人欣赏，唱不出声、走调则主有话难出口。",tip:"有话难出口时，先写下来再说。",k:["唱歌","歌唱","唱曲","引吭高歌","唱歌了"]},
+          {t:"梦见跳舞",s:"吉",a:"翩翩起舞，主人际和谐，心身俱悦。",b:"跳舞主人际的节奏感：舞步合拍主与身边人配合正好，踩脚、跟不上主一段关系里节奏不对，该对一对拍。",tip:"关系里的节奏，要两个人一起对。",k:["跳舞","舞蹈","起舞","跳舞了"]},
+          {t:"梦见喝酒",s:"中",a:"把酒言欢，主人情往来；烂醉如泥，主失态之虞。",b:"喝酒主人情与放松：小酌言欢主往来顺遂，喝醉失态主提醒近期应酬、情绪都要节制，防酒后失言。",tip:"应酬季，替自己定个量。",k:["喝酒","饮酒","醉酒","喝醉","酒醉","喝酒了"]},
+          {t:"梦见吃饭",s:"中",a:"安坐而食，主生计安稳；食不知味，主心事在怀。",b:"吃饭主生计与满足：吃得香主日子安稳、有口福，食不知味、吃不饱主心里有一处不满足，宴席热闹主人情往来多。",tip:"吃不饱的梦，多半是心没吃饱。",k:["吃饭","用餐","吃东西","进食","吃席","宴席","吃饭了"]},
+          {t:"梦见买东西",s:"中",a:"市井交易，主有所求购，亦主取舍之难。",b:"买东西主需求与取舍：买得称心主所求将有着落，挑来选去、钱不够主现实中正为一笔支出或一个选择纠结。",tip:"纠结的那笔钱，按需不按欲，就好定了。",k:["买东西","买","购物","买衣","买房","买了"]},
+          {t:"梦见丢东西",s:"凶",a:"遗失之物，主心有挂碍，怕失所重。",b:"丢东西主怕失去：丢的若是贵重物，主最在意的那件事没看牢；四处找寻主心里正为一件事没着落而焦灼。",tip:"先确认那件最在意的事，此刻是否安好。",k:["丢东西","东西丢了","遗失","丢失","找不到东西","东西不见了"]},
+          {t:"梦见捡钱",s:"吉",a:"拾金于途，主意外之喜，小财将至。",b:"捡钱是小喜的吉口：主一笔意外之得或一个顺手的机会。捡得坦然主可取，捡得心虚则提醒这便宜占得不安心。",tip:"顺手的机会可以接，来路不明的便宜别占。",k:["捡钱","捡到钱","拾钱","捡到钱包","捡钱了"],c:["捡","钱"]},
+          {t:"梦见丢钱",s:"凶",a:"遗财于外，主小损将至，宜看紧钱袋。",b:"丢钱主小破财与疏忽：或是一笔糊涂账、一次冲动消费在路上。丢而复得主有惊无险，宜对一遍近账。",tip:"对一遍这个月的账，小漏多半藏在里面。",k:["丢钱","钱丢了","掉钱","钱包丢了","钱不见了"],c:["丢","钱"]},
+          {t:"梦见数钱",s:"中",a:"点钞计数，主财心正盛，得失在算计之间。",b:"数钱主对钱的在意到了顶点：数得清主账目有数、心中有底，数不清、越数越乱主近期的收支需要好好理一理。",tip:"越数越乱的梦之后，把账本打开理一晚。",k:["数钱","点钱","数钞票","数钱数"],c:["数","钱"]},
+          {t:"梦见借钱",s:"中",a:"借贷往来，主人情与周转，皆要量力。",b:"借钱主人情账与周转：借给人主将有人开口求助，向人借主手头一处周转紧。古本嘱：借贷一事，梦先提醒量力。",tip:"开口与被开口之前，都先算自己的余量。",k:["借钱","借债","向人借钱","借钱给人","借钱了"]},
+          {t:"梦见打电话",s:"中",a:"千里传音，主有待通之信，待叙之人。",b:"打电话主沟通：打通主一件事将说开，打不通、号码拨错主与某人正失联或话没说到点上，宜主动联系。",tip:"打不通的梦之后，真去打那通电话。",k:["打电话","电话","通话","接电话","打电话给"]},
+          {t:"梦见读书、写字",s:"中",a:"展卷研墨，主学业进益，心思沉静。",b:"读书写字主进益与沉静：读得进主状态正佳、所学有着落，字写不成、书看不懂主一门该补的课还欠着火候。",tip:"欠着的那门课，排进这周的日程。",k:["读书","看书","写字","读字","念书","读书了"]},
+          {t:"梦见做饭",s:"中",a:"炊烟起处，主操持家事，亦主供给他人。",b:"做饭主操持与供给：饭做得香主家事、人事打理得顺，饭糊饭生主一件事火候没掌握好，宜调整节奏。",tip:"火候二字，是做饭的，也是做事的。",k:["做饭","做菜","下厨","烧菜","烹饪","做饭了"]},
+          {t:"梦见盖房子",s:"吉",a:"筑室兴家，主根基新立，家业将成。",b:"盖房子是大兴土木的吉口：主一项根基性的大事在推进——置业、成家、立业皆可。地基稳主根基牢。",tip:"根基性的事，慢工出细活，别赶。",k:["盖房子","盖房","建房","造房","建房子","盖新房"],c:["盖","房"]},
+          {t:"梦见搬家",s:"中",a:"迁居他处，主环境将变，心亦随之。",b:"搬家主变动：搬向宽敞明亮主境遇向好，搬得狼狈、东西丢散主这次变动心里还没准备好，宜先安顿内务。",tip:"变动之前，先把旧处的账结清。",k:["搬家","搬迁","迁居","搬新家","搬家了"]},
+          {t:"梦见旅行",s:"中",a:"远行在外，主心有远方，亦主行程将启。",b:"旅行主远方与放空：旅途顺遂主状态松弛、将有新见闻，行李丢、赶不上车则主出行计划有漏洞，宜复核。",tip:"真有出行计划的，把证件行程再核一遍。",k:["旅行","旅游","出游","出门远行","远行","出远门","去旅行"]},
+          {t:"梦见坐车",s:"中",a:"车行坦途，主进程顺遂；车行险路，宜握紧方向。",b:"坐车主进程由谁掌控：自己是乘客主随大势走，自己开车另作开车解。车稳主顺，车坏车祸则主进程有变。",tip:"乘客的梦之后，想想方向盘在谁手里。",k:["坐车","乘车","车上","汽车","公交车","大巴","坐车了"]},
+          {t:"梦见坐飞机",s:"中",a:"乘风而起，主事业腾挪，亦主高处不胜寒。",b:"坐飞机主快速上升与远行：起飞顺遂主一个计划将快速推进，延误、颠簸主上升期有波折，宜系好安全带。",tip:"上升太快时，先把基本盘系牢。",k:["坐飞机","飞机","乘飞机","航班","坐飞机了"]},
+          {t:"梦见开车",s:"中",a:"手握方向，主自掌进程，快慢由心。",b:"开车主掌控感：开得稳主局面在手，刹不住、迷了路主一件事正失控或方向有误，宜减速复盘。",tip:"失控的梦之后，把最快的那件事减一档速。",k:["开车","驾车","驾驶","开汽车","开车了"]},
+          {t:"梦见骑车",s:"中",a:"单车独行，主自食其力，进退自如。",b:"骑车主靠自己：骑得轻快主自食其力、进退自如，车坏、链断主工具或身体有一处小毛病，宜检修。",tip:"靠自己的路子，更要顾好自己的车和腿。",k:["骑车","骑自行车","自行车","骑电动车","骑车了"]},
+          {t:"梦见走路",s:"中",a:"徒步徐行，主一步一个脚印，急不得。",b:"走路主最本分的进程：路远主这件事周期长，脚步轻快主状态稳，脚疼路烂则主该换双鞋、换条路了。",tip:"长路靠的不是快，是不停。",k:["走路","步行","徒步","赶路","走路了"]},
+          {t:"梦见上楼梯",s:"中",a:"拾级而上，主晋升有望，步步为营。",b:"上楼主上升通道：上得顺主晋升、进阶有望，楼梯陡、断、爬不完主通道有阻或目标定得太高，宜分段。",tip:"爬不完的楼梯，多半是目标该拆段了。",k:["上楼","上楼梯","爬楼梯","登楼","上台阶","上楼了"]},
+          {t:"梦见下楼梯",s:"中",a:"拾级而下，主回落与收束，宜稳步落地。",b:"下楼主回落、收尾或探底：下得稳主平稳着陆，下得急、踩空主一件事收尾太急，有闪失之虞。",tip:"收尾时踩空最可惜，最后几步更要稳。",k:["下楼","下楼梯","下台阶","下楼了"]},
+          {t:"梦见电梯",s:"中",a:"升降之间，主境遇起伏借外力而行。",b:"电梯主借外力的起伏：电梯上行主得势，电梯下坠、困梯主一处依靠忽然不可靠，宜备自己的腿。",tip:"借力的同时，留一条自己的楼梯。",k:["电梯","坐电梯","升降梯","电梯里"]},
+          {t:"梦见开门",s:"吉",a:"门扉洞开，主新机已至，只待举步。",b:"开门是机会的吉口：门自己开、钥匙能开主一件事的门路已通；门后是光主前景好，门后是黑则主先看清再进。",tip:"门开了，先探头看清，再迈步。",k:["开门","门开","打开门","推门","开门了"]},
+          {t:"梦见找厕所",s:"中",a:"寻厕不得，主急事在身，无处安放。",b:"找厕所是最常见的身体信号梦，多主睡时身体在催你醒来；若醒后无此意，则主一件急事在心里没处安放。",tip:"这类梦先信身体，别急着查古本。",k:["找厕所","上厕所","厕所","茅厕","如厕","想上厕所","找不到厕所"]},
+          {t:"梦见打扫",s:"中",a:"洒扫庭除，主清理积弊，心境渐明。",b:"打扫主清理：扫出许多尘土主积压的旧事、旧情绪正在清仓，扫不干净主还有一处心结没解。",tip:"屋里心里，一起扫效果最好。",k:["打扫","扫地","清洁","扫除","拖地","打扫卫生"]},
+          {t:"梦见种地",s:"中",a:"春播一粒，主长线经营，急收不得。",b:"种地主长线投入：播种主一件要慢慢养的事刚开头，收割主到了验收的时候，宜按节气行事，不催熟。",tip:"刚播种的事，别天天刨出来看。",k:["种地","种田","耕种","种庄稼","播种","种地了"]},
+          {t:"梦见放风筝",s:"吉",a:"纸鸢乘风，主志向高扬，亦主一线牵挂。",b:"风筝主放飞与牵挂：风筝高飞主心愿、名声有起色，线断主一件牵挂将脱手，是忧是喜看梦里心境。",tip:"线在手里时，珍惜那根牵挂。",k:["风筝","放风筝","纸鸢"]},
+          {t:"梦见下棋",s:"中",a:"对弈之间，主谋略在胸，步步为局。",b:"下棋主谋划与对手：赢棋主布局得当，输棋主一步算漏，观棋不语则主自己正置身事外冷眼看局。",tip:"算漏的那一步，复盘时最值钱。",k:["下棋","棋","对弈","下象棋","下围棋","下棋了"]},
+          {t:"梦见打牌、打麻将",s:"中",a:"牌局之上，主输赢在运，亦主取舍之智。",b:"打牌主运气与取舍的博弈：赢牌主手气正顺，输牌、烂牌主提醒近期忌赌忌投机，把心思放回正事。",tip:"烂牌的梦之后，远离一切侥幸局。",k:["打牌","牌","打麻将","麻将","赌博","打牌了"]},
+          {t:"梦见睡不着",s:"中",a:"长夜难眠，主心事未解，身亦未安。",b:"梦里失眠是焦虑的套娃：多主一件心事在睡前盘旋。古本无此口，今人多此梦——解法不在书里，在作息里。",tip:"睡前把心事写在纸上，替脑子关个门。",k:["睡不着","失眠","睡不着觉","睡不着了"]},
+          {t:"梦见爬树",s:"中",a:"攀树登高，主另辟蹊径，亦主根基未稳。",b:"爬树主用非正途的方式向上：爬得高主办法虽野而有效，树枝断、爬一半主这条捷径根基不稳，宜回正道。",tip:"捷径可以走，先确认枝干结实。",k:["爬树","上树","爬到树上"]},
+          {t:"梦见摘果子",s:"吉",a:"伸手摘果，主收获在即，唾手可得。",b:"摘果子主收获临门：果熟好摘主付出将有回报，果高够不着主还差一点助力或时日，宜借梯、宜等人。",tip:"够不着时先找梯子，别硬跳。",k:["摘果子","摘果","摘桃","摘苹果","摘梨","摘果子了"],c:["摘","果"]},
+          {t:"梦见采花、摘花",s:"吉",a:"折花在手，主喜事可撷，人缘正盛。",b:"采花主撷取喜气：花美主一段好缘分、好机会在手边，花刺手主喜事带刺，接受之前先看清条件。",tip:"带刺的喜事，先问清条件再伸手。",k:["采花","摘花","折花","采花了"]},
+          {t:"梦见钱",s:"中",a:"钱财在握，主得失心盛，聚散皆有因。",b:"钱入梦版本极杂：得钱主机会，数钱主焦虑，给钱主舍，核心都是近来对钱的在意度高。具体吉凶须看得失情状。",tip:"梦钱多的时候，正适合把账理清。",k:["钱","银子","钞票","钱财","金钱","铜钱","很多钱"]},
+          {t:"梦见金子",s:"吉",a:"黄金满目，主大富之象，亦主虚荣之戒。",b:"金子是财梦里的重口：主一笔大的进项或一个贵重的机会；若金子是假的、摸着成灰，则提醒眼前的大利有诈。",tip:"大利当前，先验真假，再谈高兴。",k:["金子","黄金","金条","金块","金银","金子了"]},
+          {t:"梦见首饰、珠宝",s:"吉",a:"珠光宝气，主身价见长，喜事盈门。",b:"首饰主身价与体面：戴首饰主被看重、有喜事，首饰丢、断主一处体面或贵重之物有损，宜看管。",tip:"被看重的时节，言行更要配得上。",k:["首饰","珠宝","玉器","玉佩","翡翠","珍珠","首饰了"]},
+          {t:"梦见戒指",s:"中",a:"指环在手，主盟约在心，散则约弛。",b:"戒指主盟约：戴戒指主一段承诺将定，戒指丢、断主一纸约定有变，宜把口头之约落成文字。",tip:"重要的约，落字为据。",k:["戒指","指环","钻戒","戒指了"]},
+          {t:"梦见衣服",s:"中",a:"衣裳在身，主体面与身份，新旧皆有意。",b:"衣服主体面与角色：衣鲜主状态好、被人高看，衣旧衣脏主一处体面受损，或对自己的新角色还没适应。",tip:"新角色的衣服，要穿一阵才合身。",k:["衣服","衣裳","衣","服装","穿衣"]},
+          {t:"梦见新衣服",s:"吉",a:"新衣加身，主气象一新，喜事将临。",b:"新衣服是明确的吉口：主形象、境遇有一番更新，多应在换工作、搬家、婚嫁、新阶段开启前后。",tip:"新气象配新规矩，趁势把旧习惯换一件。",k:["新衣服","穿新衣","新衣","买新衣","新衣服了"],c:["衣","新"]},
+          {t:"梦见破衣服",s:"凶",a:"衣衫褴褛，主窘迫之象，宜开源节流。",b:"破衣服主窘迫与体面受损：或手头紧，或一处场面撑得辛苦。古本有破衣后换新衣者，主先窘后通。",tip:"撑场面的开销，先砍一砍。",k:["破衣服","破衣","烂衣服","衣破","褴褛","衣服破了"]},
+          {t:"梦见鞋",s:"中",a:"鞋履合脚，主行路顺遂；不合脚则事有勉强。",b:"鞋主前程与伴侣（谐音偕）：鞋合脚主路走得对、关系和顺，鞋挤脚、鞋破主一件事或一段关系正勉强着。",tip:"勉强的那双鞋，该换就换。",k:["鞋","鞋子","布鞋","皮鞋","新鞋","穿鞋"]},
+          {t:"梦见丢鞋",s:"凶",a:"失履无着，主行程受阻，伴侣有隙。",b:"丢鞋主落脚处出问题：行程、职位或关系有一处没着落。找到鞋主虚惊，赤脚走路则提醒先备一双后路。",tip:"先把后路备好，再谈往前走。",k:["丢鞋","鞋丢了","找不到鞋","鞋不见了","鞋丢"],c:["鞋","丢"]},
+          {t:"梦见帽子",s:"中",a:"冠帽在头，主名分与庇护，得失皆有意。",b:"帽子主名分与头上的庇护：戴新帽主将有新头衔、新角色，帽子被风吹走主一处名分不稳，宜低调。",tip:"新头衔到手之前，先别声张。",k:["帽子","帽","戴帽","帽子了"]},
+          {t:"梦见伞",s:"中",a:"伞下避雨，主有庇护，亦主自备退路。",b:"伞主庇护与准备：有伞主有人或有积蓄为你遮雨，伞破、伞丢主退路不足，宜未雨绸缪。",tip:"晴天修伞，雨天不慌。",k:["伞","雨伞","撑伞","打伞","一把伞"]},
+          {t:"梦见眼镜",s:"中",a:"借镜观物，主看清一事，亦主依赖外力。",b:"眼镜主看清：戴上眼镜看清了主一件事将明朗，眼镜碎、丢主一处判断要失了凭据，宜多方求证。",tip:"凭据不足时，别急着下判断。",k:["眼镜","戴眼镜","墨镜","眼镜碎了"]},
+          {t:"梦见钥匙",s:"中",a:"钥匙在手，主门路已通；钥匙虽多，须对锁。",b:"钥匙主方法与门路：得钥匙主难题将有解法，钥匙一大串却开不了门，主方法多而未对路，宜精准。",tip:"方法不在多，对锁才行。",k:["钥匙","钥匙串","一把钥匙"]},
+          {t:"梦见丢钥匙",s:"凶",a:"失钥无门，主一事失了门路，宜另寻他法。",b:"丢钥匙主门路中断：一个联系、一份权限、一条渠道忽然断了。梦里另寻得门主此路不通自有他路。",tip:"一条路断了，先找备选，别死磕。",k:["丢钥匙","钥匙丢了","钥匙不见了","钥匙丢"],c:["钥匙","丢"]},
+          {t:"梦见刀",s:"凶",a:"刀刃在前，主决断与伤害，皆在一念。",b:"刀主决断与锋芒：持刀主将做一个干脆的了断，被刀伤、刀对着自己则主言语或利益之伤将至，宜避锋芒。",tip:"快刀斩乱麻之前，先确认斩的是麻不是绳结里的手。",k:["刀","菜刀","刀子","匕首","尖刀","一把刀"]},
+          {t:"梦见剑",s:"中",a:"宝剑出鞘，主才华得展，亦主锋芒太露。",b:"剑主才华与正气：得剑、佩剑主本事将被看见，剑折、剑锈主一门手艺搁置太久，该擦亮了。",tip:"搁置的手艺，捡起来擦一擦。",k:["剑","宝剑","佩剑","长剑","一把剑"]},
+          {t:"梦见枪",s:"凶",a:"枪声乍起，主突发之惊，宜远是非。",b:"枪主突发冲突与远距离的威胁：闻枪声主将有突发的消息，被枪指主一处压力正对准自己，宜避是非场。",tip:"是非场里，先退到安全距离。",k:["枪","手枪","开枪","枪声","枪响"]},
+          {t:"梦见镜子",s:"中",a:"明镜高悬，主自省与真相，照妖亦照心。",b:"镜子主真相与自省：镜明主能看清自己与局势，镜碎主一处自我认知要打破重来，镜中异象主心里有未承认之事。",tip:"镜子碎了不可怕，不敢照才可怕。",k:["镜子","镜","铜镜","一面镜子"]},
+          {t:"梦见书",s:"中",a:"书卷在手，主学业文事，皆有进益。",b:"书主学识与文书：得书、读书主进益，书丢、书烂主一纸文书、一个资格有疏漏，宜核查材料。",tip:"要交的材料，再核一遍页数与印章。",k:["书","书籍","书本","古书","一本书"]},
+          {t:"梦见笔",s:"中",a:"笔落惊风，主文书将动，签字须慎。",b:"笔主文书与表达：将有要签的字、要写的文。笔顺主文事顺遂，笔断、无墨主表达受阻，宜先备好材料。",tip:"签字之前，逐条看清再落笔。",k:["笔","毛笔","钢笔","写字的笔","一支笔"]},
+          {t:"梦见包",s:"中",a:"囊箧在身，主负担与家底，轻重自知。",b:"包主随身的负担与家底：包沉主担子重，包轻主一身轻松，包丢、包被抢则主家底或隐私有失，宜看管。",tip:"担子太重时，先放下一件不急的。",k:["包","钱包","书包","皮包","背包","提包"]},
+          {t:"梦见房子",s:"中",a:"宅舍安然，主家业有根；宅舍倾颓，宜修补。",b:"房子主家业与内心居所：房大房亮主境遇宽，房漏房暗主家里或心里有一处待修，宜动手补。",tip:"漏的那一处，先补屋顶，再谈装修。",k:["房子","房屋","房","住宅","屋子","大房子"]},
+          {t:"梦见新房",s:"吉",a:"新居落成，主新局已开，乔迁之喜。",b:"新房主新阶段的落点：置业、成家、新工作有一件将安顿下来，房内明亮主安顿得顺，宜趁势定居。",tip:"安顿下来的时节，把根扎深一点。",k:["新房","新房子","新屋","新房了"],c:["房","新"]},
+          {t:"梦见老房子",s:"中",a:"故宅重游，主怀旧之思，亦主根基回望。",b:"老房子主过去与根基：回老宅多主怀旧、想家，或一件旧事要回去处理；老宅修缮主与过去和解。",tip:"回去处理旧事时，带上耐心，别带情绪。",k:["老房子","旧房子","老屋","旧屋","故居","祖屋","老宅"]},
+          {t:"梦见门",s:"中",a:"门户开阖，主机会与界限，皆在一推之间。",b:"门主机会与界限：门开主机会到，门关、门锁主一处暂时进不去，宜另寻侧门；门多主选择多。",tip:"正门进不去时，先看看侧门。",k:["门","大门","门前","门口","房门","一扇门"]},
+          {t:"梦见床",s:"中",a:"安卧于床，主休整与亲密，皆系身心。",b:"床主休息与亲密关系：床整主状态安稳，床乱、床塌主休息出了大问题，或一段亲密关系需要整理。",tip:"床都乱了，先睡个整觉再说别的。",k:["床","床上","睡床","卧床","一张床"]},
+          {t:"梦见灯",s:"吉",a:"明灯高照，主前路有光，贵人指引。",b:"灯主希望与指引：灯亮主困局中有光、有指点，灯灭灯摇主指望动摇，宜再备一盏——留个后手。",tip:"任何计划，都留一盏备用的灯。",k:["灯","灯光","油灯","灯笼","明灯","一盏灯"]},
+          {t:"梦见蜡烛",s:"中",a:"烛影摇红，主喜庆在近，亦主时光有限。",b:"蜡烛主喜庆与时光：红烛主婚嫁之喜，白烛主祭奠之思，烛将尽主一件事时限将至，宜抓紧。",tip:"时限将至的事，先挑最要紧的做完。",k:["蜡烛","烛","烛光","香烛","红蜡烛"]},
+          {t:"梦见钟表",s:"中",a:"钟表滴答，主时限在心，亦主守时之德。",b:"钟表主时间感：钟准主节奏在握，钟停、钟乱主一件事的时间表乱了，或自己在拖延一件有时限的事。",tip:"乱了的时间表，重新排一张贴在墙上。",k:["钟","钟表","手表","时钟","挂钟","钟表了"]},
+          {t:"梦见锁",s:"中",a:"锁闭门户，主心防与难题，皆待钥匙。",b:"锁主封闭与难题：锁得上主安全感足，锁不上、锁坏了主一处防线有漏，宜补；心里上锁则主对人未交心。",tip:"防线有漏先补漏，心锁则慢慢开。",k:["锁","锁门","门锁","铁锁","一把锁"]},
+          {t:"梦见箱子",s:"中",a:"箱箧满盈，主积蓄与秘密，皆藏于内。",b:"箱子主积蓄与压箱底的心事：箱满主有积蓄、有后手，箱空、箱被翻主一处老底或隐私被触及。",tip:"压箱底的事，自己先有个交代。",k:["箱子","箱","皮箱","宝箱","一个箱子"]},
+          {t:"梦见梯子",s:"中",a:"梯云纵上，主晋升有阶，亦须步步踩实。",b:"梯子主晋升的通道：梯稳主一步步有阶可上，梯晃、梯断主晋升的凭借不牢，宜先固根基再登高。",tip:"登高之前，先摇一摇梯子稳不稳。",k:["梯子","梯","楼梯","一把梯子"]},
+          {t:"梦见吃肉",s:"中",a:"大快朵颐，主欲望得偿，亦主负担将增。",b:"吃肉主满足与负担：肉香主口福与实惠到手，肉多腻人主一桩好处带着负担，宜取舍。",tip:"好处带负担时，先算负担再伸筷子。",k:["吃肉","肉食","吃猪肉","吃牛肉","大肉","吃肉了"]},
+          {t:"梦见吃鱼",s:"吉",a:"食鱼鲜美，主年年有余，口福财福并至。",b:"吃鱼是鱼梦的落实口：主财喜落袋、口福不浅。鱼刺卡喉则提醒得意之时防小失，宜细嚼慢咽。",tip:"好事到嘴边，更要慢慢吃。",k:["吃鱼","鱼肉","吃鱼肉","吃鱼了"]},
+          {t:"梦见吃水果",s:"吉",a:"瓜果鲜洁，主小喜频至，身心俱润。",b:"吃水果主小而确定的喜气：果甜主顺心，果酸主喜中带点波折，果烂则主一个机会放得太久了。",tip:"机会像水果，放久了会烂，及时吃。",k:["吃水果","水果","吃果子","吃水果了"]},
+          {t:"梦见苹果",s:"吉",a:"苹果圆润，主平安顺遂，所求有着落。",b:"苹果谐音平安，主平顺与健康：苹果红大主一件挂心事将平安落地，苹果有虫则主平顺里藏个小隐患。",tip:"平安落地的事，别忘了回个信、道声谢。",k:["苹果","吃苹果","红苹果"]},
+          {t:"梦见梨",s:"中",a:"梨者离也，主聚散之思，亦主清润之喜。",b:"梨谐音离，古本两解：主分别之思，或主清润得喜。分梨而食多被忌，梦里吃梨甜美者，今人多作顺心解。",tip:"聚散之事，顺其自然最清润。",k:["梨","吃梨","梨子","雪梨"]},
+          {t:"梦见桃子",s:"吉",a:"蟠桃献瑞，主长寿与桃花，皆是喜象。",b:"桃子主长寿与姻缘：桃熟主喜事、人缘双动，桃青主好事还在长，宜再等些时日。",tip:"桃花与寿桃同枝，先分清你要哪一种。",k:["桃子","桃","吃桃","蟠桃","水蜜桃"]},
+          {t:"梦见葡萄",s:"吉",a:"葡萄累累，主子嗣兴旺，收获成串。",b:"葡萄主成串的收获：一件接一件的小成，或家中有添丁、结社之喜。葡萄酸主期待落差，先调预期。",tip:"成串的收获，一颗一颗摘，别整串拽。",k:["葡萄","吃葡萄","葡萄串"]},
+          {t:"梦见西瓜",s:"吉",a:"西瓜清甜，主暑气尽消，好事圆满。",b:"西瓜主圆满与消暑：一件烦热之事将清爽了结。瓜甜主结果好，瓜生瓜烂则主这事火候或时机不对。",tip:"了结得清爽时，别忘了分甜给帮过你的人。",k:["西瓜","吃西瓜","大西瓜"]},
+          {t:"梦见鸡蛋",s:"中",a:"鸡蛋圆满，主新生在壳，亦主易碎之局。",b:"鸡蛋主新生与易碎：蛋多蛋好主有新的指望在孵化，蛋碎主一个脆弱的局破了，宜护，也宜认。",tip:"孵化中的事，先护好温度，别总掀开看。",k:["鸡蛋","蛋","吃蛋","鸡蛋碎","鸡鸭蛋"]},
+          {t:"梦见喝茶",s:"吉",a:"清茶一盏，主心境澄明，贵客将至。",b:"喝茶主清静与人情：茶香主心境稳、将有对脾气的客人或朋友，茶凉则主一段往来在变淡，宜主动续水。",tip:"变淡的往来，主动续一次水试试。",k:["喝茶","茶","品茶","泡茶","一杯茶"]},
+          {t:"梦见吃糖",s:"吉",a:"蜜糖入口，主甜言与小喜，皆悦人心。",b:"吃糖主甜头：或一句好话、一笔小喜将至。糖吃多了主甜言听多了要留神，甜里可能包着事。",tip:"甜言入耳时，留一分清醒尝尝馅。",k:["吃糖","糖","甜食","糖果","蜜糖","吃糖了"]},
+          {t:"梦见米饭",s:"中",a:"米饭盈碗，主衣食有着落，细水长流。",b:"米饭主最基本的生计：饭足饭香主衣食安稳，饭少饭馊主生计上有一处紧巴，宜节流、宜备粮。",tip:"细水长流的底气，是仓里有粮。",k:["米饭","大米","白饭","一碗饭","米饭了"]},
+          {t:"梦见面条",s:"中",a:"面条绵长，主长寿之思，亦主事有牵连。",b:"面条主绵长与牵连：吃长面主祝愿长寿、事往长里走，面缠成团主一件事牵连太多，宜理出头绪。",tip:"缠成团的事，从线头开始理。",k:["面条","吃面","面食","挂面","一碗面"]},
+          {t:"梦见辣椒",s:"中",a:"辛辣入口，主性情热烈，亦主口舌辛辣。",b:"辣椒主刺激：吃辣痛快主日子需要点热烈，辣得难受主近期的言语、饮食都太过了，宜收一收。",tip:"话太辣、吃太辣，都伤身，收三分。",k:["辣椒","吃辣椒","辣","红辣椒"]},
+          {t:"梦见学校",s:"中",a:"重返庠序，主旧课未了，新知待补。",b:"学校主学习与集体生活：回学校多主怀旧或一门旧课没修完——多半是与同窗、师长相关的一段心事。",tip:"旧课的老师同学里，有人值得联系一下。",k:["学校","学堂","校园","母校","学校里"]},
+          {t:"梦见医院",s:"凶",a:"医馆病房，主身心告急之信，宜早调治。",b:"医院主修复与告急：自己住院主身心有一处在求救，探望病人主牵挂某人。古本戒：此梦之后，先顾身体。",tip:"先预约一次体检，比什么解法都实在。",k:["医院","医馆","住院","去医院","医院里"]},
+          {t:"梦见寺庙",s:"吉",a:"古寺钟声，主心有归处，福缘将至。",b:"寺庙主庇护与心安：入寺礼拜主心里将得一段安宁，或有长者、贵人庇护，宜存敬意、行善事。",tip:"心安之处不必远求，先静坐十分钟。",k:["寺庙","庙","寺院","庙宇","烧香拜佛","寺里"]},
+          {t:"梦见道观",s:"吉",a:"宫观清幽，主心向清静，道缘深厚。",b:"道观主清静与归隐之心：入观主近来向往简单生活，或将遇一位淡泊的指点者。观中钟声主心事得钟点醒。",tip:"向往清静时，先把手机静音一小时。",k:["道观","宫观","道院","三清观","观里"]},
+          {t:"梦见市场",s:"中",a:"市井喧阗，主人情交易，皆在热闹之中。",b:"市场主人情与交易：市场繁荣主往来兴旺、机会多，市场冷清、迷路主在热闹里反而没方向，宜定准所求。",tip:"热闹里先想清自己要买什么。",k:["市场","集市","赶集","菜市场","闹市","市场里"]},
+          {t:"梦见车站",s:"中",a:"车站送迎，主人生换乘，去留皆在时辰。",b:"车站主换乘与送别：将有一段行程、一个阶段在此交接。等车主时机未到，送人主一段关系将远行。",tip:"换乘的间隙，把下一程的票先买好。",k:["车站","站台","火车站","候车","车站里"]},
+          {t:"梦见监狱",s:"凶",a:"身陷囹圄，主束缚已深，宜自省自赎。",b:"监狱主束缚感：一份工作、一段关系或一个习惯把你困住了。出狱之梦主解脱将至，宜顺势走完最后一步。",tip:"困住你的若是习惯，就从最小的那条改起。",k:["监狱","坐牢","牢房","入狱","大牢","坐牢了"]},
+          {t:"梦见过年",s:"吉",a:"爆竹迎新，主阖家团圆，旧岁翻篇。",b:"过年主团圆与翻篇：年味浓主家和、人旺，独自过年主漂泊之思，宜给家里一个交代、一条消息。",tip:"翻篇之前，给旧岁里帮过你的人道声谢。",k:["过年","春节","新年","年夜","守岁","过年了"]},
+          {t:"梦见生日",s:"吉",a:"生辰之庆，主新岁开启，人缘俱佳。",b:"生日主新的年轮：自己生日主将开启一段新气象，他人生日主人缘往来，宜道贺、宜许愿、宜行动。",tip:"许下的愿，挑一个最小的先实现。",k:["生日","过生日","寿辰","祝寿","生日了"]},
+          {t:"梦见战争",s:"凶",a:"兵荒马乱，主环境动荡，宜避锋芒、保根本。",b:"战争主大环境的动荡感：行业、单位或家庭有一场大变动在酝酿，自己是旁观者主受波及，亲历者主正处风口。",tip:"动荡期，先保根本：现金、健康、退路。",k:["战争","打仗","战场","兵荒马乱","打仗了"]},
+          {t:"梦见停电",s:"凶",a:"灯火骤熄，主依靠中断，宜自备光明。",b:"停电主一处依靠忽然中断：电力、网络、某个关键的人。梦里不慌、摸黑能行主自有后手，宜把后手再确认一遍。",tip:"关键依靠，都留一个离线备份。",k:["停电","断电","没电","停电了"]},
+          {t:"梦见山崩",s:"凶",a:"山崩地裂，主靠山将倾，宜早做打算。",b:"山崩主靠山动摇：一直倚仗的人、单位或局面有变。崩而无伤主能全身而退，宜提前铺好自己的路。",tip:"靠山未倾时，先把自己的腿练好。",k:["山崩","塌方","山体滑坡","塌山","山塌"]},
+          {t:"梦见日食、月食",s:"凶",a:"日月失光，主明暗颠倒之时，宜静守待时。",b:"日食月食主一时的晦暗：权威、名声或心情有一阵被遮蔽，古本嘱静守——蚀尽自复明，不必强争。",tip:"被遮蔽的时节，守拙比争辩有用。",k:["日食","月食","日蚀","月蚀","日食了"]}
+        ];
+        /* ---------- 检索 ---------- */
+        var dreamInput = document.getElementById("dreamInput");
+        var dreamResults = document.getElementById("dreamResults");
+        var dreamForm = document.getElementById("dreamForm");
+        if (!dreamInput || !dreamResults || !dreamForm) return;
+        function esc(s) {
+          return String(s).replace(/[&<>"']/g, function (ch) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
+          });
+        }
+        /* 口语与错字归一：把常见错写、口语说法换成正字再比对（容错的一半在这里） */
+        var TYPO_MAP = { "呀": "牙", "蛇咬": "蛇咬", "掉呀": "掉牙", "门呀": "门牙", "长虫": "蛇", "大长虫": "蛇", "没牙": "掉牙", "崩牙": "牙碎" };
+        function normalize(q) {
+          var s = String(q || "").replace(/[\s，。、；：？！·…—「」『』“”‘’（）()【】\[\],.!?;:"']/g, "");
+          Object.keys(TYPO_MAP).forEach(function (bad) {
+            if (s.indexOf(bad) !== -1) s = s.split(bad).join(TYPO_MAP[bad]);
+          });
+          return s;
+        }
+        /* 近似匹配：关键词删去一字后能在输入中出现（少个字、漏字时兜底）。
+           只认三字以上的词、且删后仍剩两字——二字词删剩一字到处都能撞上，反成噪音。
+           且近似命中只在全库无一精确命中时才启用，绝不给精确结果垫场。 */
+        function fuzzyHit(q, kw) {
+          if (kw.length < 3 || kw.length > 5) return false;
+          for (var i = 0; i < kw.length; i++) {
+            var sub = kw.slice(0, i) + kw.slice(i + 1);
+            if (sub.length >= 2 && q.indexOf(sub) !== -1) return true;
+          }
+          return false;
+        }
+        function scoreEntry(e, q) {
+          var best = 0, hitWord = "";
+          (e.k || []).forEach(function (kw) {
+            if (q.indexOf(kw) !== -1) {
+              var sc = 30 + kw.length * 12;
+              if (sc > best) { best = sc; hitWord = kw; }
+            }
+          });
+          var comboHit = false;
+          if (e.c && e.c.length) {
+            var all = true;
+            e.c.forEach(function (w) { if (q.indexOf(w) === -1) all = false; });
+            if (all) { comboHit = true; best += 70 + e.c.join("").length * 6; if (!hitWord) hitWord = e.c.join(" + "); }
+          }
+          return { score: best, hit: hitWord, combo: comboHit, fuzzy: false };
+        }
+        function fuzzyEntry(e, q) {
+          var word = "";
+          (e.k || []).forEach(function (kw) { if (!word && fuzzyHit(q, kw)) word = kw; });
+          return word ? { score: 18, hit: word, combo: false, fuzzy: true } : null;
+        }
+        var TAG_CLASS = { "吉": "ji", "凶": "xiong", "中": "zhong" };
+        /* ---------- 详细解释：重点词条专写细解，其余按本条白话与提示生成分情境细解，保证 259 条条条可展开 ---------- */
+        var DREAM_DETAIL = {
+          "梦见蛇": { scenes: [["水中游动", "蛇在水里安静游动、你在岸边或一旁看着，多主财路活络、心事流动而不滞；水清则更顺，水浊则先把账目人情理清再谈进财。"], ["蛇入宅门", "蛇自己进家、不伤人，按「蛇进家」解，多主财喜临门或家中将有消息；若全家惊慌驱赶，则喜中带口舌，先和气、再处理。"], ["被蛇咬到", "被咬而不甚痛，通行本主得财、交好运；咬得痛极、惊惧醒来，则多主被一句话或一个人刺中，近日谨言、护好钱袋。"], ["被蛇追赶", "追而不及多为虚惊，主你正躲着一件事；追上并咬到，反转按被咬的吉口看。梦里不怕、敢回头看蛇，说明心里已有底，多半能自己解决。"], ["心境之分", "同一条蛇，怕与不怕解法差一截：不怕、能对视，多偏财气与贵人；惊惶奔逃、醒后心悸，则先按口舌烦恼解，近日少惹是非。"]], yiji: "宜把拖着的账目与约定尽快了结、主动核对钱财往来；忌在惊惧未平时与人争执、轻信来路不明的偏财消息。", related: ["被蛇咬", "蛇缠身", "蛇追人", "蛇进家", "梦见龙", "梦见水"] },
+          "被蛇咬": { scenes: [["咬而不痛", "咬住却不痛、甚至没什么感觉，是本条最顺的口：主得财、交好运，多应一笔意外之得或贵人松口。"], ["咬得痛极", "痛感真切、惊惧醒来，意思往受扰一边偏：多主被言语或小利所伤，近日签约、借贷都要逐字看清。"], ["咬在手上", "咬手多应做事与钱财：手里正办的事将有着落，也提醒经手之物要留凭据。"], ["咬在脚上", "咬脚多应行程与前程：出门、调动之事将有消息，行前把证件与安排再核一遍。"]], yiji: "宜顺手把将成的事落定、钱财留好凭据；忌因小喜得意忘形、把大额支出赶在同一天。", related: ["梦见蛇", "蛇缠身", "蛇追人", "梦见鱼", "梦见钱"] },
+          "蛇缠身": { scenes: [["缠而不紧", "蛇绕身却不勒不咬，主有一件人情或旧账缠着你，分量尚轻，主动开口就能解开。"], ["越缠越紧", "缠得喘不过气、挣脱不开，主拖着的事已经到了不得不处理的时候，再拖只会更紧。"], ["自己解开", "梦里自己把蛇解下或蛇自行离去，主缠扰将了——白天那件拖着的事，正适合由你主动收尾。"], ["缠在腰腿", "缠腰多应钱财人情，缠腿多应行程去留，对照白天最放不下的那一处看。"]], yiji: "宜主动了结一件拖着的事、把话说开；忌继续拖延、用新承诺盖住旧承诺。", related: ["梦见蛇", "被蛇咬", "蛇追人", "梦见小偷", "梦见借钱"] },
+          "蛇追人": { scenes: [["追而不及", "蛇在后面追、始终追不上，多为虚惊：怕的那件事声势大、落点轻，不必自己先吓自己。"], ["追上咬到", "被追上并咬到，反转按「被蛇咬」解，主躲不过的事摊开之后，反而有着落与得财之象。"], ["躲进家门", "逃回家中、关门避蛇，主家宅是你的后盾——白天遇难处，先向家里人开口。"], ["心不惧、回头看", "追赶中并不害怕、甚至停下回头，多主你心里已经有应对之策，宜把方案落成行动。"]], yiji: "宜列出所躲之事的最小第一步并动手；忌一味回避、把期限拖到最后一刻。", related: ["梦见蛇", "被蛇咬", "被人追赶", "梦见跑步", "梦见迷路"] },
+          "蛇进家": { scenes: [["安静盘在屋内", "蛇进家后安静盘卧、不惊不扰，是财喜临门的正口，家中近期多有喜信。"], ["家人惊慌驱赶", "喜象带了扰：驱赶中若伤了蛇、乱了家什，主喜事筹备中会有口舌，先定分工再办喜事。"], ["蛇进卧房", "进到卧房多应贴身之事：钱财、健康或亲密关系将有消息，宜把卧房与作息一并收拾清爽。"], ["蛇自行离去", "来而复去，主喜气过门而不久留——有机会上门时，手脚要快、礼数要到。"]], yiji: "宜以和气迎客迎事、把家中喜事提前备齐；忌惊慌失措、因小口角冲淡了喜气。", related: ["梦见蛇", "被蛇咬", "梦见棺材", "梦见燕子", "梦见新房"] },
+          "梦见水": { scenes: [["水清", "清水、清泉、看得见底，主心境清明、财路干净、人际清白，是水梦里最顺的一口，宜乘势推进手头正事。"], ["水浊", "浊水、浑水、脏水，与清水正相反，主烦心事搅成一团、账目人情不清不楚，宜先停手厘清，不宜浑水摸鱼。"], ["水静", "湖面、井水、静水无波，主蓄势与沉淀：事情在暗处成形，心境稳则后劲足，忌急于求成、频频掀开来看。"], ["水急", "急流、洪水、大浪扑面，主势头超出掌控：能登高避水主有惊无险，先保根本、再谈得失，切忌迎浪硬扛。"], ["水深水浅", "水浅而清主小而稳的进益，水深不见底主一件事水比看上去深，入局之前先探深浅。"]], yiji: "宜顺势而为、把账目与情绪都理清后再进；忌在水浊势急时下重注、做长久承诺。", related: ["梦见清水", "梦见浊水", "梦见大水、洪水", "梦见河水", "梦见大海", "梦见湖"] },
+          "梦见清水": { scenes: [["饮清水", "喝下清水、甘甜解渴，主心事得慰、一件久困之事将有清朗的说法。"], ["清水洗手洗面", "以清水洗濯，主洗去一段晦气与误会，宜趁此去把那句解释的话说清。"], ["清泉涌出", "泉眼涌水不止，主源头活水：财路或思路有一处新源头，宜顺势接住。"], ["清水变浊", "清变浊是提醒：本已清白的一件事有人搅局，留好凭据、少作口头传话。"]], yiji: "宜乘清朗之势落定正事、把误会说开；忌在局势转浊时还按旧印象行事。", related: ["梦见水", "梦见浊水", "梦见井", "梦见洗澡", "梦见湖"] },
+          "梦见浊水": { scenes: [["站在浊水边", "只是看见、不曾下水，主烦扰在外围：看清即可，不必蹚进去。"], ["蹚水而过", "亲身蹚过浊水，主你正卷在一团乱事里，宜先上岸——抽身复盘，比硬闯有用。"], ["饮了浊水", "喝下或呛到浊水，主听进了不清不楚的话或接了糊涂账，宜把来源逐一核实。"], ["浊水渐清", "浑水慢慢沉淀变清，是本条的转口：乱局将自己理出头绪，耐心等沉淀，莫再搅动。"]], yiji: "宜停手厘清账目与人情、凡事留凭据；忌浑水摸鱼、替人作保、听一句传话就下结论。", related: ["梦见水", "梦见清水", "梦见大水、洪水", "梦见泥土", "梦见下雨"] },
+          "梦见大水、洪水": { scenes: [["登高避水", "水涨而你登上高处、安然无恙，是有惊无险的正口：变故虽猛，根本无伤。"], ["被水冲走", "被洪水卷走又抓住东西，主一度失控而终能自救；醒后宜把最要紧的后手再确认一遍。"], ["水淹房屋", "水进家门多应家事与家财：宜提前查漏——合同、保险、家中水电，都是实在的避水之法。"], ["洪水退去", "水退而天清，主一波大势已过，宜收拾残局、清点损失，不宜立刻大举进取。"]], yiji: "宜保根本、备后手、低调守成；忌在势头正猛时逆势加注、把身家押在一处。", related: ["梦见水", "梦见浊水", "梦见地震", "梦见山崩", "梦见船"] },
+          "梦见河水": { scenes: [["顺流而下", "乘船或沿河顺流，主行事顺遂、路越走越宽，宜把计划的步子迈大一点。"], ["逆流、渡河", "逆水行舟或徒步渡河，主正过一道关口：费力是真的，过河之后路就平了。"], ["河水清浅", "清浅见底，主眼下这条路虽不阔，却干净可靠，细水长流亦是福。"], ["河水干涸", "河床见底，主一条路子暂时走不通，宜改道或等水来，不必在一处枯耗。"]], yiji: "宜顺流时加速、过河时专注；忌在河干路断处死耗、频繁改道又不走完一条。", related: ["梦见水", "梦见大海", "梦见桥", "梦见过桥", "梦见路"] },
+          "梦见大海": { scenes: [["海面平静", "风平浪静、望不到边，主心境开阔、际遇平稳，适合谋长远之事。"], ["海浪汹涌", "浪大而你站在岸上，主机会与风险并存：先看清岸在哪里，再决定下不下水。"], ["在海中游泳", "身在海中游得自如，主你已适应大局面；呛水力竭则提醒负荷超了，先上岸。"], ["海啸将至", "巨浪压境而能避开，主大变故前得预警之象，宜提前收缩、保住根本。"]], yiji: "宜谋远、备岸、量力下水；忌只看海阔便贸然远航、把退路一并押上。", related: ["梦见水", "梦见河水", "梦见游泳", "梦见船", "梦见湖"] },
+          "梦见掉牙": { scenes: [["掉牙不痛不出血", "松而自落、不痛不血，多主一个旧阶段自然脱落，或牵挂家中长辈，虚惊居多。"], ["掉牙疼痛出血", "痛而见血，意思往重里解：根基性的事在松动，宜尽快检查牙齿本身，也给家里长辈问声安。"], ["门牙、整排牙掉", "门牙主门面与至亲，整排脱落主牵挂面较广；碎牙、蛀牙脱落则反有去旧之象，坏的去了、新的才生。"], ["掉后长出新牙", "落而更生是本条的转吉口，按「长新牙」解，主旧去新来，正在换阶段的人多应此象。"]], yiji: "宜给长辈打个电话、预约一次牙科检查、把根基性的事复核一遍；忌拿此梦自惊、深夜里胡思乱想到天亮。", related: ["梦见长新牙", "梦见牙疼", "梦见已故亲人", "梦见父母", "梦见流血"] },
+          "梦见飞": { scenes: [["飞得高而稳", "御风直上、俯瞰大地，是状态正佳的正口：心愿在近处，该亮相的事别藏着。"], ["飞不起来、飞得吃力", "扑腾半天离不开地，多主白天太累或一处束缚未解——先补觉，再谈冲刺。"], ["飞着飞着往下坠", "高开低走，转按「坠落」解：手头最要紧的事根基要再确认一遍。"], ["与人同飞", "有人同行或有人在地上望你，主这段上升路上有同伴或有仰望你的人，言行更要配得上。"]], yiji: "宜乘势推进、主动争取该争的机会；忌得意时许下兑现不了的承诺。", related: ["梦见坠落", "梦见鸟", "梦见龙", "梦见星星", "梦见放风筝"] },
+          "梦见考试": { scenes: [["答得顺、题都会", "下笔有神、心里有底，主现实中那场「验收」你其实准备得不错，宜稳住节奏。"], ["找不到考场、迟到", "四处找考场、进门已开考，主准备里有一处明显的漏：名单、材料、时间，逐一对一遍。"], ["题都不会、交白卷", "主没底的那件事被放大了，与其焦虑，不如把最弱的一章先补上。"], ["监考、成绩揭晓", "有人监考主正被评判，梦见成绩好多为心愿先行，成绩差则提醒备好第二方案。"]], yiji: "宜按清单补漏、提前交卷留复核时间；忌临场才翻书、把全部指望押在一次结果上。", related: ["梦见考试落榜", "梦见上学", "梦见学校", "梦见迟到", "梦见工作"] },
+          "梦见已故亲人": { scenes: [["亲人安然、面带笑意", "多半是思念成梦，心里惦记所致，醒来去祭扫或翻翻旧照，心就安了。"], ["亲人开口嘱托", "古本嘱字字记清：醒来先把原话写下来，多半对应家里一件待办的小事。"], ["亲人有所求、面带愁容", "主家里有一件未了之事——旧物、祭扫、一句未说完的话，办了便安。"], ["亲人远去、唤之不应", "主一段思念正在慢慢放下，不必自责，这是心在翻篇。"]], yiji: "宜把那件待办小事办了、给在世的亲人多打一个电话；忌拿梦自责、把思念拖成心病。", related: ["梦见死人", "梦见父母", "梦见老人", "梦见坟墓", "梦见棺材"] },
+          "梦见火": { scenes: [["火旺而光明", "炉火、篝火、灯火通明，主事业与名声有起色，是火的正口，宜乘势露脸。"], ["火势失控", "火烧到身边、扑之不灭，转按「着火」解，主心急惹祸或冲突将起，先降温再说话。"], ["自己生火、添柴", "亲手生火主你正为一件事蓄势，火起则事成，火灭则提醒燃料——资源与帮手要备足。"], ["火灭、余烬", "热闹将散，主一段高光到了收尾时，宜善始善终、留好余温给下一程。"]], yiji: "宜乘势推进、把热度用在正事上；忌火气上来时做决定、与人正面争吵。", related: ["梦见着火", "梦见灯", "梦见蜡烛", "梦见太阳", "梦见光明"] },
+          "梦见钱": { scenes: [["得钱、进钱", "捡钱、发钱、有人给钱，主机会与进益，分别细看「捡钱」「数钱」诸条更准。"], ["丢钱、花钱如流水", "转按「丢钱」解，主小破财与疏忽在路上，宜对一遍近账、砍掉冲动支出。"], ["钱多得拿不住", "钱多而乱、数不清，主对钱的焦虑到了顶点——数目越大，心越没底，先把账理清。"], ["钱是假的、破的", "假钱、冥币、破钞，主眼前一笔看似大的利有诈，验明真假再谈高兴。"]], yiji: "宜把账理清、落袋为安；忌在梦钱之后冲动消费、借钱给人只凭交情。", related: ["梦见捡钱", "梦见丢钱", "梦见数钱", "梦见借钱", "梦见金子"] },
+          "梦见狗": { scenes: [["狗亲近、摇尾", "狗来亲近、围着你转，主友人可靠、将得助力，梦里那只狗的「主人」多半就是答案。"], ["狗吠不止", "只闻吠声、狗不近身，主背后有闲话，听过即可，不必追着解释。"], ["狗追、狗咬", "转按「被狗咬」解，主信任的人有失信之虞，钱与承诺先落纸面。"], ["狗走失、狗受伤", "主一处友情在变淡或一位朋友正需要你，醒来顺手问候一句。"]], yiji: "宜珍惜摇尾之人、重要约定落成文字；忌把闲话放在心上、只凭交情托付钱财。", related: ["被狗咬", "梦见朋友", "梦见猫", "梦见小偷", "梦见狼"] },
+          "梦见鱼": { scenes: [["鱼在水中自在游", "主财路活络、年年有余，鱼越大越肥，正口越稳。"], ["亲手抓鱼、钓鱼", "转按「抓鱼、钓鱼」解，主靠自己本事得财，钓到大鱼则所求有成。"], ["鱼死、鱼逃", "鱼翻白、鱼跃出水缸，主机会在溜走，到了手边的事别再犹豫。"], ["吃鱼、鱼上桌", "转按「吃鱼」解，主财喜落袋；若被鱼刺卡住，得意之时更要细嚼慢咽。"]], yiji: "宜及时接住手边的机会、把进账落袋；忌犹豫太久、把好事拖到变味。", related: ["抓鱼、钓鱼", "梦见吃鱼", "梦见水", "梦见钱", "梦见清水"] },
+          "梦见龙": { scenes: [["龙飞天上", "乘龙、见龙升天，是大贵正口，主运势大开，该递的材料、该见的人趁势办了。"], ["龙在水中", "龙潜深水，主机会尚在暗处、贵人未露面，宜养精蓄锐、待时而动。"], ["龙近身而不惧", "龙到跟前而你坦然，主将得上位者青眼，平日的本事要拿得出手。"], ["龙怒、龙斗", "二龙相斗或龙带怒意，主大人物之间有纷争，小事之人宜避锋芒、莫站队。"]], yiji: "宜主动拜访长者前辈、把大事往前推；忌在贵人面前夸口、把机会说满做不满。", related: ["梦见凤凰", "梦见蛇", "梦见贵人", "梦见飞", "梦见水"] },
+          "梦见老虎": { scenes: [["虎在远处、不近身", "远远见虎、虎自走开，主强敌或难关在而未发，虚惊居多，先避其锋。"], ["虎扑、虎追", "虎扑上来或一路追赶，主正面冲突迫近，宜结伴、留证据、不单独硬扛。"], ["虎被制住、虎温顺", "制虎、虎如大猫般温顺，是转吉口：主你有本事压住最难的那一关。"], ["虎进家门", "虎入宅门主压力进到家里，多应工作之压带回家中，宜把界限划清。"]], yiji: "宜避锋芒、备帮手、把身体养足再应战；忌与强势者硬碰、深夜里独自做决定。", related: ["被老虎咬", "梦见狼", "梦见熊", "梦见警察、军人", "被人追赶"] },
+          "被人追赶": { scenes: [["追者看不清面目", "追你的是人影、是人群，主压力无形——债、责、期限，总有一件在心里排队。"], ["被追上、摊开来说", "躲不过而被追上，反主事情将摊开解决，摊开那一刻，多半没有想象中可怕。"], ["躲藏成功", "藏起来、追者走过，主暂避一时：能缓不能了，白天仍要列出面对它的第一步。"], ["反追回去", "你停下、甚至反身面对，主心气已转：宜趁这股劲把那件事正面处理掉。"]], yiji: "宜列出所躲之事的最小第一步、约好面对的时间；忌继续装看不见、把小事拖成大事。", related: ["蛇追人", "梦见跑步", "梦见迷路", "梦见迟到", "梦见赶车"] },
+          "梦见迷路": { scenes: [["有人指路", "迷途得人指点，主贵人将至——白天那件拿不定主意的事，去问个过来人。"], ["自己走出去", "靠自己辨路走出，主破局靠自力，醒来多半心里已有答案，别再反复。"], ["越走越黑、原地打转", "主方向感全失的那阵子，宜停：停一天再决定，比乱走强。"], ["迷路却不慌", "身在迷途而心安，主所谓迷路只是换路，旧路不通处，正有新路。"]], yiji: "宜求人指引、把选项写在纸上再选；忌在方向未明时连夜赶路、下重注。", related: ["梦见路", "梦见黑暗", "梦见雾", "被人追赶", "梦见森林"] },
+          "梦见下雨": { scenes: [["细雨润物", "毛毛细雨、淋着舒服，主小恩小惠与心情得润，宜把拖着的小事顺手办了。"], ["暴雨倾盆", "暴雨淋透、无处躲避，主烦忧集中压顶，先顾睡眠与身体，事一件件来。"], ["雨后天晴", "雨停日出、空气清亮，是困局将解的正口：难处快到头了，再撑一撑。"], ["在雨里赶路", "冒雨赶路主带病、带烦推进一件事，宜给自己留一件干衣裳——一个后手。"]], yiji: "宜顺润而行、把小事清仓；忌在暴雨心境里做长久承诺、淋着雨硬赶路。", related: ["梦见水", "梦见彩虹", "梦见伞", "梦见刮风", "梦见云"] },
+          "梦见棺材": { scenes: [["棺材静置、抬棺而行", "是「官、财」谐音的正口，主升迁、进财，别被外形吓着。"], ["打开棺材、空棺", "空棺无尸，主虚位以待：一件等你去坐的位置、去接的事将有着落。"], ["棺中有人坐起", "这一变格外作惊扰论，主一件以为已了结的旧事又冒头，宜正面收尾。"], ["自己躺进棺材", "转按「自己死了」的翻篇解，主旧阶段彻底结束，新局在后头。"]], yiji: "宜乘势争一争升迁与正当之财；忌因外形忌讳而自惊、错过递材料的时机。", related: ["梦见坟墓", "梦见葬礼", "梦见自己死了", "梦见死人", "梦见钱"] },
+          "梦见结婚": { scenes: [["自己成婚、喜气洋洋", "主一段合作或一个承诺将落定，是结合的正口，该签的约趁势签。"], ["参加他人婚礼", "主人缘喜事近，席间若有旧人重逢，另有续缘之象。"], ["婚礼生变、逃婚", "临场生变主对那份承诺心里还有犹豫，先想清再点头，别赶鸭子上架。"], ["与陌生人成婚", "新对象面目模糊，主将与一个全新的领域、团队「结合」，先看清对方底细。"]], yiji: "宜落定承诺、把口头之约写成文字；忌在犹豫未清时赶场点头。", related: ["梦见新娘、新郎", "梦见恋人", "梦见戒指", "梦见重逢", "梦见生孩子"] }
+        };
+        function dreamCoreNoun(e) {
+          var t = String(e.t || "").replace(/^梦见/, "");
+          var parts = t.split(/[、，,／\/]/);
+          var n = (parts[0] || t).trim();
+          return n || e.t;
+        }
+        function dreamFirstClause(e) {
+          var b = String(e.b || "");
+          var seg = b.split(/[：:；。]/)[0] || b;
+          return seg.replace(/^[，,、\s]+/, "");
+        }
+        var DREAM_CLUSTERS = [
+          ["梦见蛇", "被蛇咬", "蛇缠身", "蛇追人", "打蛇、杀蛇", "蛇进家"],
+          ["梦见水", "梦见清水", "梦见浊水", "梦见大水、洪水", "梦见河水", "梦见大海", "梦见湖", "梦见井", "梦见游泳", "梦见下雨"],
+          ["梦见掉牙", "梦见牙疼", "梦见长新牙", "梦见掉头发", "梦见剪头发", "梦见白头发", "梦见长头发", "梦见流血", "梦见受伤", "梦见生病"],
+          ["梦见死人", "梦见已故亲人", "梦见棺材", "梦见坟墓", "梦见葬礼", "梦见自己死了", "梦见鬼"],
+          ["梦见钱", "梦见金子", "梦见捡钱", "梦见丢钱", "梦见数钱", "梦见借钱", "梦见首饰、珠宝", "梦见戒指"],
+          ["梦见飞", "梦见坠落", "梦见坠崖", "梦见跑步", "被人追赶", "梦见赶车", "梦见迟到"],
+          ["梦见考试", "梦见考试落榜", "梦见上学", "梦见学校", "梦见工作", "梦见老师"],
+          ["梦见房子", "梦见新房", "梦见老房子", "梦见盖房子", "梦见搬家", "梦见门", "梦见开门", "梦见床"],
+          ["梦见火", "梦见着火", "梦见灯", "梦见蜡烛", "梦见停电", "梦见太阳", "梦见光明"],
+          ["梦见狗", "被狗咬", "梦见猫", "梦见狼", "梦见老虎", "被老虎咬", "梦见熊"],
+          ["梦见鱼", "抓鱼、钓鱼", "梦见吃鱼", "梦见鸟", "梦见燕子", "梦见喜鹊"],
+          ["梦见结婚", "梦见新娘、新郎", "梦见恋人", "梦见前任", "梦见暗恋的人", "梦见分手", "梦见重逢"],
+          ["梦见山", "爬山、上山", "梦见山崩", "梦见地震", "梦见树", "梦见森林"],
+          ["梦见衣服", "梦见新衣服", "梦见破衣服", "梦见鞋", "梦见丢鞋", "梦见帽子", "梦见伞"],
+          ["梦见钥匙", "梦见丢钥匙", "梦见锁", "梦见箱子", "梦见包", "梦见镜子", "梦见照镜子"]
+        ];
+        function dreamTitleIndex(title) {
+          for (var i = 0; i < DREAM_DB.length; i++) { if (DREAM_DB[i].t === title) return i; }
+          return -1;
+        }
+        function buildRelated(e) {
+          var out = [];
+          function pushTitle(title) {
+            if (!title || title === e.t) return;
+            if (dreamTitleIndex(title) === -1) return;
+            if (out.indexOf(title) !== -1) return;
+            out.push(title);
+          }
+          for (var c = 0; c < DREAM_CLUSTERS.length; c++) {
+            if (DREAM_CLUSTERS[c].indexOf(e.t) !== -1) {
+              DREAM_CLUSTERS[c].forEach(pushTitle);
+            }
+          }
+          /* 关键词共字兜底：与本条别名同首字或互含的词条 */
+          if (out.length < 3) {
+            var myKeys = (e.k || []).join(" ");
+            DREAM_DB.forEach(function (o) {
+              if (out.length >= 4) return;
+              if (o.t === e.t) return;
+              var hit = false;
+              (o.k || []).forEach(function (kw) {
+                if (hit) return;
+                if (kw && myKeys.indexOf(kw.charAt(0)) !== -1 && kw.length >= 2 && myKeys.indexOf(kw) !== -1) hit = true;
+                (e.k || []).forEach(function (mk) {
+                  if (mk && kw && (mk.indexOf(kw) !== -1 || kw.indexOf(mk) !== -1)) hit = true;
+                });
+              });
+              if (hit) pushTitle(o.t);
+            });
+          }
+          /* 仍不足则取相邻词条，保证条条都有可点的相关词条 */
+          if (out.length < 2) {
+            var idx = dreamTitleIndex(e.t);
+            if (idx > 0) pushTitle(DREAM_DB[idx - 1].t);
+            if (idx >= 0 && idx < DREAM_DB.length - 1) pushTitle(DREAM_DB[idx + 1].t);
+            if (idx > 1) pushTitle(DREAM_DB[idx - 2].t);
+          }
+          return out.slice(0, 4);
+        }
+        function buildGenericScenes(e) {
+          var noun = dreamCoreNoun(e);
+          var first = dreamFirstClause(e);
+          var tip = String(e.tip || "");
+          var scenes = [];
+          scenes.push(["安然出现时", "若「" + noun + "」在梦中安静出现、你并不惊慌，多按本条的顺口解——" + first + "。心境稳，梦意多半落在提醒与预兆中较顺的一面，不必先自惊。"]);
+          scenes.push(["情急、失控时", "若梦里伴随惊惧、追逐、疼痛、破损或怎么也摆脱不开，意思要往重里解一层：多是白天压力与未了之事被放大。先对照本条提示——" + tip + ""]);
+          /* 场所／对象之分：按词条性质给不同的第三种分法 */
+          var t = e.t;
+          var third;
+          if (/蛇|龙|虎|狗|猫|鼠|牛|马|猪|羊|鸡|鸭|鱼|鸟|蝶|蜂|蚁|蜘蛛|蟑螂|虫|蛙|龟|兔|猴|狼|熊|象|鹿|凤凰|蝙蝠|燕|鸦|鹊|鹤|鹰/.test(t)) {
+            third = ["在家中与在野外", "「" + noun + "」出现在家中，多应家事、家财与贴身的人情；出现在野外、路上，则多应外面的事与生人。同一梦象，离家越近，分量越贴身。"];
+          } else if (/水|雨|雪|海|河|湖|井|瀑布|船|游泳/.test(t)) {
+            third = ["看清浊与动静", "再细看水的样子：清则顺、浊则烦，静则蓄势、急则失控。记不清全貌时，先记梦醒那一刻是安然还是心慌，吉凶已分大半。"];
+          } else if (/死人|亲人|父母|老人|恋人|前任|朋友|故人|孩子|婴儿|孕妇|陌生人|贵人|老师|医生|警察|和尚|神仙|乞丐|新娘/.test(t)) {
+            third = ["看对方的神情", "人物梦先看对方：神情安然、开口说话，多有所指，醒来先把话记下；对方愁苦、远去或唤之不应，则多是牵挂与未了之事在提醒你。"];
+          } else if (/钱|金|首饰|戒指|捡|丢|数钱|借钱/.test(t)) {
+            third = ["看得与失", "财物梦以得失分口：得之坦然多主可取之机，失之慌张多主疏忽在前。数目越大越要冷静——梦里的数目从来不作数，心慌的程度才作数。"];
+          } else {
+            third = ["看成与不成", "再看梦里这件事的结局：做成了、到手了、走通了，多按顺口解；半途而废、反复受阻，则主现实中同一件事还差一个环节，宜回头补上再推进。"];
+          }
+          scenes.push(third);
+          scenes.push(["偶梦与连梦", "偶尔一梦，多为当日心绪的回声，解个大意即可；若连着几夜反复梦见「" + noun + "」，说明对应的那件事在心里分量已重，值得白天正面处理一次，而不是夜夜查梦。"]);
+          return scenes;
+        }
+        function buildGenericYiji(e) {
+          var noun = dreamCoreNoun(e);
+          var h = 0;
+          for (var i = 0; i < e.t.length; i++) h += e.t.charCodeAt(i);
+          var v = h % 2;
+          if (e.s === "吉") {
+            return v ? ("宜趁势把与「" + noun + "」相关的计划往前推进一步、主动联络与落定；忌得意忘形、口头许诺拖着不落纸面。") : ("宜顺势而行、该见的人去见、该递的材料递出；忌因小喜而大意、把好机会说满做不满。");
+          }
+          if (e.s === "凶") {
+            return v ? ("宜静守复核、先顾睡眠与身体、把最紧的一件事列出最小一步；忌冲动决断、正面硬碰、深夜里做重要决定。") : ("宜收敛锋芒、留好凭据与后手、遇事缓一缓再回应；忌硬扛、赌气行事、把小患拖成大患。");
+          }
+          return v ? ("宜先看清情状再小步试行、把梦里的细节记下来对照白天；忌未分清吉凶便下重注、听人一说就全信。") : ("宜观望厘清、重要之事多方核对一次再定；忌在心绪未平时拍板、替人作保担责。");
+        }
+        function dreamDetailFor(e) {
+          var ov = DREAM_DETAIL[e.t];
+          var scenes = (ov && ov.scenes && ov.scenes.length) ? ov.scenes : buildGenericScenes(e);
+          var yiji = (ov && ov.yiji) ? ov.yiji : buildGenericYiji(e);
+          var related = (ov && ov.related && ov.related.length) ? ov.related.filter(function (title) { return dreamTitleIndex(title) !== -1 && title !== e.t; }) : buildRelated(e);
+          if (!related.length) related = buildRelated(e);
+          return { scenes: scenes, yiji: yiji, related: related.slice(0, 5) };
+        }
+        function dreamDetailHTML(e) {
+          var d = dreamDetailFor(e);
+          var h = '<h4>分情境细解</h4><ul class="dream-scenes">';
+          d.scenes.forEach(function (sc) {
+            h += '<li><b>' + esc(sc[0]) + '：</b>' + esc(sc[1]) + '</li>';
+          });
+          h += '</ul><p class="dream-yiji"><b>宜忌：</b>' + esc(d.yiji) + '</p>';
+          h += '<div class="dream-related"><span class="rel-label">相关词条：</span>';
+          d.related.forEach(function (title) {
+            h += '<button type="button" class="dream-rel-chip" data-rel="' + esc(title) + '">' + esc(title) + '</button>';
+          });
+          h += '</div>';
+          return h;
+        }
+        function setDreamCardOpen(card, open) {
+          if (!card) return;
+          card.classList.toggle("is-open", !!open);
+          var det = card.querySelector(".dream-detail");
+          var btn = card.querySelector(".dream-toggle");
+          if (det) det.hidden = !open;
+          if (btn) {
+            btn.setAttribute("aria-expanded", open ? "true" : "false");
+            var txt = btn.querySelector(".dream-toggle-txt");
+            if (txt) txt.textContent = open ? "收起详细解释" : "展开详细解释";
+          }
+        }
+        function jumpToDream(title) {
+          var idx = dreamTitleIndex(title);
+          if (idx === -1) return;
+          var target = DREAM_DB[idx];
+          var term = (target.k && target.k[0]) ? target.k[0] : target.t;
+          dreamInput.value = term;
+          renderDream(title);
+          if (dreamResults.scrollIntoView) dreamResults.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        function renderDream(openTitle) {
+          var raw = dreamInput.value;
+          var q = normalize(raw);
+          dreamResults.innerHTML = "";
+          if (!q) {
+            dreamResults.innerHTML = '<div class="dream-empty">先把梦写下来，再点「解析梦境」——写一句梦里出现了什么即可。</div>';
+            return;
+          }
+          var scored = [];
+          DREAM_DB.forEach(function (e, i) {
+            var r = scoreEntry(e, q);
+            if (r.score > 0) scored.push({ e: e, r: r, i: i });
+          });
+          var fuzzyMode = false;
+          if (!scored.length) {
+            /* 全库无一精确命中，才启用容错近似匹配，至多取三条 */
+            fuzzyMode = true;
+            DREAM_DB.forEach(function (e, i) {
+              var r = fuzzyEntry(e, q);
+              if (r) scored.push({ e: e, r: r, i: i });
+            });
+          }
+          scored.sort(function (x, y) { return (y.r.score - x.r.score) || (x.i - y.i); });
+          var top = scored.slice(0, fuzzyMode ? 3 : 5);
+          if (!top.length) {
+            dreamResults.innerHTML = '<div class="dream-empty">这一梦，古本词条里暂未查到相近的说法。不妨<b>换个更短的关键词</b>再试，如只写「蛇」「水」「飞」「掉牙」「考试」中的一两个——词越短，越容易命中；词越具体，解得越准。</div>';
+            return;
+          }
+          var head = document.createElement("p");
+          head.className = "dream-count";
+          head.innerHTML = "为「<b>" + esc(raw.trim()) + "</b>」查到 <b>" + top.length + "</b> 条相关词条，按相关度排在前面，诸位自行对照：" + (fuzzyMode ? "（未有精确命中，以下为容错近似结果）" : "");
+          dreamResults.appendChild(head);
+          var hint = document.createElement("p");
+          hint.className = "dream-expand-hint";
+          hint.textContent = "点任意一张卡片即可展开详细解释（含分情境细解、宜忌与相关词条），再点一次收起；每张卡片各自展开，互不影响。";
+          dreamResults.appendChild(hint);
+          var grid = document.createElement("div");
+          grid.className = "dream-results";
+          top.forEach(function (it) {
+            var e = it.e, r = it.r;
+            var card = document.createElement("article");
+            card.className = "dream-card";
+            card.setAttribute("data-dream-title", e.t);
+            var hitTxt = r.combo ? "组合命中：" + esc(r.hit) : (r.fuzzy ? "近似命中：" + esc(r.hit) + "（容错）" : "命中：" + esc(r.hit));
+            card.innerHTML =
+              '<div class="dream-card-head"><h3>' + esc(e.t) + '</h3>' +
+              '<span class="dream-tag ' + (TAG_CLASS[e.s] || "zhong") + '">' + esc(e.s) + '</span>' +
+              '<span class="dream-hit">' + hitTxt + '</span></div>' +
+              '<div class="dream-ancient">古本云：' + esc(e.a) + '</div>' +
+              '<p class="dream-plain">' + esc(e.b) + '</p>' +
+              '<p class="dream-tip"><b>提示：</b>' + esc(e.tip) + '</p>' +
+              '<button type="button" class="dream-toggle" aria-expanded="false"><span class="dream-toggle-txt">展开详细解释</span><span class="dream-chev" aria-hidden="true">▾</span></button>' +
+              '<div class="dream-detail" hidden>' + dreamDetailHTML(e) + '</div>';
+            /* 点卡片展开／收起，只动这一张；点相关词条只跳转，不收起、不展开别张 */
+            card.addEventListener("click", function (ev) {
+              var chip = ev.target.closest ? ev.target.closest(".dream-rel-chip") : null;
+              if (chip) {
+                ev.stopPropagation();
+                jumpToDream(chip.getAttribute("data-rel"));
+                return;
+              }
+              if (ev.target.closest && ev.target.closest(".dream-detail")) return;
+              setDreamCardOpen(card, !card.classList.contains("is-open"));
+            });
+            grid.appendChild(card);
+            if (openTitle && e.t === openTitle) setDreamCardOpen(card, true);
+          });
+          dreamResults.appendChild(grid);
+        }
+        dreamForm.addEventListener("submit", function (ev) { ev.preventDefault(); renderDream(); });
+        dreamInput.addEventListener("keydown", function (ev) {
+          if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); renderDream(); }
+        });
+      })();
+    </script>
+
+
   </body>
 </html>
