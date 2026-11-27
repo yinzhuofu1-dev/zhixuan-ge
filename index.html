@@ -93,7 +93,8 @@
 
       /* ---------- 八字 ---------- */
       .bazi-box{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:26px}
-      .bazi-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;align-items:end}
+      .bazi-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;align-items:start}
+      .bazi-form .field-btn{align-self:end}
       .bazi-form label{display:block;font-size:13px;color:var(--ink2);margin-bottom:6px;font-weight:500}
       .bazi-form input,.bazi-form select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font-size:15px;font-family:inherit}
       .field-date{grid-column:span 2}
@@ -2088,7 +2089,7 @@
                 <option value="女">女</option>
               </select>
             </div>
-            <div>
+            <div class="field-btn">
               <button class="btn" type="submit">按真太阳时排八字 · 看解析</button>
             </div>
           </form>
@@ -5440,7 +5441,13 @@ void main() {
               render();
             }
             function go(index, animate) {
-              if (isMobileNav && fallback) fallback.classList.add("gooey-anim");
+              if (isMobileNav && fallback) {
+                fallback.classList.add("gooey-anim");
+                /* 关键：加 class 和改 transform 发生在同一任务里时，浏览器只认最终状态，
+                   过渡不会跑、药丸直接瞬移，看起来就是“动效消失了”。先强制重排一次，
+                   让过渡属性先生效，再改位置，过渡才能真正跑起来。 */
+                void fallback.offsetWidth;
+              }
               if (index === target) return;
               if (!rects[index] || !animate || reduce || isMobileNav || target < 0) { settle(index); return; }
               var now = performance.now();
