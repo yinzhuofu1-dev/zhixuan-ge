@@ -334,6 +334,13 @@
       .bz-note{font-size:13.5px;color:var(--ink2);margin:16px 0 0}
       .bz-hint{font-size:13px;color:var(--ink2);margin:6px 0 0;line-height:1.7}
       .bz-hint.warn{color:#9a3b26}
+      .bz-label-row{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+      .bz-label-row label{margin-bottom:0}
+      .bz-help{flex:none;width:18px;height:18px;min-width:0;min-height:0;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--paper);color:var(--ink2);font-size:12px;font-weight:700;line-height:1;cursor:pointer;font-family:inherit}
+      .bz-help:hover,.bz-help[aria-expanded="true"]{border-color:var(--jade);color:var(--jade)}
+      .bz-help:focus-visible{outline:2px solid var(--jade);outline-offset:1px}
+      .bz-pop{margin:8px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);box-shadow:0 10px 28px rgba(38,28,20,.16);font-size:13px;line-height:1.7;color:var(--ink2)}
+      .bz-pop[hidden]{display:none}
       .bz-empty{border:1px dashed var(--line);border-radius:12px;padding:16px 18px;color:var(--ink2);font-size:14px;background:var(--paper);margin-top:14px}
       #baziResult.has-result .bz-empty{display:none}
       #solarInfo:not(:empty) ~ .bz-empty{display:none}
@@ -758,6 +765,9 @@
       .gooey-nav__stage{ position:relative; max-width:100%; }
       .gooey-nav__canvas{ position:absolute; top:0; left:0; pointer-events:none; }
       .gooey-nav__fallback{ position:absolute; top:0; left:0; display:none; border-radius:999px; background:var(--gn-pill); pointer-events:none; }
+      /* 手机走普通药丸时靠它平滑滑动：只有 transform/宽高过渡，全程 GPU 合成 */
+      .gooey-nav__fallback.gooey-anim{ transition:transform .38s cubic-bezier(.22,1,.36,1), width .38s cubic-bezier(.22,1,.36,1), height .38s cubic-bezier(.22,1,.36,1); will-change:transform; }
+      @media (prefers-reduced-motion: reduce){ .gooey-nav__fallback.gooey-anim{ transition:none; } }
       .gooey-nav__list{ position:relative; display:flex; flex-wrap:wrap; gap:var(--gn-gap); margin:0; padding:0; list-style:none; }
       .gooey-nav__list--active{ position:absolute; inset:0; color:var(--gn-active-ink); visibility:hidden; clip-path:inset(100%); pointer-events:none; }
       .gooey-nav__item{ display:flex; }
@@ -1952,12 +1962,15 @@
               </select>
             </div>
             <div id="leapWrap" style="display:none">
-              <label for="lunarLeap">农历月份</label>
+              <div class="bz-label-row">
+                <label for="lunarLeap">农历月份</label>
+                <button type="button" class="bz-help" id="leapHelpBtn" aria-expanded="false" aria-controls="leapHelpPop" aria-label="平月和闰月是什么意思">?</button>
+              </div>
               <select id="lunarLeap">
-                <option value="0" selected>平月（平时月份，大多数人选这个）</option>
-                <option value="1">闰月（出生在闰月里才选）</option>
+                <option value="0" selected>平月</option>
+                <option value="1">闰月</option>
               </select>
-              <p class="bz-hint">这里不是问公历闰年（2 月有 29 天那种），而是问农历有没有闰月：农历有的年份会多出一个月，叫闰月，比如闰六月就是一年里有两个六月。不知道就选「平月」，只有户口本、老黄历上写着「闰×月」出生的人才选「闰月」。</p>
+              <div class="bz-pop" id="leapHelpPop" hidden>这里不是问公历闰年（2 月有 29 天那种），而是问农历闰月：农历有的年份会多出一个月，叫闰月，比如闰六月就是一年里有两个六月。不知道就选「平月」，只有户口本、老黄历上写着「闰×月」出生的人才选「闰月」。</div>
               <p class="bz-hint" id="leapYearInfo"></p>
             </div>
             <div class="field-full" id="sizhuWrap" style="display:none">
@@ -3658,10 +3671,31 @@
             document.getElementById(id).disabled = v === "sizhu";
           });
           if (v === "lunar") updateLeapHint();
+          closeLeapHelp();
         });
         document.getElementById("birthYear").addEventListener("change", updateLeapHint);
         document.getElementById("birthMonth").addEventListener("change", updateLeapHint);
         document.getElementById("lunarLeap").addEventListener("change", updateLeapHint);
+        /* 平月/闰月小问号：点开才显示解释，平时不占地方 */
+        var leapHelpBtn = document.getElementById("leapHelpBtn");
+        var leapHelpPop = document.getElementById("leapHelpPop");
+        function closeLeapHelp() {
+          if (!leapHelpPop || leapHelpPop.hidden) return;
+          leapHelpPop.hidden = true;
+          if (leapHelpBtn) leapHelpBtn.setAttribute("aria-expanded", "false");
+        }
+        if (leapHelpBtn && leapHelpPop) {
+          leapHelpBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            var open = leapHelpPop.hidden;
+            leapHelpPop.hidden = !open;
+            leapHelpBtn.setAttribute("aria-expanded", open ? "true" : "false");
+          });
+          document.addEventListener("click", function (e) {
+            if (!leapHelpPop.hidden && !leapHelpPop.contains(e.target) && e.target !== leapHelpBtn) closeLeapHelp();
+          });
+          document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLeapHelp(); });
+        }
       })();
 
       /* ---------- 地支关系（合冲刑害破） ---------- */
@@ -5061,14 +5095,20 @@ void main() {
             var canvas = stage.querySelector(".gooey-nav__canvas");
             var fallback = stage.querySelector(".gooey-nav__fallback");
             if (!canvas || !fallback) return;
+            /* 手机导航卡顿的根因：这段 WebGL 每帧要在整个导航条上逐像素算两次粘液场（本体 + 阴影），
+               手机导航是三行平铺、画布又大，600ms 内几十帧全屏重算，低端机直接掉帧；再加每帧重算
+               overlay 的 clip-path: path()、以及手指点按也会触发 hover 动画，雪上加霜。手机改走
+               现成的普通药丸（.gooey-nav__fallback），只做 transform 平移，GPU 合成、零逐像素
+               计算；桌面端原样不动。 */
+            var isMobileNav = window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(pointer: coarse)").matches;
             var settings = {
               animationTime: 600, particleCount: 17, timeVariance: 300, spread: 56,
-              gooeyness: 0.75, wobble: 0.5, hoverEffect: true,
+              gooeyness: 0.75, wobble: 0.5, hoverEffect: !isMobileNav,
               pillRgb: pillRgb, tints: [],
               hoverRgb: [pillRgb[0], pillRgb[1], pillRgb[2], 0.08],
               shadow: 0.2
             };
-            var gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: true, antialias: false });
+            var gl = isMobileNav ? null : canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: true, antialias: false });
             var pipeline = gl ? buildPipeline(gl) : null;
             fallback.style.display = pipeline ? "none" : "block";
             canvas.style.display = pipeline ? "block" : "none";
@@ -5088,20 +5128,22 @@ void main() {
 
             function measure() {
               var box = stage.getBoundingClientRect();
-              var ratio = Math.min(window.devicePixelRatio || 1, 2);
               view.width = box.width;
               view.height = box.height;
-              var outerWidth = box.width + MARGIN * 2;
-              var outerHeight = box.height + MARGIN * 2;
-              canvas.style.left = (-MARGIN) + "px";
-              canvas.style.top = (-MARGIN) + "px";
-              canvas.style.width = outerWidth + "px";
-              canvas.style.height = outerHeight + "px";
-              var width = Math.max(1, Math.round(outerWidth * ratio));
-              var height = Math.max(1, Math.round(outerHeight * ratio));
-              if (canvas.width !== width || canvas.height !== height) {
-                canvas.width = width;
-                canvas.height = height;
+              if (!isMobileNav) {
+                var ratio = Math.min(window.devicePixelRatio || 1, 2);
+                var outerWidth = box.width + MARGIN * 2;
+                var outerHeight = box.height + MARGIN * 2;
+                canvas.style.left = (-MARGIN) + "px";
+                canvas.style.top = (-MARGIN) + "px";
+                canvas.style.width = outerWidth + "px";
+                canvas.style.height = outerHeight + "px";
+                var width = Math.max(1, Math.round(outerWidth * ratio));
+                var height = Math.max(1, Math.round(outerHeight * ratio));
+                if (canvas.width !== width || canvas.height !== height) {
+                  canvas.width = width;
+                  canvas.height = height;
+                }
               }
               rects = Array.prototype.map.call(list.children, function (item) {
                 var rect = item.getBoundingClientRect();
@@ -5398,8 +5440,9 @@ void main() {
               render();
             }
             function go(index, animate) {
+              if (isMobileNav && fallback) fallback.classList.add("gooey-anim");
               if (index === target) return;
-              if (!rects[index] || !animate || reduce || target < 0) { settle(index); return; }
+              if (!rects[index] || !animate || reduce || isMobileNav || target < 0) { settle(index); return; }
               var now = performance.now();
               target = index;
               currentIndex = index;
@@ -5421,6 +5464,7 @@ void main() {
               wake();
             }
             function onOver(event) {
+              if (isMobileNav) return;
               var item = event.target.closest ? event.target.closest("[data-gooey-index]") : null;
               if (!item || !list.contains(item)) return;
               var index = Number(item.getAttribute("data-gooey-index"));
