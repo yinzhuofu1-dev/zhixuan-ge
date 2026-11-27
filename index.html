@@ -759,15 +759,17 @@
       .gooey-nav__list{ position:relative; display:flex; flex-wrap:wrap; gap:var(--gn-gap); margin:0; padding:0; list-style:none; }
       .gooey-nav__list--active{ position:absolute; inset:0; color:var(--gn-active-ink); visibility:hidden; clip-path:inset(100%); pointer-events:none; }
       .gooey-nav__item{ display:flex; }
-      .gooey-nav__link{
+      /* 站内旧规则 nav.toc a（54/177/481 行）会改字号、内边距，还给当前项加淡色底；
+         用 #gooeyNav 特指度压过它们，否则药丸里的字与白色镜像层错位、重影（手机尤甚）。 */
+      #gooeyNav .gooey-nav__link{
         display:inline-flex; align-items:center; gap:8px;
         padding:var(--gn-y) var(--gn-x); border:none; border-radius:999px;
-        background:none; color:var(--gn-muted); font:inherit; font-weight:500;
+        background:none; color:var(--gn-muted); font-size:var(--gn-font); font-weight:500; line-height:1.2;
         text-decoration:none; white-space:nowrap; cursor:pointer;
         transition:color .2s ease; -webkit-tap-highlight-color:transparent;
       }
-      .gooey-nav__list--active .gooey-nav__link{ color:inherit; }
-      .gooey-nav__item[data-active] .gooey-nav__link{ color:var(--gn-ink); }
+      #gooeyNav .gooey-nav__list--active .gooey-nav__link{ color:inherit; }
+      #gooeyNav .gooey-nav__item[data-active] .gooey-nav__link{ color:var(--gn-ink); }
       .gooey-nav__link:focus-visible{ outline:2px solid var(--gn-ink); outline-offset:2px; }
       .gooey-nav__icon{ display:inline-flex; flex:none; }
       .gooey-nav__icon svg{ width:1.15em; height:1.15em; }
@@ -779,7 +781,7 @@
       .gooey-nav__chev{ display:inline-block; font-size:10px; line-height:1; transition:transform .25s ease; }
       #funcMenuBtn[aria-expanded="true"] .gooey-nav__chev{ transform:rotate(180deg); }
       @media (hover: hover){
-        .gooey-nav__link:hover{ color:var(--gn-ink); }
+        #gooeyNav .gooey-nav__link:hover{ color:var(--gn-ink); background:none; }
       }
 
       /* ===== 功能菜单：顶栏「功能」钮的下拉，6 个功能入口 ===== */
@@ -790,12 +792,12 @@
         box-shadow:0 18px 40px -12px rgba(30,13,13,.35), 0 4px 12px rgba(30,13,13,.12);
       }
       .pill-nav__func-menu[hidden]{ display:none; }
-      .pill-nav__func-item{
+      #gooeyNav .pill-nav__func-item{
         display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px;
-        color:var(--ink); font-size:14px; font-weight:500; text-decoration:none;
+        background:none; color:var(--ink); font-size:14px; font-weight:500; text-decoration:none;
       }
-      .pill-nav__func-item:hover{ background:color-mix(in srgb, var(--ink) 6%, transparent); }
-      .pill-nav__func-item[aria-current]{ background:var(--jade); color:#fff; font-weight:700; }
+      #gooeyNav .pill-nav__func-item:hover{ background:color-mix(in srgb, var(--ink) 6%, transparent); }
+      #gooeyNav .pill-nav__func-item[aria-current]{ background:var(--jade); color:#fff; font-weight:700; }
       .pill-nav__func-item svg{ flex:none; }
       @media (max-width:900px){
         .pill-nav__func-menu{ left:0; right:0; min-width:0; }
@@ -815,7 +817,8 @@
       #pnSpacer{ height:0; }
       /* 中等宽度先收紧单行：字号与项内边距略减，九个章节仍在一行内排全，不触发隐藏 */
       @media (max-width:1180px){
-        nav.pill-nav{ --pn-x:10px; --pn-font:13px; --pn-item-gap:2px; --pn-gap:6px; --gn-x:12px; --gn-font:13px; --gn-gap:2px; }
+        nav.pill-nav{ --pn-x:10px; --pn-font:13px; --pn-item-gap:2px; --pn-gap:6px; }
+        #gooeyNav{ --gn-x:12px; --gn-font:13px; --gn-gap:2px; }
       }
       /* 窄屏不再折叠成汉堡：原 collapse=auto 会把整条章节栏 display:none，
          只剩 Logo 圆泡与汉堡按钮，观感上像「导航没了」（用户反馈）。
@@ -829,7 +832,7 @@
         .gooey-nav__list{ justify-content:center; }
       }
       @media (prefers-reduced-motion: reduce){
-        .pill-nav__line, .pill-nav__row, .gooey-nav__link, .pill-nav__func-item{ transition:none; }
+        .pill-nav__line, .pill-nav__row, #gooeyNav .gooey-nav__link, .pill-nav__func-item{ transition:none; }
       }
 
       /* ---------- 手机收起：向下浏览时收成一条细 bar（Logo＋当前章节＋展开钮） ----------
