@@ -5588,7 +5588,8 @@ void main() {
            （Logo＋当前章节名＋「导航」展开钮），把空间让给正文；回到页面
            顶部时再自动展开，手指下滑不再自动展开（2026-11-27 用户反馈：下
            滑时导航自己弹开，改为只由回到顶部或手动展开）。收起钮 / 细 bar
-           仍可手动切换，点任意章节、点 Logo 回首页也会收回。阈值刻意放慢：
+           仍可手动切换，点任意章节、点 Logo 回首页也会收回——但会等药丸变形
+           播完（约 900ms）再收，免得动效被藏进收起的导航栏里看不见（fixed12）。阈值刻意放慢：
            要先滚过页面上方 380px、且同向持续滑满 110px 才收起，展开只在
            回到顶部 80px 内自动触发，轻扫与小抖动都不触发；每次收放后另有
            700ms 冷却，
@@ -5606,15 +5607,31 @@ void main() {
           updateSticky();
         }
         function holdAutoNav(ms) { autoNav.holdUntil = Date.now() + ms; autoNav.down = 0; }
-        if (foldBtn) foldBtn.addEventListener("click", function () { setMini(true); holdAutoNav(600); });
-        if (mini) mini.addEventListener("click", function () { setMini(false); holdAutoNav(600); });
+        /* 点章节 / 功能菜单项 / Logo 后不要立刻收起：GooeyNav 药丸约 600ms 才滑到位，
+           立刻收起会把变形藏进 display:none 的导航栏里，手机上就看不到任何动效
+           （2026-11-27 用户反馈：只有点「功能」钮能看到动效，因为它是 <button>，
+           不在 navAnchors 里）。改成等 900ms 再收起，动效播完、药丸落定后再让出空间；
+           减弱动效的用户本就没有动画，照旧立刻收起。手动收起 / 展开钮不受影响，
+           点它们会取消待执行的延时收起，免得刚展开又被收回去。 */
+        var miniTimer = 0;
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        function clearMiniTimer() { if (miniTimer) { window.clearTimeout(miniTimer); miniTimer = 0; } }
+        function collapseAfterMorph() {
+          if (!mobileNavMQ.matches) return;
+          clearMiniTimer();
+          if (reduceMotion) { setMini(true); holdAutoNav(1000); return; }
+          holdAutoNav(1100);
+          miniTimer = window.setTimeout(function () { miniTimer = 0; setMini(true); }, 900);
+        }
+        if (foldBtn) foldBtn.addEventListener("click", function () { clearMiniTimer(); setMini(true); holdAutoNav(600); });
+        if (mini) mini.addEventListener("click", function () { clearMiniTimer(); setMini(false); holdAutoNav(600); });
         navAnchors.forEach(function (it) {
-          it.addEventListener("click", function () { if (mobileNavMQ.matches) { setMini(true); holdAutoNav(1000); } });
+          it.addEventListener("click", function () { collapseAfterMorph(); });
         });
         Array.prototype.forEach.call(document.querySelectorAll(".pill-nav__func-item"), function (it) {
-          it.addEventListener("click", function () { if (mobileNavMQ.matches) { setMini(true); holdAutoNav(1000); } });
+          it.addEventListener("click", function () { collapseAfterMorph(); });
         });
-        if (logoLink) logoLink.addEventListener("click", function () { if (mobileNavMQ.matches) { setMini(true); holdAutoNav(1000); } });
+        if (logoLink) logoLink.addEventListener("click", function () { collapseAfterMorph(); });
         if (typeof mobileNavMQ.addEventListener === "function") {
           mobileNavMQ.addEventListener("change", function (e) { if (!e.matches) root.removeAttribute("data-mini"); });
         }
