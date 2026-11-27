@@ -332,6 +332,8 @@
       .bz-panel{display:none}
       .bz-panel.on{display:block;animation:viewIn .4s cubic-bezier(.22,.61,.36,1) both}
       .bz-note{font-size:13.5px;color:var(--ink2);margin:16px 0 0}
+      .bz-hint{font-size:13px;color:var(--ink2);margin:6px 0 0;line-height:1.7}
+      .bz-hint.warn{color:#9a3b26}
       .bz-empty{border:1px dashed var(--line);border-radius:12px;padding:16px 18px;color:var(--ink2);font-size:14px;background:var(--paper);margin-top:14px}
       #baziResult.has-result .bz-empty{display:none}
       #solarInfo:not(:empty) ~ .bz-empty{display:none}
@@ -1952,9 +1954,11 @@
             <div id="leapWrap" style="display:none">
               <label for="lunarLeap">农历月份</label>
               <select id="lunarLeap">
-                <option value="0" selected>平月</option>
-                <option value="1">闰月（该年有闰月时选）</option>
+                <option value="0" selected>平月（平时月份，大多数人选这个）</option>
+                <option value="1">闰月（出生在闰月里才选）</option>
               </select>
+              <p class="bz-hint">这里不是问公历闰年（2 月有 29 天那种），而是问农历有没有闰月：农历有的年份会多出一个月，叫闰月，比如闰六月就是一年里有两个六月。不知道就选「平月」，只有户口本、老黄历上写着「闰×月」出生的人才选「闰月」。</p>
+              <p class="bz-hint" id="leapYearInfo"></p>
             </div>
             <div class="field-full" id="sizhuWrap" style="display:none">
               <label>四柱直填 · 依次选年、月、日、时四柱的干支（干支阴阳须相配）</label>
@@ -3547,7 +3551,7 @@
 
       /* ---------- 农历 → 公历：借浏览器内置中国农历历法逐日比对 ---------- */
       var LUNAR_FMT = null;
-      var LUNAR_MONTH_NAME = {"正":1,"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9,"十":10,"冬":11,"腊":12};
+      var LUNAR_MONTH_NAME = {"正":1,"一":1,"二":2,"三":3,"四":4,"五":5,"六":6,"七":7,"八":8,"九":9,"十":10,"十一":11,"冬":11,"十二":12,"腊":12};
       function lunarPartsOf(date) {
         if (!LUNAR_FMT) {
           try { LUNAR_FMT = new Intl.DateTimeFormat("zh-Hans-u-ca-chinese", { year: "numeric", month: "long", day: "numeric" }); }
@@ -3579,6 +3583,44 @@
           cur.setDate(cur.getDate() + 1);
         }
         return null;
+      }
+
+      /* ---------- 平月 / 闰月提示：按所选农历年份算出当年闰月，直接告诉用户怎么选 ---------- */
+      var LEAP_CN = ["一","二","三","四","五","六","七","八","九","十","十一","十二"];
+      function findLeapMonth(ly) {
+        try {
+          var cur = new Date(ly, 0, 10, 12, 0, 0);
+          for (var i = 0; i < 420; i++) {
+            var p = lunarPartsOf(cur);
+            if (p && p.y === ly && p.leap) return p.m;
+            cur.setDate(cur.getDate() + 1);
+          }
+        } catch (e) {}
+        return 0;
+      }
+      function updateLeapHint() {
+        var info = document.getElementById("leapYearInfo");
+        var leapSel = document.getElementById("lunarLeap");
+        if (!info || !leapSel) return;
+        var y = parseInt(document.getElementById("birthYear").value, 10);
+        var m = parseInt(document.getElementById("birthMonth").value, 10);
+        if (!y || !m) { info.textContent = ""; info.classList.remove("warn"); return; }
+        var leap = findLeapMonth(y);
+        var isLeapChoice = leapSel.value === "1";
+        if (!leap) {
+          info.textContent = y + "年农历没有闰月，不用纠结，直接选「平月」就行。";
+          info.classList.toggle("warn", isLeapChoice);
+          if (isLeapChoice) info.textContent = "注意：" + y + "年农历没有闰月，你选了「闰月」会换算失败，改回「平月」再排。";
+        } else if (m === leap) {
+          info.textContent = y + "年闰" + LEAP_CN[leap - 1] + "月：这一年有两个" + LEAP_CN[leap - 1] + "月，第一个是平月、第二个才是闰月，生日写着「闰" + LEAP_CN[leap - 1] + "月」才选「闰月」，否则选「平月」。";
+          info.classList.remove("warn");
+        } else if (isLeapChoice) {
+          info.textContent = "注意：" + y + "年闰的是" + LEAP_CN[leap - 1] + "月，不是" + LEAP_CN[m - 1] + "月，你选了「闰月」会换算失败，改回「平月」再排。";
+          info.classList.add("warn");
+        } else {
+          info.textContent = y + "年闰" + LEAP_CN[leap - 1] + "月，你选的" + LEAP_CN[m - 1] + "月没有闰月，选「平月」就行。";
+          info.classList.remove("warn");
+        }
       }
 
       /* ---------- 四柱直填 ---------- */
@@ -3615,7 +3657,11 @@
           ["birthYear", "birthMonth", "birthDay", "birthHour", "birthMinute"].forEach(function (id) {
             document.getElementById(id).disabled = v === "sizhu";
           });
+          if (v === "lunar") updateLeapHint();
         });
+        document.getElementById("birthYear").addEventListener("change", updateLeapHint);
+        document.getElementById("birthMonth").addEventListener("change", updateLeapHint);
+        document.getElementById("lunarLeap").addEventListener("change", updateLeapHint);
       })();
 
       /* ---------- 地支关系（合冲刑害破） ---------- */
